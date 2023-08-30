@@ -1,38 +1,101 @@
-.App {
-  text-align: center;
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Container */
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+main {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 500px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+label {
+    display: flex;
+    align-items: left;
+    justify-content: space-between; /* This will push content to either end */
+    margin-bottom: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+
+
+input, textarea, button, div, label {
+    margin-bottom: 15px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input, textarea, button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+input[type="radio"] {
+    width: auto;
+    margin: 0 5px 0 15px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    cursor: pointer;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #B0C4DE;  /* A light steel blue to indicate disabled */
+    cursor: not-allowed;
+}
+
+span {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.output-box {
+    width: 100%;  /* or your preferred width */
+    height: 200px;  /* or your preferred height */
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+    resize: none;  /* to prevent resizing */
+}
+.error-message {
+    color: red;
+    text-align: center;
+    font-size: 0.875rem;
+    margin-top: 10px;
+}
+
+input:focus, textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
 }
