@@ -1,34 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
 
-function App() {
-    const [fullName, setFullName] = useState('');
-    const [shortName, setShortName] = useState('');
-    const [ticker, setTicker] = useState('');
-    const [exchange, setExchange] = useState('');
-    const [caseType, setCaseType] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [leadPlaintiffDeadline, setLeadPlaintiffDeadline] = useState("");
-    const [classPeriodStartDate, setClassPeriodStartDate] = useState("");
-    const [classPeriodEndDate, setClassPeriodEndDate] = useState("");
-    const [caseDetails, setCaseDetails] = useState("");
-    const [ipoDate, setIpoDate] = useState('');
-    const [investigationParagraph, setInvestigationParagraph] = useState('');
-    const [purchaseDate, setPurchaseDate] = useState('');
-    const [spacFullName, setSpacFullName] = useState('');
-    const [spacShortName, setSpacShortName] = useState('');
-    const [mergerDate, setMergerDate] = useState('');
-   // const [release, setRelease] = useState('');
-    const [generatedContent, setGeneratedContent] = useState('');
-   // const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
 const handleLogin = async () => {
     try {
-        const response = await fetch('http://${API_URL}/login', {
+        const response = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password }),
@@ -44,10 +21,6 @@ const handleLogin = async () => {
         console.error("Error during login:", error);
     }
 };
-
-
-
-
 
     const exchanges = ['NYSE', 'NASDAQ', 'OTCMKTS', 'Other'];
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation'];
