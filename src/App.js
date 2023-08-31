@@ -24,12 +24,13 @@ function App() {
     const [password, setPassword] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-   const API_URL = process.env.REACT_APP_API_URL || 'https://localhost:5001';
+  // const API_URL = process.env.REACT_APP_API_URL || 'https://localhost:5001';
 
 
 const handleLogin = async () => {
     try {
-        const response = await fetch(`https:${API_URL}/login`, {
+        // const response = await fetch(`https:${API_URL}/login`, {
+        const response = await fetch(`login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password }),
