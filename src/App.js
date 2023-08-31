@@ -29,7 +29,7 @@ function App() {
 
 const handleLogin = async () => {
     try {
-        const response = await fetch(`https://press-release-app-cf727cc5d2fc.herokuapp.com/login`, {
+        const response = await fetch(`https://press-release-ce0117865217.herokuapp.com/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password }),
