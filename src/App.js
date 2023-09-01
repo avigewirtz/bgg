@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Document, Packer, Paragraph, TextRun, ExternalHyperlink} from 'docx';
 import './App.css';
-// latest
 function App() {
     const [fullName, setFullName] = useState('');
     const [shortName, setShortName] = useState('');
@@ -23,12 +22,13 @@ function App() {
     const [password, setPassword] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-   // const API_URL = process.env.REACT_APP_API_URL || 'https://localhost:5001';
+ // const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
 
 const handleLogin = async () => {
     try {
-         const response = await fetch(`http://localhost:5001/login`, {
+        // const response = await fetch(`${API_URL}/login`, {
+       const response = await fetch('/.netlify/functions/validatePassword'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password }),
@@ -272,24 +272,24 @@ Peretz Bronstein or Yael Nathanson
     );
 };
 
-//function generateDocument(content) {
-//    const doc = new Document({
-//        sections: [
-//            {
-//                children: [
-//                    new Paragraph({
-//                        children: [
-//                            new TextRun(content),
-//                        ],
-//                    }),
-//                ],
-//            },
-//        ],
-//    });
-//
-//    // Packer to DOCX
-//    return Packer.toBlob(doc);
-//}
+function generateDocument(content) {
+    const doc = new Document({
+        sections: [
+            {
+                children: [
+                    new Paragraph({
+                        children: [
+                            new TextRun(content),
+                        ],
+                    }),
+                ],
+            },
+        ],
+    });
+
+    // Packer to DOCX
+    return Packer.toBlob(doc);
+}
 
 const downloadDocument = (content) => {
     const paragraphs = contentToParagraphs(content);

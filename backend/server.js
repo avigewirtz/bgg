@@ -7,7 +7,9 @@ const app = express();
 
 // Using Heroku's dynamic port or 5001 locally
 // const PORT = process.env.PORT || 5001;
-const PORT = 5001;
+// const PORT = 5001;
+
+const PORT = process.env.PORT || 5001; // if PORT isn't set, it defaults to 5001 for local development
 
 app.use(cors());
 app.use(bodyParser.json());
