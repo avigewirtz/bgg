@@ -420,7 +420,7 @@ const contentToParagraphs = (content) => {
 
     return (
         <div className="app">
-            // {isAuthenticated ? (
+            {/* isAuthenticated ? ( */}
                 <>
             <header>
                 <h1>Company Details Form</h1>
@@ -669,6 +669,11 @@ const contentToParagraphs = (content) => {
                                           <button onClick={() => downloadDocument(generatedContent)}>Download Word Document</button>
                                       </>
                                   )}
+              </div>
+          );
+}
+
+export default App;
 //                          </main>
 //                      </>
 //                  ) : (
@@ -684,8 +689,3 @@ const contentToParagraphs = (content) => {
 //                      </div>
 //
 //                  )}
-              </div>
-          );
-}
-
-export default App;
