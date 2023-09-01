@@ -421,7 +421,7 @@ const contentToParagraphs = (content) => {
     return (
         <div className="app">
             {/* isAuthenticated ? ( */}
-                <>
+               // <>
             <header>
                 <h1>Company Details Form</h1>
             </header>
