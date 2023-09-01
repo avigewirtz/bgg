@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Document, Packer, Paragraph, TextRun, ExternalHyperlink, ConcreteHyperlink } from 'docx';
 import './App.css';
-
+// latest
 function App() {
     const [fullName, setFullName] = useState('');
     const [shortName, setShortName] = useState('');
@@ -18,19 +19,16 @@ function App() {
     const [spacFullName, setSpacFullName] = useState('');
     const [spacShortName, setSpacShortName] = useState('');
     const [mergerDate, setMergerDate] = useState('');
-   // const [release, setRelease] = useState('');
     const [generatedContent, setGeneratedContent] = useState('');
-   // const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // const API_URL = process.env.REACT_APP_API_URL || 'https://localhost:5001';
+   // const API_URL = process.env.REACT_APP_API_URL || 'https://localhost:5001';
 
 
 const handleLogin = async () => {
     try {
-        // const response = await fetch(`https:${API_URL}/login`, {
-        const response = await fetch(`login`, {
+         const response = await fetch(`http://localhost:5001/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password }),
@@ -274,6 +272,122 @@ Peretz Bronstein or Yael Nathanson
     );
 };
 
+function generateDocument(content) {
+    const doc = new Document({
+        sections: [
+            {
+                children: [
+                    new Paragraph({
+                        children: [
+                            new TextRun(content),
+                        ],
+                    }),
+                ],
+            },
+        ],
+    });
+
+    // Packer to DOCX
+    return Packer.toBlob(doc);
+}
+
+const downloadDocument = (content) => {
+    const paragraphs = contentToParagraphs(content);
+
+    // If there are no paragraphs, there's no need to proceed.
+    if (paragraphs.length === 0) return;
+
+    const doc = new Document({
+        sections: [
+            {
+                properties: {},
+                children: paragraphs
+            },
+        ],
+    });
+
+   try {
+       Packer.toBlob(doc)
+           .then(blob => {
+               const url = URL.createObjectURL(blob);
+               const a = document.createElement('a');
+               a.href = url;
+               a.download = 'document.docx';
+               a.click();
+           });
+   } catch (e) {
+       console.error("Detailed error:", e);
+   }
+};
+
+const contentToParagraphs = (content) => {
+    if (!content || typeof content !== 'string') return [];
+
+    const boldKeywords = [
+        "Investigation Details:",
+        "What’s Next?",
+        "Why Bronstein, Gewirtz & Grossman:",
+        "contact",
+        "Case Details:",
+        "Class Definition:"
+    ];
+
+    const lines = content.split('\n');
+    let isFirstParagraph = true; // For tracking the first paragraph
+
+    return lines.map((line, index) => {
+        let isBold = isFirstParagraph || boldKeywords.some(keyword => line.startsWith(keyword));
+
+        if (isFirstParagraph && index > 0) { // Reset flag after processing the first paragraph
+            isFirstParagraph = false;
+        }
+
+        const processLink = (part, linkType) => {
+            const isEmail = linkType === "email";
+            const formattedLink = isEmail ? part : part.toLowerCase();
+            const link = isEmail ? `mailto:${formattedLink}` : `https://${formattedLink}`;
+            return new ExternalHyperlink({
+                children: [
+                    new TextRun({
+                        text: formattedLink,
+                        style: "Hyperlink",
+                        bold: isBold
+                    })
+                ],
+                link: link
+            });
+        };
+
+        if (line.includes('bgandg.com/') || line.includes('info@bgandg.com')) {
+            const regex = /(bgandg\.com\/\S+|info@bgandg\.com)/g;
+            const parts = line.split(regex);
+            const runs = parts.map(part => {
+                if (part.includes('bgandg.com/')) {
+                    return processLink(part, "url");
+                } else if (part.includes('info@bgandg.com')) {
+                    return processLink(part, "email");
+                } else {
+                    return new TextRun({
+                        text: part,
+                        bold: isBold
+                    });
+                }
+            });
+            return new Paragraph({ children: runs });
+        } else {
+            return new Paragraph({
+                children: [new TextRun({
+                    text: line,
+                    bold: isBold
+                })]
+            });
+        }
+    });
+};
+
+
+
+
 
     return (
         <div className="app">
@@ -303,16 +417,18 @@ Peretz Bronstein or Yael Nathanson
                     onChange={e => setTicker(e.target.value)}
                 />
 
-                <div>
-                    <span>Choose stock market exchange:</span>
-                    <select value={exchange} onChange={e => setExchange(e.target.value)}>
-                        {exchanges.map((item, index) => (
-                            <option key={index} value={item}>
-                                {item}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+              <div>
+                  <span>Choose stock market exchange:</span>
+                  <select value={exchange} onChange={e => setExchange(e.target.value)}>
+                      <option value="" disabled hidden>Select an exchange</option> {/* Add this line */}
+                      {exchanges.map((item, index) => (
+                          <option key={index} value={item}>
+                              {item}
+                          </option>
+                      ))}
+                  </select>
+              </div>
+
 
 
 
@@ -320,6 +436,7 @@ Peretz Bronstein or Yael Nathanson
                 <div>
                     <span>What type of case is it?</span>
                     <select value={caseType} onChange={e => setCaseType(e.target.value)}>
+                        <option value="" disabled hidden>Select a case type</option> {/* Add this line */}
                         {cases.map((item, index) => (
                             <option key={index} value={item}>
                                 {item}
@@ -327,6 +444,7 @@ Peretz Bronstein or Yael Nathanson
                         ))}
                     </select>
                 </div>
+
 
 
                 {caseType === 'IPO' && (
@@ -513,17 +631,20 @@ Peretz Bronstein or Yael Nathanson
                               {errorMessage && <p className="error-message">{errorMessage}</p>}
 
                               {generatedContent && (
-                                 <textarea
-                                     value={generatedContent}
-                                     readOnly
-                                     className="output-box"
-                                 />
-                              )}
+                                      <>
+                                          <textarea
+                                              value={generatedContent}
+                                              readOnly
+                                              className="output-box"
+                                          />
+                                          <button onClick={() => downloadDocument(generatedContent)}>Download Word Document</button>
+                                      </>
+                                  )}
                           </main>
                       </>
                   ) : (
                       <div className="login-section">
-                          {/* Removed the username input */}
+
                           <input
                               type="password"
                               placeholder="Enter password"
