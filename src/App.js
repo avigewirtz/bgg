@@ -20,7 +20,7 @@ function App() {
     const [mergerDate, setMergerDate] = useState('');
     const [generatedContent, setGeneratedContent] = useState('');
     const [password, setPassword] = useState('');
-   // const [isAuthenticated, setIsAuthenticated] = useState(false);
+    // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
  // const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
@@ -51,29 +51,6 @@ function App() {
 //    }
 //};
 
-//const handleLogin = async () => {
-//    try {
-//        const response = await fetch('/.netlify/functions/validatePassword', {
-//            method: 'POST',
-//            headers: { 'Content-Type': 'application/json' },
-//            body: JSON.stringify({ password }),
-//        });
-//
-//        const data = await response.json();
-//
-//        if (response.status === 401) {
-//            alert(data.error);
-//        } else if (data.token) {
-//            setIsAuthenticated(true);
-//            sessionStorage.setItem('authToken', data.token);
-//        } else {
-//            alert('Login failed');
-//        }
-//
-//    } catch (error) {
-//        console.error("Error during login:", error);
-//    }
-//};
 
 
 
@@ -414,266 +391,505 @@ const contentToParagraphs = (content) => {
     });
 };
 
+return (
+    <div className="app">
+        <header>
+            <h1>Company Details Form</h1>
+        </header>
 
+        <main>
+            <input
+                type="text"
+                placeholder="Enter full company name"
+                value={fullName}
+                onChange={e => setFullName(e.target.value)}
+            />
+            <input
+                type="text"
+                placeholder="Enter short company name"
+                value={shortName}
+                onChange={e => setShortName(e.target.value)}
+            />
+            <input
+                type="text"
+                placeholder="Enter ticker"
+                value={ticker}
+                onChange={e => setTicker(e.target.value)}
+            />
 
+            <div>
+                <span>Choose stock market exchange:</span>
+                <select value={exchange} onChange={e => setExchange(e.target.value)}>
+                    <option value="" disabled hidden>Select an exchange</option>
+                    {exchanges.map((item, index) => (
+                        <option key={index} value={item}>
+                            {item}
+                        </option>
+                    ))}
+                </select>
+            </div>
 
+            <div>
+                <span>What type of case is it?</span>
+                <select value={caseType} onChange={e => setCaseType(e.target.value)}>
+                    <option value="" disabled hidden>Select a case type</option>
+                    {cases.map((item, index) => (
+                        <option key={index} value={item}>
+                            {item}
+                        </option>
+                    ))}
+                </select>
+            </div>
 
-    return (
-        <div className="app">
-            {/* isAuthenticated ? ( */}
-               // <>
-            <header>
-                <h1>Company Details Form</h1>
-            </header>
-
-            <main>
-                <input
-                    type="text"
-                    placeholder="Enter full company name"
-                    value={fullName}
-                    onChange={e => setFullName(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Enter short company name"
-                    value={shortName}
-                    onChange={e => setShortName(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Enter ticker"
-                    value={ticker}
-                    onChange={e => setTicker(e.target.value)}
-                />
-
-              <div>
-                  <span>Choose stock market exchange:</span>
-                  <select value={exchange} onChange={e => setExchange(e.target.value)}>
-                      <option value="" disabled hidden>Select an exchange</option> {/* Add this line */}
-                      {exchanges.map((item, index) => (
-                          <option key={index} value={item}>
-                              {item}
-                          </option>
-                      ))}
-                  </select>
-              </div>
-
-
-
-
-
-                <div>
-                    <span>What type of case is it?</span>
-                    <select value={caseType} onChange={e => setCaseType(e.target.value)}>
-                        <option value="" disabled hidden>Select a case type</option> {/* Add this line */}
-                        {cases.map((item, index) => (
-                            <option key={index} value={item}>
-                                {item}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-
-
-                {caseType === 'IPO' && (
-                    <>
-                        <label>
-                            IPO Date:
-                            <input
-                                type="date"
-                                placeholder="Enter IPO Date"
-                                value={ipoDate}
-                                onChange={e => setIpoDate(e.target.value)}
-                            />
-                        </label>
-
-                        <label>
-                            Lead Plaintiff Deadline:
-                            <input
-                                type="date"
-                                placeholder="Enter Lead Plaintiff Deadline"
-                                value={leadPlaintiffDeadline}
-                                onChange={e => setLeadPlaintiffDeadline(e.target.value)}
-                            />
-                        </label>
-
-                        <label>
-                            Case Details:
-                            <textarea
-                                placeholder="Enter Case Details"
-                                value={caseDetails}
-                                onChange={e => setCaseDetails(e.target.value)}
-                            />
-                        </label>
-                    </>
-                )}
-
-
-      {/* Class period and IPO section */}
-                {caseType === 'Class period and IPO' && (
-                    <div>
-                        <label>
-                            IPO Date:
-                            <input
-                                type="date"
-                                value={ipoDate}
-                                onChange={e => setIpoDate(e.target.value)}
-                            />
-                        </label>
-
-                        <label>
-                            Class Period Start Date:
-                            <input
-                                type="date"
-                                value={classPeriodStartDate}
-                                onChange={e => setClassPeriodStartDate(e.target.value)}
-                            />
-                        </label>
-
-                        <label>
-                            Class Period End Date:
-                            <input
-                                type="date"
-                                value={classPeriodEndDate}
-                                onChange={e => setClassPeriodEndDate(e.target.value)}
-                            />
-                        </label>
-
-                        <label>
-                            Lead Plaintiff Deadline:
-                            <input
-                                type="date"
-                                value={leadPlaintiffDeadline}
-                                onChange={e => setLeadPlaintiffDeadline(e.target.value)}
-                            />
-                        </label>
-
-                        <label>
-                            Complaint Allegations:
-                            <textarea
-                                value={caseDetails}
-                                onChange={e => setCaseDetails(e.target.value)}
-                            />
-                        </label>
-                    </div>
-                )}
-
-
-                {/* Render extra fields if the "Class period" case type is chosen */}
-                {caseType === 'Class period' && (
-                    <div>
-                        <label>
-                            Enter Lead Plaintiff Deadline:
-                            <input
-                                type="date"
-                                value={leadPlaintiffDeadline}
-                                onChange={e => setLeadPlaintiffDeadline(e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Enter Class Period Start Date:
-                            <input
-                                type="date"
-                                value={classPeriodStartDate}
-                                onChange={e => setClassPeriodStartDate(e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Enter Class Period End Date:
-                            <input
-                                type="date"
-                                value={classPeriodEndDate}
-                                onChange={e => setClassPeriodEndDate(e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Enter Case Details:
-                            <textarea
-                                value={caseDetails}
-                                onChange={e => setCaseDetails(e.target.value)}
-                            />
-                        </label>
-                    </div>
-                )}
-
-{caseType === '10b investigation' && (
+            {caseType === 'IPO' && (
+                <>
                     <label>
-                        Investigation Details:
-                        <textarea
-                            placeholder="Enter paragraph of investigation"
-                            value={investigationParagraph}
-                            onChange={e => setInvestigationParagraph(e.target.value)}
-                            rows="4"
-                            cols="50"
+                        IPO Date:
+                        <input
+                            type="date"
+                            placeholder="Enter IPO Date"
+                            value={ipoDate}
+                            onChange={e => setIpoDate(e.target.value)}
                         />
                     </label>
-                )}
 
-                {caseType === 'Derivative investigation' && (
-                    <div>
-                        <label>
-                            Date of Purchase:
-                            <input
-                                type="date"
-                                value={purchaseDate}
-                                onChange={e => setPurchaseDate(e.target.value)}
-                            />
-                        </label>
-                    </div>
-                )}
+                    <label>
+                        Lead Plaintiff Deadline:
+                        <input
+                            type="date"
+                            placeholder="Enter Lead Plaintiff Deadline"
+                            value={leadPlaintiffDeadline}
+                            onChange={e => setLeadPlaintiffDeadline(e.target.value)}
+                        />
+                    </label>
 
-                {caseType === 'SPAC investigation' && (
-                    <div>
-                        <label>
-                            SPAC Full Name:
-                            <input
-                                type="text"
-                                placeholder="Enter SPAC Full Name"
-                                value={spacFullName}
-                                onChange={e => setSpacFullName(e.target.value)}
-                            />
-                        </label>
+                    <label>
+                        Case Details:
+                        <textarea
+                            placeholder="Enter Case Details"
+                            value={caseDetails}
+                            onChange={e => setCaseDetails(e.target.value)}
+                        />
+                    </label>
+                </>
+            )}
 
-                        <label>
-                            SPAC Short Name:
-                            <input
-                                type="text"
-                                placeholder="Enter SPAC Short Name"
-                                value={spacShortName}
-                                onChange={e => setSpacShortName(e.target.value)}
-                            />
-                        </label>
+            {caseType === 'Class period and IPO' && (
+                <div>
+                    <label>
+                        IPO Date:
+                        <input
+                            type="date"
+                            value={ipoDate}
+                            onChange={e => setIpoDate(e.target.value)}
+                        />
+                    </label>
 
-                        <label>
-                            Merger Date:
-                            <input
-                                type="date"
-                                value={mergerDate}
-                                onChange={e => setMergerDate(e.target.value)}
-                            />
-                        </label>
-                    </div>
-                )}
+                    <label>
+                        Class Period Start Date:
+                        <input
+                            type="date"
+                            value={classPeriodStartDate}
+                            onChange={e => setClassPeriodStartDate(e.target.value)}
+                        />
+                    </label>
+
+                    <label>
+                        Class Period End Date:
+                        <input
+                            type="date"
+                            value={classPeriodEndDate}
+                            onChange={e => setClassPeriodEndDate(e.target.value)}
+                        />
+                    </label>
+
+                    <label>
+                        Lead Plaintiff Deadline:
+                        <input
+                            type="date"
+                            value={leadPlaintiffDeadline}
+                            onChange={e => setLeadPlaintiffDeadline(e.target.value)}
+                        />
+                    </label>
+
+                    <label>
+                        Complaint Allegations:
+                        <textarea
+                            value={caseDetails}
+                            onChange={e => setCaseDetails(e.target.value)}
+                        />
+                    </label>
+                </div>
+            )}
+
+            {caseType === 'Class period' && (
+                <div>
+                    <label>
+                        Enter Lead Plaintiff Deadline:
+                        <input
+                            type="date"
+                            value={leadPlaintiffDeadline}
+                            onChange={e => setLeadPlaintiffDeadline(e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        Enter Class Period Start Date:
+                        <input
+                            type="date"
+                            value={classPeriodStartDate}
+                            onChange={e => setClassPeriodStartDate(e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        Enter Class Period End Date:
+                        <input
+                            type="date"
+                            value={classPeriodEndDate}
+                            onChange={e => setClassPeriodEndDate(e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        Enter Case Details:
+                        <textarea
+                            value={caseDetails}
+                            onChange={e => setCaseDetails(e.target.value)}
+                        />
+                    </label>
+                </div>
+            )}
+
+            {caseType === '10b investigation' && (
+                <label>
+                    Investigation Details:
+                    <textarea
+                        placeholder="Enter paragraph of investigation"
+                        value={investigationParagraph}
+                        onChange={e => setInvestigationParagraph(e.target.value)}
+                        rows="4"
+                        cols="50"
+                    />
+                </label>
+            )}
+
+            {caseType === 'Derivative investigation' && (
+                <div>
+                    <label>
+                        Date of Purchase:
+                        <input
+                            type="date"
+                            value={purchaseDate}
+                            onChange={e => setPurchaseDate(e.target.value)}
+                        />
+                    </label>
+                </div>
+            )}
+
+            {caseType === 'SPAC investigation' && (
+                <div>
+                    <label>
+                        SPAC Full Name:
+                        <input
+                            type="text"
+                            placeholder="Enter SPAC Full Name"
+                            value={spacFullName}
+                            onChange={e => setSpacFullName(e.target.value)}
+                        />
+                    </label>
+
+                    <label>
+                        SPAC Short Name:
+                        <input
+                            type="text"
+                            placeholder="Enter SPAC Short Name"
+                            value={spacShortName}
+                            onChange={e => setSpacShortName(e.target.value)}
+                        />
+                    </label>
+
+                    <label>
+                        Merger Date:
+                        <input
+                            type="date"
+                            value={mergerDate}
+                            onChange={e => setMergerDate(e.target.value)}
+                        />
+                    </label>
+                </div>
+            )}
+
+            <button onClick={handleSubmit}>Submit</button>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+            {generatedContent && (
+                <>
+                    <textarea
+                        value={generatedContent}
+                        readOnly
+                        className="output-box"
+                    />
+                    <button onClick={() => downloadDocument(generatedContent)}>Download Word Document</button>
+                </>
+            )}
         </main>
-           <button onClick={handleSubmit}>Submit</button>
-                              {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-                              {generatedContent && (
-                                      <>
-                                          <textarea
-                                              value={generatedContent}
-                                              readOnly
-                                              className="output-box"
-                                          />
-                                          <button onClick={() => downloadDocument(generatedContent)}>Download Word Document</button>
-                                      </>
-                                  )}
-              </div>
-          );
-}
+    </div>
+);
 
 export default App;
+
+
+
+
+//    return (
+//        <div className="app">
+//            {isAuthenticated ? (
+//                <>
+//            <header>
+//                <h1>Company Details Form</h1>
+//            </header>
+//
+//            <main>
+//                <input
+//                    type="text"
+//                    placeholder="Enter full company name"
+//                    value={fullName}
+//                    onChange={e => setFullName(e.target.value)}
+//                />
+//                <input
+//                    type="text"
+//                    placeholder="Enter short company name"
+//                    value={shortName}
+//                    onChange={e => setShortName(e.target.value)}
+//                />
+//                <input
+//                    type="text"
+//                    placeholder="Enter ticker"
+//                    value={ticker}
+//                    onChange={e => setTicker(e.target.value)}
+//                />
+//
+//              <div>
+//                  <span>Choose stock market exchange:</span>
+//                  <select value={exchange} onChange={e => setExchange(e.target.value)}>
+//                      <option value="" disabled hidden>Select an exchange</option> {/* Add this line */}
+//                      {exchanges.map((item, index) => (
+//                          <option key={index} value={item}>
+//                              {item}
+//                          </option>
+//                      ))}
+//                  </select>
+//              </div>
+//
+//
+//
+//
+//
+//                <div>
+//                    <span>What type of case is it?</span>
+//                    <select value={caseType} onChange={e => setCaseType(e.target.value)}>
+//                        <option value="" disabled hidden>Select a case type</option> {/* Add this line */}
+//                        {cases.map((item, index) => (
+//                            <option key={index} value={item}>
+//                                {item}
+//                            </option>
+//                        ))}
+//                    </select>
+//                </div>
+//
+//
+//
+//                {caseType === 'IPO' && (
+//                    <>
+//                        <label>
+//                            IPO Date:
+//                            <input
+//                                type="date"
+//                                placeholder="Enter IPO Date"
+//                                value={ipoDate}
+//                                onChange={e => setIpoDate(e.target.value)}
+//                            />
+//                        </label>
+//
+//                        <label>
+//                            Lead Plaintiff Deadline:
+//                            <input
+//                                type="date"
+//                                placeholder="Enter Lead Plaintiff Deadline"
+//                                value={leadPlaintiffDeadline}
+//                                onChange={e => setLeadPlaintiffDeadline(e.target.value)}
+//                            />
+//                        </label>
+//
+//                        <label>
+//                            Case Details:
+//                            <textarea
+//                                placeholder="Enter Case Details"
+//                                value={caseDetails}
+//                                onChange={e => setCaseDetails(e.target.value)}
+//                            />
+//                        </label>
+//                    </>
+//                )}
+//
+//
+//      {/* Class period and IPO section */}
+//                {caseType === 'Class period and IPO' && (
+//                    <div>
+//                        <label>
+//                            IPO Date:
+//                            <input
+//                                type="date"
+//                                value={ipoDate}
+//                                onChange={e => setIpoDate(e.target.value)}
+//                            />
+//                        </label>
+//
+//                        <label>
+//                            Class Period Start Date:
+//                            <input
+//                                type="date"
+//                                value={classPeriodStartDate}
+//                                onChange={e => setClassPeriodStartDate(e.target.value)}
+//                            />
+//                        </label>
+//
+//                        <label>
+//                            Class Period End Date:
+//                            <input
+//                                type="date"
+//                                value={classPeriodEndDate}
+//                                onChange={e => setClassPeriodEndDate(e.target.value)}
+//                            />
+//                        </label>
+//
+//                        <label>
+//                            Lead Plaintiff Deadline:
+//                            <input
+//                                type="date"
+//                                value={leadPlaintiffDeadline}
+//                                onChange={e => setLeadPlaintiffDeadline(e.target.value)}
+//                            />
+//                        </label>
+//
+//                        <label>
+//                            Complaint Allegations:
+//                            <textarea
+//                                value={caseDetails}
+//                                onChange={e => setCaseDetails(e.target.value)}
+//                            />
+//                        </label>
+//                    </div>
+//                )}
+//
+//
+//                {/* Render extra fields if the "Class period" case type is chosen */}
+//                {caseType === 'Class period' && (
+//                    <div>
+//                        <label>
+//                            Enter Lead Plaintiff Deadline:
+//                            <input
+//                                type="date"
+//                                value={leadPlaintiffDeadline}
+//                                onChange={e => setLeadPlaintiffDeadline(e.target.value)}
+//                            />
+//                        </label>
+//                        <label>
+//                            Enter Class Period Start Date:
+//                            <input
+//                                type="date"
+//                                value={classPeriodStartDate}
+//                                onChange={e => setClassPeriodStartDate(e.target.value)}
+//                            />
+//                        </label>
+//                        <label>
+//                            Enter Class Period End Date:
+//                            <input
+//                                type="date"
+//                                value={classPeriodEndDate}
+//                                onChange={e => setClassPeriodEndDate(e.target.value)}
+//                            />
+//                        </label>
+//                        <label>
+//                            Enter Case Details:
+//                            <textarea
+//                                value={caseDetails}
+//                                onChange={e => setCaseDetails(e.target.value)}
+//                            />
+//                        </label>
+//                    </div>
+//                )}
+//
+//{caseType === '10b investigation' && (
+//                    <label>
+//                        Investigation Details:
+//                        <textarea
+//                            placeholder="Enter paragraph of investigation"
+//                            value={investigationParagraph}
+//                            onChange={e => setInvestigationParagraph(e.target.value)}
+//                            rows="4"
+//                            cols="50"
+//                        />
+//                    </label>
+//                )}
+//
+//                {caseType === 'Derivative investigation' && (
+//                    <div>
+//                        <label>
+//                            Date of Purchase:
+//                            <input
+//                                type="date"
+//                                value={purchaseDate}
+//                                onChange={e => setPurchaseDate(e.target.value)}
+//                            />
+//                        </label>
+//                    </div>
+//                )}
+//
+//                {caseType === 'SPAC investigation' && (
+//                    <div>
+//                        <label>
+//                            SPAC Full Name:
+//                            <input
+//                                type="text"
+//                                placeholder="Enter SPAC Full Name"
+//                                value={spacFullName}
+//                                onChange={e => setSpacFullName(e.target.value)}
+//                            />
+//                        </label>
+//
+//                        <label>
+//                            SPAC Short Name:
+//                            <input
+//                                type="text"
+//                                placeholder="Enter SPAC Short Name"
+//                                value={spacShortName}
+//                                onChange={e => setSpacShortName(e.target.value)}
+//                            />
+//                        </label>
+//
+//                        <label>
+//                            Merger Date:
+//                            <input
+//                                type="date"
+//                                value={mergerDate}
+//                                onChange={e => setMergerDate(e.target.value)}
+//                            />
+//                        </label>
+//                    </div>
+//                )}
+//
+//           <button onClick={handleSubmit}>Submit</button>
+//                              {errorMessage && <p className="error-message">{errorMessage}</p>}
+//
+//                              {generatedContent && (
+//                                      <>
+//                                          <textarea
+//                                              value={generatedContent}
+//                                              readOnly
+//                                              className="output-box"
+//                                          />
+//                                          <button onClick={() => downloadDocument(generatedContent)}>Download Word Document</button>
+//                                      </>
+//                                  )}
 //                          </main>
 //                      </>
 //                  ) : (
@@ -689,3 +905,8 @@ export default App;
 //                      </div>
 //
 //                  )}
+//              </div>
+//          );
+//}
+//
+//export default App;
