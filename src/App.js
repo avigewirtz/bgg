@@ -281,6 +281,7 @@ const contentToParagraphs = (content) => {
         "Investigation Details:",
         "What’s Next?",
         "Why Bronstein, Gewirtz & Grossman:",
+        "Contact",
         "contact",
         "Case Details:",
         "Class Definition:"
