@@ -25,27 +25,41 @@ function App() {
  // const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
 
-const handleLogin = async () => {
-    try {
-        // const response = await fetch(`${API_URL}/login`, {
-       const response = await fetch('/.netlify/functions/validatePassword', {
-           method: 'POST',
-           headers: { 'Content-Type': 'application/json' },
-           body: JSON.stringify({ password }),
-       });
+//const handleLogin = async () => {
+//    try {
+//        // const response = await fetch(`${API_URL}/login`, {
+//       const response = await fetch('/.netlify/functions/validatePassword', {
+//           method: 'POST',
+//           headers: { 'Content-Type': 'application/json' },
+//           body: JSON.stringify({ password }),
+//       });
+//
+//        const data = await response.json();
+//        if (data.token) {
+//            setIsAuthenticated(true);
+//            sessionStorage.setItem('authToken', data.token);
+//        } else {
+//            alert('Login failed');
+//        }
+//    } catch (error) {
+//        console.error("Error during login:", error);
+//    }
+//};
 
-        const data = await response.json();
-        if (data.token) {
-            setIsAuthenticated(true);
-            sessionStorage.setItem('authToken', data.token);
-        } else {
-            alert('Login failed');
-        }
-    } catch (error) {
-        console.error("Error during login:", error);
+const handleLogin = async () => {
+    // Use the environment variable
+    const SITE_PASSWORD_FROM_ENV = process.env.SITE_PASSWORD;
+
+    if (password === SITE_PASSWORD_FROM_ENV) {
+        // Fetch your token or proceed with whatever logic you want upon successful login
+        // ... (like the rest of your code where you fetch a token, set isAuthenticated, etc.)
+
+        setIsAuthenticated(true);
+        sessionStorage.setItem('authToken', 'YOUR_GENERATED_TOKEN_OR_VALUE'); // update this line if you're fetching an actual token
+    } else {
+        alert('Login failed');
     }
 };
-
 
 
 
