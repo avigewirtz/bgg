@@ -20,7 +20,7 @@ function App() {
     const [mergerDate, setMergerDate] = useState('');
     const [generatedContent, setGeneratedContent] = useState('');
     const [password, setPassword] = useState('');
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+   // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
  // const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
@@ -51,29 +51,29 @@ function App() {
 //    }
 //};
 
-const handleLogin = async () => {
-    try {
-        const response = await fetch('/.netlify/functions/validatePassword', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password }),
-        });
-
-        const data = await response.json();
-
-        if (response.status === 401) {
-            alert(data.error);
-        } else if (data.token) {
-            setIsAuthenticated(true);
-            sessionStorage.setItem('authToken', data.token);
-        } else {
-            alert('Login failed');
-        }
-
-    } catch (error) {
-        console.error("Error during login:", error);
-    }
-};
+//const handleLogin = async () => {
+//    try {
+//        const response = await fetch('/.netlify/functions/validatePassword', {
+//            method: 'POST',
+//            headers: { 'Content-Type': 'application/json' },
+//            body: JSON.stringify({ password }),
+//        });
+//
+//        const data = await response.json();
+//
+//        if (response.status === 401) {
+//            alert(data.error);
+//        } else if (data.token) {
+//            setIsAuthenticated(true);
+//            sessionStorage.setItem('authToken', data.token);
+//        } else {
+//            alert('Login failed');
+//        }
+//
+//    } catch (error) {
+//        console.error("Error during login:", error);
+//    }
+//};
 
 
 
@@ -420,7 +420,7 @@ const contentToParagraphs = (content) => {
 
     return (
         <div className="app">
-            {isAuthenticated ? (
+            // {isAuthenticated ? (
                 <>
             <header>
                 <h1>Company Details Form</h1>
@@ -669,21 +669,21 @@ const contentToParagraphs = (content) => {
                                           <button onClick={() => downloadDocument(generatedContent)}>Download Word Document</button>
                                       </>
                                   )}
-                          </main>
-                      </>
-                  ) : (
-                      <div className="login-section">
-
-                          <input
-                              type="password"
-                              placeholder="Enter password"
-                              value={password}
-                              onChange={e => setPassword(e.target.value)}
-                          />
-                          <button onClick={handleLogin}>Login</button>
-                      </div>
-
-                  )}
+//                          </main>
+//                      </>
+//                  ) : (
+//                      <div className="login-section">
+//
+//                          <input
+//                              type="password"
+//                              placeholder="Enter password"
+//                              value={password}
+//                              onChange={e => setPassword(e.target.value)}
+//                          />
+//                          <button onClick={handleLogin}>Login</button>
+//                      </div>
+//
+//                  )}
               </div>
           );
 }
