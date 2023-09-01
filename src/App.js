@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Document, Packer, Paragraph, TextRun, ExternalHyperlink, ConcreteHyperlink } from 'docx';
+import { Document, Packer, Paragraph, TextRun, ExternalHyperlink} from 'docx';
 import './App.css';
 // latest
 function App() {
@@ -272,24 +272,24 @@ Peretz Bronstein or Yael Nathanson
     );
 };
 
-function generateDocument(content) {
-    const doc = new Document({
-        sections: [
-            {
-                children: [
-                    new Paragraph({
-                        children: [
-                            new TextRun(content),
-                        ],
-                    }),
-                ],
-            },
-        ],
-    });
-
-    // Packer to DOCX
-    return Packer.toBlob(doc);
-}
+//function generateDocument(content) {
+//    const doc = new Document({
+//        sections: [
+//            {
+//                children: [
+//                    new Paragraph({
+//                        children: [
+//                            new TextRun(content),
+//                        ],
+//                    }),
+//                ],
+//            },
+//        ],
+//    });
+//
+//    // Packer to DOCX
+//    return Packer.toBlob(doc);
+//}
 
 const downloadDocument = (content) => {
     const paragraphs = contentToParagraphs(content);
