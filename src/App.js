@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Document, Packer, Paragraph, TextRun, ExternalHyperlink} from 'docx';
 import './App.css';
+
 function App() {
     const [fullName, setFullName] = useState('');
     const [shortName, setShortName] = useState('');
@@ -579,8 +580,7 @@ return (
             )}
         </main>
     </div>
-)
-
-
+);
+}
 export default App;
 
