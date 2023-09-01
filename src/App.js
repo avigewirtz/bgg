@@ -655,7 +655,7 @@ const contentToParagraphs = (content) => {
                         </label>
                     </div>
                 )}
-
+        </main>
            <button onClick={handleSubmit}>Submit</button>
                               {errorMessage && <p className="error-message">{errorMessage}</p>}
 
