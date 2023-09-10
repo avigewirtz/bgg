@@ -82,25 +82,26 @@ function App() {
     return formattedDate;
 }
 
- const generate_ipo = (
-     full_name, ticker, short_name, exchange,
-     ipo_date, case_details, lead_plaintiff_deadline
- ) => {
-    lead_plaintiff_deadline = formatDate(lead_plaintiff_deadline);
-    ipo_date = formatDate(ipo_date);
-     return (
-         `Calling All ${full_name} (${ticker}) Investors: Contact Bronstein, Gewirtz & Grossman, LLC to Actively Participate in the Class Action Lawsuit
+const generate_ipo = (
+    full_name, ticker, short_name, exchange,
+    ipo_date, case_details, lead_plaintiff_deadline
+) => {
+    const formattedIpoDate = formatDate(ipo_date);
+    const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
+
+    return (
+        `${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${fullName} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!
 
  Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.
 
  Class Definition:
- This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities pursuant to the registration statement and prospectus issued in connection with the Company's ${ipo_date} initial public offering ("IPO"). Such investors are encouraged to join this case by visiting the firm’s site: bgandg.com/${ticker}.
+ This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIpoDate} initial public offering ("IPO"). Such investors are encouraged to join this case by visiting the firm’s site: bgandg.com/${ticker}.
 
  Case Details:
  ${case_details}
 
  What’s Next?
- A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: bgandg.com/${ticker} or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at 332-239-2660. If you suffered a loss in ${short_name} you have until ${lead_plaintiff_deadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.
+ A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: bgandg.com/${ticker} or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at 332-239-2660. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.
 
  Why Bronstein, Gewirtz & Grossman:
  Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.
@@ -111,8 +112,9 @@ function App() {
  Bronstein, Gewirtz & Grossman, LLC
  Peretz Bronstein or Yael Nathanson
  332-239-2660 | info@bgandg.com`
-     );
- };
+    );
+};
+
 
 
 
@@ -121,22 +123,23 @@ const generate_class_period = (
     class_period_start_date, class_period_end_date,
     case_details, lead_plaintiff_deadline
 ) => {
-    class_period_start_date = formatDate(class_period_start_date);
-    class_period_end_date = formatDate(class_period_end_date);
-    lead_plaintiff_deadline = formatDate(lead_plaintiff_deadline);
+    const formattedClassPeriodStartDate = formatDate(class_period_start_date);
+    const formattedClassPeriodEndDate = formatDate(class_period_end_date);
+    const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
+    
     return (
-        `Calling All ${full_name} (${ticker}) Investors: Contact Bronstein, Gewirtz & Grossman, LLC to Actively Participate in the Class Action Lawsuit
+        `${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${fullName} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!
 
 Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.
 
 Class Definition:
-This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities between ${class_period_start_date} and ${class_period_end_date}, inclusive (the “Class Period”). Such investors are encouraged to join this case by visiting the firm’s site: bgandg.com/${ticker}.
+This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, inclusive (the “Class Period”). Such investors are encouraged to join this case by visiting the firm’s site: bgandg.com/${ticker}.
 
 Case Details:
 ${case_details}
 
 What’s Next?
-A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: bgandg.com/${ticker} or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at 332-239-2660. If you suffered a loss in ${short_name} you have until ${lead_plaintiff_deadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.
+A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: bgandg.com/${ticker} or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at 332-239-2660. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.
 
 Why Bronstein, Gewirtz & Grossman:
 Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.
@@ -150,17 +153,18 @@ Peretz Bronstein or Yael Nathanson
     );
 };
 
- const generate_class_period_and_ipo = (
-     full_name, ticker, short_name, exchange,
-     ipo_date, class_period_start_date, class_period_end_date,
-     case_details, lead_plaintiff_deadline
- ) => {
-    lead_plaintiff_deadline = formatDate(lead_plaintiff_deadline);
-    ipo_date = formatDate(ipo_date);
-    class_period_start_date = formatDate(class_period_start_date);
-    class_period_end_date = formatDate(class_period_end_date);
+const generate_class_period_and_ipo = (
+    full_name, ticker, short_name, exchange,
+    ipo_date, class_period_start_date, class_period_end_date,
+    case_details, lead_plaintiff_deadline
+) => {
+    const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
+    const formattedIPODate = formatDate(ipo_date);
+    const formattedClassPeriodStartDate = formatDate(class_period_start_date);
+    const formattedClassPeriodEndDate = formatDate(class_period_end_date);
+    
      return (
-         `Calling All ${full_name} (${ticker}) Investors: Contact Bronstein, Gewirtz & Grossman, LLC to Actively Participate in the Class Action Lawsuit
+         `${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${fullName} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!
 
  Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.
 
@@ -188,12 +192,12 @@ Peretz Bronstein or Yael Nathanson
 
 
  const generate_derivative_investigation = (full_name, ticker, short_name, exchange, purchaseDate) => {
-    purchaseDate = formatDate(purchaseDate);
+    const formattedPurchaseDate = formatDate(purchaseDate);
     
      return (
          `Bronstein, Gewirtz & Grossman, LLC Notifies Shareholders of ${full_name} (${ticker}) Investigation
 
- Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities prior to ${purchaseDate}, and continue to hold to the present, are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: bgandg.com/${ticker}.
+ Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities prior to ${formattedPurchaseDate}, and continue to hold to the present, are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: bgandg.com/${ticker}.
 
  Investigation Details:
  The investigation concerns whether ${short_name} and certain of its officers and/or directors have engaged in corporate wrongdoing.
@@ -216,11 +220,11 @@ Peretz Bronstein or Yael Nathanson
 
 
   const generate_spac_investigation = (full_name, short_name, exchange, ticker, spac_full_name, spac_short_name, merger_date) => {
-    mergerDate = formatDate(mergerDate);
+    const formattedMergerDate = formatDate(merger_date);
       return (
           `Calling All ${full_name} (${ticker}) Investors: Contact Bronstein, Gewirtz & Grossman, LLC To Claim Your Losses
 
-  Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${spac_full_name} (“${spac_short_name}”), which merged with ${full_name} (“${short_name}”) (${exchange}: ${ticker}) on ${merger_date}. Investors who purchased ${spac_short_name} and continue to hold to the present, are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: bgandg.com/${ticker}.
+  Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${spac_full_name} (“${spac_short_name}”), which merged with ${full_name} (“${short_name}”) (${exchange}: ${ticker}) on ${formattedMergerDate}. Investors who purchased ${spac_short_name} and continue to hold to the present, are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: bgandg.com/${ticker}.
 
   Investigation Details:
   The investigation concerns whether ${spac_short_name} failed to provide relevant information to its shareholders before the merger.
