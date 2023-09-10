@@ -169,13 +169,13 @@ const generate_class_period_and_ipo = (
  Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.
 
  Class Definition:
- This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities: (1) pursuant to the registration statement and prospectus issued in connection with the Company's ${ipo_date} initial public offering ("IPO"); or (ii) between ${class_period_start_date} and ${class_period_end_date}, both dates inclusive (the “Class Period”). Such investors are encouraged to join this case by visiting the firm’s site: bgandg.com/${ticker}.
+ This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities: (1) pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIPODate} initial public offering ("IPO"); or (ii) between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, both dates inclusive (the “Class Period”). Such investors are encouraged to join this case by visiting the firm’s site: bgandg.com/${ticker}.
 
  Case Details:
  ${case_details}
 
  What’s Next?
- A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: bgandg.com/${ticker} or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at 332-239-2660. If you suffered a loss in ${short_name} you have until ${lead_plaintiff_deadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.
+ A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: bgandg.com/${ticker} or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at 332-239-2660. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.
 
  Why Bronstein, Gewirtz & Grossman:
  Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.
