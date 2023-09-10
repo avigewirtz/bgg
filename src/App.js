@@ -81,7 +81,7 @@ function App() {
             setExchange(value);
         }
     };
-
+    
  function formatDate(inputDate) {
     const months = [
         'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
@@ -424,6 +424,8 @@ return (
                         />
                     )}
                 </div>
+
+            <div>
                 <span>What type of case is it?</span>
                 <select value={caseType} onChange={e => setCaseType(e.target.value)}>
                     <option value="" disabled hidden>Select a case type</option>
