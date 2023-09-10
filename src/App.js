@@ -72,6 +72,16 @@ function App() {
        }
     };
 
+    const handleExchangeChange = (e) => {
+        const value = e.target.value;
+        if (value === "Other") {
+            // If "Other" is selected, reset 'exchange' to an empty string for custom input
+            setExchange("");
+        } else {
+            setExchange(value);
+        }
+    };
+
  function formatDate(inputDate) {
     const months = [
         'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
@@ -396,7 +406,7 @@ return (
 
 <div>
                     <span>Choose stock market exchange:</span>
-                    <select value={exchange} onChange={e => setExchange(e.target.value)}>
+                    <select value={exchange === "" ? "Other" : exchange} onChange={handleExchangeChange}>
                         <option value="" disabled hidden>Select an exchange</option>
                         {exchanges.map((item, index) => (
                             <option key={index} value={item}>
@@ -404,18 +414,16 @@ return (
                             </option>
                         ))}
                     </select>
-                    {exchange === "Other" && (
+                    {exchange === "" && (
                         <input 
                             type="text" 
-                            placeholder="Enter exchange" 
-                            value={exchange} // Set value to 'exchange'
-                            onChange={e => setExchange(e.target.value)} // Update 'exchange' directly
+                            placeholder="Enter custom exchange" 
+                            value={exchange}
+                            onChange={e => setExchange(e.target.value)}
                             required
                         />
                     )}
                 </div>
-
-            <div>
                 <span>What type of case is it?</span>
                 <select value={caseType} onChange={e => setCaseType(e.target.value)}>
                     <option value="" disabled hidden>Select a case type</option>
