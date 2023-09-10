@@ -71,10 +71,23 @@ function App() {
        }
     };
 
+ function formatDate(inputDate) {
+    const months = [
+        'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const [year, month, day] = inputDate.split('-');
+    const formattedDate = `${months[parseInt(month, 10) - 1]} ${parseInt(day, 10)}, ${year}`;
+    
+    return formattedDate;
+}
+
  const generate_ipo = (
      full_name, ticker, short_name, exchange,
      ipo_date, case_details, lead_plaintiff_deadline
  ) => {
+    lead_plaintiff_deadline = formatDate(lead_plaintiff_deadline);
+    ipo_date = formatDate(ipo_date);
      return (
          `Calling All ${full_name} (${ticker}) Investors: Contact Bronstein, Gewirtz & Grossman, LLC to Actively Participate in the Class Action Lawsuit
 
@@ -108,6 +121,9 @@ const generate_class_period = (
     class_period_start_date, class_period_end_date,
     case_details, lead_plaintiff_deadline
 ) => {
+    class_period_start_date = formatDate(class_period_start_date);
+    class_period_end_date = formatDate(class_period_end_date);
+    lead_plaintiff_deadline = formatDate(lead_plaintiff_deadline);
     return (
         `Calling All ${full_name} (${ticker}) Investors: Contact Bronstein, Gewirtz & Grossman, LLC to Actively Participate in the Class Action Lawsuit
 
@@ -139,6 +155,10 @@ Peretz Bronstein or Yael Nathanson
      ipo_date, class_period_start_date, class_period_end_date,
      case_details, lead_plaintiff_deadline
  ) => {
+    lead_plaintiff_deadline = formatDate(lead_plaintiff_deadline);
+    ipo_date = formatDate(ipo_date);
+    class_period_start_date = formatDate(class_period_start_date);
+    class_period_end_date = formatDate(class_period_end_date);
      return (
          `Calling All ${full_name} (${ticker}) Investors: Contact Bronstein, Gewirtz & Grossman, LLC to Actively Participate in the Class Action Lawsuit
 
@@ -167,7 +187,9 @@ Peretz Bronstein or Yael Nathanson
 
 
 
- const generate_derivative_investigation = (full_name, ticker, short_name, exchange, purchaseDateDate) => {
+ const generate_derivative_investigation = (full_name, ticker, short_name, exchange, purchaseDate) => {
+    purchaseDate = formatDate(purchaseDate);
+    
      return (
          `Bronstein, Gewirtz & Grossman, LLC Notifies Shareholders of ${full_name} (${ticker}) Investigation
 
@@ -194,6 +216,7 @@ Peretz Bronstein or Yael Nathanson
 
 
   const generate_spac_investigation = (full_name, short_name, exchange, ticker, spac_full_name, spac_short_name, merger_date) => {
+    mergerDate = formatDate(mergerDate);
       return (
           `Calling All ${full_name} (${ticker}) Investors: Contact Bronstein, Gewirtz & Grossman, LLC To Claim Your Losses
 
@@ -314,7 +337,7 @@ const contentToParagraphs = (content) => {
         };
 
         if (line.includes('bgandg.com/') || line.includes('info@bgandg.com')) {
-            const regex = /(bgandg\.com\/\S+|info@bgandg\.com)/g;
+            const regex = /(bgandg\.com\/\S+?)(?=[.,;]?(\s|$)|info@bgandg\.com)/g;
             const parts = line.split(regex);
             const runs = parts.map(part => {
                 if (part.includes('bgandg.com/')) {
@@ -339,6 +362,7 @@ const contentToParagraphs = (content) => {
         }
     });
 };
+
 
 return (
     <div className="app">
