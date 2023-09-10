@@ -23,7 +23,6 @@ function App() {
 
     const exchanges = ['NYSE', 'NASDAQ', 'OTCMKTS', 'Other'];
     const [exchange, setExchange] = useState("");
-    const [customExchange, setCustomExchange] = useState("");
 
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation'];
 
@@ -409,8 +408,8 @@ return (
                         <input 
                             type="text" 
                             placeholder="Enter exchange" 
-                            value={customExchange} 
-                            onChange={e => setCustomExchange(e.target.value)}
+                            value={exchange} // Set value to 'exchange'
+                            onChange={e => setExchange(e.target.value)} // Update 'exchange' directly
                             required
                         />
                     )}
