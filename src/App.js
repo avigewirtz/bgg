@@ -19,7 +19,7 @@ function App() {
     const [spacShortName, setSpacShortName] = useState('');
     const [mergerDate, setMergerDate] = useState('');
     const [generatedContent, setGeneratedContent] = useState('');
-
+    const [showCustomInput, setShowCustomInput] = useState(false);
 
     const exchanges = ['NYSE', 'NASDAQ', 'OTCMKTS', 'Other'];
     const [exchange, setExchange] = useState("");
@@ -75,10 +75,10 @@ function App() {
     const handleExchangeChange = (e) => {
         const value = e.target.value;
         if (value === "Other") {
-            // If "Other" is selected, reset 'exchange' to an empty string for custom input
-            setExchange("");
+            setShowCustomInput(true);
         } else {
             setExchange(value);
+            setShowCustomInput(false);
         }
     };
     
@@ -406,7 +406,7 @@ return (
 
 <div>
                     <span>Choose stock market exchange:</span>
-                    <select value={exchange === "" ? "Other" : exchange} onChange={handleExchangeChange}>
+                    <select value={showCustomInput ? "Other" : exchange} onChange={handleExchangeChange}>
                         <option value="" disabled hidden>Select an exchange</option>
                         {exchanges.map((item, index) => (
                             <option key={index} value={item}>
@@ -414,7 +414,7 @@ return (
                             </option>
                         ))}
                     </select>
-                    {exchange === "" && (
+                    {showCustomInput && (
                         <input 
                             type="text" 
                             placeholder="Enter custom exchange" 
