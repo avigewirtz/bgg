@@ -6,7 +6,6 @@ function App() {
     const [fullName, setFullName] = useState('');
     const [shortName, setShortName] = useState('');
     const [ticker, setTicker] = useState('');
-    const [exchange, setExchange] = useState('');
     const [caseType, setCaseType] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [leadPlaintiffDeadline, setLeadPlaintiffDeadline] = useState("");
@@ -23,6 +22,9 @@ function App() {
 
 
     const exchanges = ['NYSE', 'NASDAQ', 'OTCMKTS', 'Other'];
+    const [exchange, setExchange] = useState("");
+    const [customExchange, setCustomExchange] = useState("");
+
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation'];
 
     const handleSubmit = () => {
@@ -393,17 +395,26 @@ return (
                 onChange={e => setTicker(e.target.value)}
             />
 
-            <div>
-                <span>Choose stock market exchange:</span>
-                <select value={exchange} onChange={e => setExchange(e.target.value)}>
-                    <option value="" disabled hidden>Select an exchange</option>
-                    {exchanges.map((item, index) => (
-                        <option key={index} value={item}>
-                            {item}
-                        </option>
-                    ))}
-                </select>
-            </div>
+<div>
+                    <span>Choose stock market exchange:</span>
+                    <select value={exchange} onChange={e => setExchange(e.target.value)}>
+                        <option value="" disabled hidden>Select an exchange</option>
+                        {exchanges.map((item, index) => (
+                            <option key={index} value={item}>
+                                {item}
+                            </option>
+                        ))}
+                    </select>
+                    {exchange === "Other" && (
+                        <input 
+                            type="text" 
+                            placeholder="Enter exchange" 
+                            value={customExchange} 
+                            onChange={e => setCustomExchange(e.target.value)}
+                            required
+                        />
+                    )}
+                </div>
 
             <div>
                 <span>What type of case is it?</span>
