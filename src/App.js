@@ -337,7 +337,7 @@ const contentToParagraphs = (content) => {
         "Investigation Details:",
         "What’s Next?",
         "Why Bronstein, Gewirtz & Grossman:",
-        "There Is No Cost to You",
+        "There is No Cost to You",
         "Contact",
         "Case Details:",
         "Class Definition:"
