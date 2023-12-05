@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Document, Packer, Paragraph, TextRun, ExternalHyperlink} from 'docx';
+import { Tabs } from 'antd';
 import './App.css';
+
+
 
 function App() {
     const [fullName, setFullName] = useState('');
@@ -18,11 +21,15 @@ function App() {
     const [spacFullName, setSpacFullName] = useState('');
     const [spacShortName, setSpacShortName] = useState('');
     const [mergerDate, setMergerDate] = useState('');
-    const [generatedContent, setGeneratedContent] = useState('');
+    const [generatedContentWord, setGeneratedContentWord] = useState('');
+    const [generatedContentSite, setGeneratedContentSite] = useState('');
     const [showCustomInput, setShowCustomInput] = useState(false);
+    const { TabPane } = Tabs;
 
     const exchanges = ['NYSE', 'NASDAQ', 'OTCMKTS', 'Other'];
     const [exchange, setExchange] = useState("");
+
+
 
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation'];
 
@@ -33,43 +40,67 @@ function App() {
         }
 
         if (caseType === 'SPAC investigation') {
-            const generatedRelease = generate_spac_investigation(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
-            setGeneratedContent(generatedRelease);
+            const generatedReleaseWord = generate_spac_investigation(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
+            const generatedReleaseSite = generate_spac_investigation_site(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
+            setGeneratedContentWord(generatedReleaseWord);
+            setGeneratedContentSite(generatedReleaseSite);
 
         }
         if (caseType === '10b investigation') {
-            const generatedRelease = generate_10b_investigation(fullName, shortName, exchange, ticker, investigationParagraph);
-            setGeneratedContent(generatedRelease);
+            const generatedReleaseWord = generate_10b_investigation(fullName, shortName, exchange, ticker, investigationParagraph);
+            const generatedReleaseSite = generate_10b_investigation_site(fullName, shortName, exchange, ticker, investigationParagraph);
+            setGeneratedContentWord(generatedReleaseWord);
+            setGeneratedContentSite(generatedReleaseSite);
         }
 
         if (caseType === 'Derivative investigation') {
-            const generatedRelease = generate_derivative_investigation(fullName, ticker, shortName, exchange, purchaseDate);
-            setGeneratedContent(generatedRelease);
+            const generatedReleaseWord = generate_derivative_investigation(fullName, ticker, shortName, exchange, purchaseDate);
+            const generatedReleaseSite = generate_derivative_investigation_site(fullName, ticker, shortName, exchange, purchaseDate);
+            setGeneratedContentWord(generatedReleaseWord);
+            setGeneratedContentSite(generatedReleaseSite);
         }
         if (caseType === 'Class period and IPO') {
-            const generatedRelease = generate_class_period_and_ipo(
+            const generatedReleaseWord = generate_class_period_and_ipo(
                 fullName, ticker, shortName, exchange,
                 ipoDate, classPeriodStartDate, classPeriodEndDate,
                 caseDetails, leadPlaintiffDeadline
             );
-            setGeneratedContent(generatedRelease);
+            const generatedReleaseSite = generate_class_period_and_ipo_site(
+                fullName, ticker, shortName, exchange,
+                ipoDate, classPeriodStartDate, classPeriodEndDate,
+                caseDetails, leadPlaintiffDeadline
+            );
+            setGeneratedContentWord(generatedReleaseWord);
+            setGeneratedContentSite(generatedReleaseSite);
         }
        if (caseType === 'IPO') {
-           const generatedRelease = generate_ipo(
+           const generatedReleaseWord = generate_ipo(
                fullName, ticker, shortName, exchange,
                ipoDate, caseDetails, leadPlaintiffDeadline
            );
-           setGeneratedContent(generatedRelease);
+           const generatedReleaseSite = generate_ipo_site(
+            fullName, ticker, shortName, exchange,
+            ipoDate, caseDetails, leadPlaintiffDeadline
+        );
+           setGeneratedContentWord(generatedReleaseWord);
+           setGeneratedContentSite(generatedReleaseSite);
        }
 
        if (caseType === 'Class period') {
-           const generatedRelease = generate_class_period(
+           const generatedReleaseWord = generate_class_period(
                fullName, ticker, shortName, exchange,
                classPeriodStartDate, classPeriodEndDate, caseDetails,
                leadPlaintiffDeadline
            );
-           setGeneratedContent(generatedRelease);
+           const generatedReleaseSite = generate_class_period_site(
+            fullName, ticker, shortName, exchange,
+            classPeriodStartDate, classPeriodEndDate, caseDetails,
+            leadPlaintiffDeadline
+        );
+           setGeneratedContentWord(generatedReleaseWord);
+           setGeneratedContentSite(generatedReleaseSite);
        }
+   
     };
 
     const handleExchangeChange = (e) => {
@@ -299,6 +330,229 @@ Peretz Bronstein or Yael Nathanson
 332-239-2660 | info@bgandg.com`
     );
 };
+
+
+
+
+
+
+const generate_ipo_site = (
+    full_name, ticker, short_name, exchange,
+    ipo_date, case_details, lead_plaintiff_deadline
+) => {
+    const formattedIpoDate = formatDate(ipo_date);
+    const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
+
+    return (
+`${ticker} ${fullName} 
+
+Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.
+
+Class Definition:
+This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIpoDate} initial public offering ("IPO"). Such investors are encouraged to join this case.
+
+Case Details:
+${case_details}
+
+What’s Next?
+A class action lawsuit has already been filed. You may review a copy of the Complaint. You may also contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at 332-239-2660. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.
+
+There is No Cost to You
+We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.
+
+Why Bronstein, Gewirtz & Grossman:
+Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.
+
+Attorney advertising. Prior results do not guarantee similar outcomes.
+
+Contact:
+Bronstein, Gewirtz & Grossman, LLC
+Peretz Bronstein or Yael Nathanson
+332-239-2660 | info@bgandg.com`
+    );
+};
+
+
+
+
+const generate_class_period_site = (
+    full_name, ticker, short_name, exchange,
+    class_period_start_date, class_period_end_date,
+    case_details, lead_plaintiff_deadline
+) => {
+    const formattedClassPeriodStartDate = formatDate(class_period_start_date);
+    const formattedClassPeriodEndDate = formatDate(class_period_end_date);
+    const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
+    
+    return (
+`${ticker} ${fullName} 
+
+Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.
+
+Class Definition:
+This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, inclusive (the “Class Period”). Such investors are encouraged to join this case. 
+
+Case Details:
+${case_details}
+
+What’s Next?
+A class action lawsuit has already been filed. You may review a copy of the Complaint. You may also contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at 332-239-2660. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.
+
+There is No Cost to You
+We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.
+
+Why Bronstein, Gewirtz & Grossman:
+Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.
+
+Attorney advertising. Prior results do not guarantee similar outcomes.
+
+Contact:
+Bronstein, Gewirtz & Grossman, LLC
+Peretz Bronstein or Yael Nathanson
+332-239-2660 | info@bgandg.com`
+    );
+};
+
+const generate_class_period_and_ipo_site = (
+    full_name, ticker, short_name, exchange,
+    ipo_date, class_period_start_date, class_period_end_date,
+    case_details, lead_plaintiff_deadline
+) => {
+    const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
+    const formattedIPODate = formatDate(ipo_date);
+    const formattedClassPeriodStartDate = formatDate(class_period_start_date);
+    const formattedClassPeriodEndDate = formatDate(class_period_end_date);
+    
+     return (
+`${ticker} ${fullName} 
+
+Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.
+
+Class Definition:
+This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities: (1) pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIPODate} initial public offering ("IPO"); or (ii) between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, both dates inclusive (the “Class Period”). Such investors are encouraged to join this case.
+
+Case Details:
+${case_details}
+
+What’s Next?
+A class action lawsuit has already been filed. You may review a copy of the Complaint. You may also contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at 332-239-2660. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.
+
+There is No Cost to You
+We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.
+
+Why Bronstein, Gewirtz & Grossman:
+Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.
+
+Attorney advertising. Prior results do not guarantee similar outcomes.
+
+Contact:
+Bronstein, Gewirtz & Grossman, LLC
+Peretz Bronstein or Yael Nathanson
+332-239-2660 | info@bgandg.com`
+     );
+ };
+
+
+
+ const generate_derivative_investigation_site = (full_name, ticker, short_name, exchange, purchaseDate) => {
+    const formattedPurchaseDate = formatDate(purchaseDate);
+    
+     return (
+`${full_name} (${ticker})
+
+Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities prior to ${formattedPurchaseDate}, and continue to hold to the present, are encouraged to obtain additional information and assist the investigation.
+
+Investigation Details:
+The investigation concerns whether ${short_name} and certain of its officers and/or directors have engaged in corporate wrongdoing.
+
+What’s Next?
+If you are aware of any facts relating to this investigation or purchased ${short_name} shares, you can assist this investigation. You can also contact Peretz Bronstein or his law clerk and client relations manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC: 332-239-2660.
+
+There is No Cost to You
+We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.
+
+Why Bronstein, Gewirtz & Grossman:
+Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.
+
+Attorney advertising. Prior results do not guarantee similar outcomes.
+
+Contact:
+Bronstein, Gewirtz & Grossman, LLC
+Peretz Bronstein or Yael Nathanson
+332-239-2660 | info@bgandg.com`
+     );
+ };
+
+
+
+  const generate_spac_investigation_site = (full_name, short_name, exchange, ticker, spac_full_name, spac_short_name, merger_date) => {
+    const formattedMergerDate = formatDate(merger_date);
+      return (
+`${full_name} (${ticker})
+
+Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${spac_full_name} (“${spac_short_name}”), which merged with ${full_name} (“${short_name}”) (${exchange}: ${ticker}) on ${formattedMergerDate}. Investors who purchased ${spac_short_name} and continue to hold to the present, are encouraged to obtain additional information and assist the investigation. 
+
+Investigation Details:
+The investigation concerns whether ${spac_short_name} failed to provide relevant information to its shareholders before the merger.
+
+What’s Next?
+If you are aware of any facts relating to this investigation or purchased ${short_name} shares, you can assist this investigation. You can also contact Peretz Bronstein or his law clerk and client relations manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC: 332-239-2660.
+
+There is No Cost to You
+We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.
+
+Why Bronstein, Gewirtz & Grossman:
+Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits.  Our firm has recovered hundreds of millions of dollars for investors nationwide.
+
+Attorney advertising. Prior results do not guarantee similar outcomes.
+
+Contact:
+Bronstein, Gewirtz & Grossman, LLC
+Peretz Bronstein or Yael Nathanson
+332-239-2660 | info@bgandg.com`
+      );
+  };
+
+
+const generate_10b_investigation_site = (full_name, short_name, exchange, ticker, investigation_paragraph) => {
+    return (
+        `${full_name} (${ticker}) 
+
+Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities are encouraged to obtain additional information and assist the investigation. 
+
+The investigation concerns whether ${short_name} has violated federal securities laws.
+
+Investigation Details:
+${investigation_paragraph}
+
+What’s Next?
+If you are aware of any facts relating to this investigation or purchased ${short_name} securities, you can assist this investigation. You can also contact Peretz Bronstein or his law clerk and client relations manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC: 332-239-2660.
+
+There is No Cost to You
+We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.
+
+Why Bronstein, Gewirtz & Grossman:
+Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits.  Our firm has recovered hundreds of millions of dollars for investors nationwide.
+
+Attorney advertising. Prior results do not guarantee similar outcomes.
+
+Contact:
+Bronstein, Gewirtz & Grossman, LLC
+Peretz Bronstein or Yael Nathanson
+332-239-2660 | info@bgandg.com`
+    );
+};
+
+
+
+
+
+
+
+
+
+
+
 
 
 const downloadDocument = (content) => {
@@ -643,15 +897,25 @@ return (
             <button onClick={handleSubmit}>Submit</button>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-            {generatedContent && (
-                <>
-                    <textarea
-                        value={generatedContent}
-                        readOnly
-                        className="output-box"
-                    />
-                    <button onClick={() => downloadDocument(generatedContent)}>Download Word Document</button>
-                </>
+            {(generatedContentWord || generatedContentSite) && (
+                <Tabs defaultActiveKey="newswire">
+                    <TabPane tab="Newswire Version" key="newswire">
+                        {generatedContentWord && (
+                            <>
+                                <textarea value={generatedContentWord} readOnly className="output-box" />
+                                <button onClick={() => downloadDocument(generatedContentWord)}>Download Word Document</button>
+                            </>
+                        )}
+                    </TabPane>
+                    <TabPane tab="Site Version" key="site">
+                        {generatedContentSite && (
+                            <>
+                                <textarea value={generatedContentSite} readOnly className="output-box" />
+                           
+                            </>
+                        )}
+                    </TabPane>
+                </Tabs>
             )}
         </main>
     </div>
