@@ -43,6 +43,11 @@ function App() {
     const [generatedContentSite, setGeneratedContentSite] = useState('');
     const [uploadStatus, setUploadStatus] = useState('');
     const [showCustomInput, setShowCustomInput] = useState(false);
+    const [showCountdown, setShowCountdown] = useState(false);
+const [showComplaint, setShowComplaint] = useState(false);
+const [showCertification, setShowCertification] = useState(false);
+const [showStock, setShowStock] = useState(false);
+
     const { TabPane } = Tabs;
 
     const exchanges = ['NYSE', 'NASDAQ', 'OTCMKTS', 'Other'];
@@ -138,12 +143,12 @@ const generateStockShortcode = () => {
     return `[stockdio-historical-chart stockExchange=”NYSENasdaq” symbol="${ticker}" includeImage="true" includeDescription="true" culture="English-US" includeRelated="true"]`;
 };
 
-const createPage = async (title, content, fullName) => {
+const createPage = async () => {
   const apiEndpoint = 'https://bgandg.com/wp-json/wp/v2/pages';
   const username = 'Shlomo'; // Replace with your WordPress username
   const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ'; // Replace with your application password
   const htmlBlock = '<style>#footer .contact-form { display: none !important; }</style><a id="sign-up"></a> <div id="embed-container"></div>';
-  const fullContent = content + htmlBlock;
+  const fullContent = generatedContentSite + htmlBlock;
   const stockShortcode = generateStockShortcode();
 
   const headers = {
@@ -157,14 +162,11 @@ const createPage = async (title, content, fullName) => {
     target: '_blank' // Optional. Set to '_blank' for opening in new tab or leave it out
 };
 
-const showCountdown = false;
-const showComplaint = false;
-const showCertification = true;
-const showStock = true;
+
 
 
   const pageData = {
-    title: title, 
+    title: ticker, 
     content: fullContent,
     status: 'publish', 
     template: 'template-class-action.php',
@@ -194,7 +196,7 @@ const showStock = true;
 
 
 const handleUploadToSite = () => {
-    createPage(ticker, generatedContentSite, fullName);
+    createPage();
 };
 
 
@@ -455,14 +457,52 @@ return (
                         )}
                     </TabPane>
                     <TabPane tab="Site Version" key="site">
-    {generatedContentSite && (
-        <>
-            <textarea value={generatedContentSite} readOnly className="output-box" />
-            <button onClick={handleUploadToSite}>Upload to Site</button>
-            {uploadStatus && <p className="status-message">{uploadStatus}</p>}
-        </>
-    )}
-</TabPane>
+                    {generatedContentSite && (
+                        <>
+                            <textarea value={generatedContentSite} readOnly className="output-box" />
+                            
+                            {/* Additional questions for Site Version */}
+                            <div className="form-section">
+                                <label>
+                                    Show Countdown:
+                                    <input
+                                        type="checkbox"
+                                        checked={showCountdown}
+                                        onChange={() => setShowCountdown(!showCountdown)}
+                                    />
+                                </label>
+                                <label>
+                                    Show Complaint:
+                                    <input
+                                        type="checkbox"
+                                        checked={showComplaint}
+                                        onChange={() => setShowComplaint(!showComplaint)}
+                                    />
+                                </label>
+                                <label>
+                                    Show Certification Form:
+                                    <input
+                                        type="checkbox"
+                                        checked={showCertification}
+                                        onChange={() => setShowCertification(!showCertification)}
+                                    />
+                                </label>
+                                <label>
+                                    Show Stock Information:
+                                    <input
+                                        type="checkbox"
+                                        checked={showStock}
+                                        onChange={() => setShowStock(!showStock)}
+                                    />
+                                </label>
+                            </div>
+
+                            <button onClick={handleUploadToSite}>Upload to Site</button>
+                            {uploadStatus && <p className="status-message">{uploadStatus}</p>}
+                        </>
+                    )}
+                </TabPane>
+
 
                 </Tabs>
             )}
