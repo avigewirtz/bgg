@@ -149,7 +149,7 @@ const createPage = async () => {
   const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ'; // Replace with your application password
   const htmlBlock = '<style>#footer .contact-form { display: none !important; }</style><a id="sign-up"></a> <div id="embed-container"></div>';
   const fullContent = generatedContentSite + htmlBlock;
-  const stockShortcode = generateStockShortcode();
+  // const stockShortcode = generateStockShortcode();
 
   const headers = {
     'Content-Type': 'application/json',
@@ -165,24 +165,30 @@ const createPage = async () => {
 
 
 
-  const pageData = {
-    title: ticker, 
+   // Create the acf object
+   const acfData = {
+    custom_banner_title: fullName,
+    certification_form: linkData,
+    toggle_certification_form: showCertification,
+    toggle_stock: showStock,
+    toggle_countdown: showCountdown,
+    toggle_complaint: showComplaint,
+};
+
+// Conditionally add stock_shortcode
+if (showStock) {
+    acfData.stock_shortcode = generateStockShortcode();
+}
+
+// Construct pageData with the acf object
+const pageData = {
+    title: ticker,
     content: fullContent,
-    status: 'publish', 
+    status: 'publish',
     template: 'template-class-action.php',
     menu_order: -1,
-    
-
-    acf: {
-        stock_shortcode: stockShortcode,
-        custom_banner_title: fullName,
-        certification_form: linkData,
-        toggle_certification_form: showCertification,
-        toggle_stock: showStock,
-        toggle_countdown: showCountdown,
-        toggle_complaint: showComplaint,
-    },
-  };
+    acf: acfData,
+};
 
   try {
     const response = await axios.post(apiEndpoint, pageData, { headers });
