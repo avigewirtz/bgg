@@ -147,7 +147,7 @@ const createPage = async () => {
   const apiEndpoint = 'https://bgandg.com/wp-json/wp/v2/pages';
   const username = 'Shlomo'; // Replace with your WordPress username
   const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ'; // Replace with your application password
-  const htmlBlock = '<style>#footer .contact-form { display: none !important; }</style><a id="sign-up"></a> <div id="embed-container"></div>';
+  const htmlBlock = '<style>#footer .contact-form {display: none !important;}</style><a id="sign-up"></a><script type="text/javascript" src="https://form.jotform.com/jsform/233456376055460"></script>';
   const fullContent = generatedContentSite + htmlBlock;
   // const stockShortcode = generateStockShortcode();
 
