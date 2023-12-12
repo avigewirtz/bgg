@@ -57,7 +57,7 @@ function App() {
             setErrorMessage('Please fill in all fields and make your choices.');
             return;
         }
-
+        setUploadStatus('');
         if (caseType === 'SPAC investigation') {
             const generatedReleaseWord = generate_spac_investigation(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
             const generatedReleaseSite = generate_spac_investigation_site(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
