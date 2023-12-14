@@ -43,17 +43,26 @@ function App() {
     const [generatedContentSite, setGeneratedContentSite] = useState('');
     const [uploadStatus, setUploadStatus] = useState('');
     const [showCustomInput, setShowCustomInput] = useState(false);
-    const [showCountdown, setShowCountdown] = useState(false);
-const [showComplaint, setShowComplaint] = useState(false);
-const [showCertification, setShowCertification] = useState(false);
-const [showStock, setShowStock] = useState(false);
+    const [folderSelection, setFolderSelection] = useState('');
 
-    const { TabPane } = Tabs;
+    // const [showCountdown, setShowCountdown] = useState(false);
+// const [showComplaint, setShowComplaint] = useState(false);
+// const [showCertification, setShowCertification] = useState(false);
+// const [showStock, setShowStock] = useState(false);
+const [complaintDocument, setComplaintDocument] = useState(null);
+
+
+
+    // const { TabPane } = Tabs;
 
     const exchanges = ['NYSE', 'NASDAQ', 'OTCMKTS', 'Other'];
     const [exchange, setExchange] = useState("");
 
-
+    // const username = process.env.WP_USERNAME;
+    // const appPassword = process.env.WP_APP_PASSWORD;
+    
+    const username = 'Shlomo'; 
+    const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
 
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation'];
 
@@ -145,10 +154,18 @@ const generateStockShortcode = () => {
 
 const createPage = async () => {
   const apiEndpoint = 'https://bgandg.com/wp-json/wp/v2/pages';
-  const username = 'Shlomo'; // Replace with your WordPress username
-  const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ'; // Replace with your application password
-  const htmlBlock = '<style>#footer .contact-form {display: none !important;}</style><a id="sign-up"></a><script type="text/javascript" src="https://form.jotform.com/jsform/233456376055460"></script>';
-  const fullContent = generatedContentSite + htmlBlock;
+//   const username = 'Shlomo'; 
+//   const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
+//  const htmlBlock = '<style>#footer .contact-form {display: none !important;}</style><a id="sign-up"></a><script type="text/javascript" src="https://form.jotform.com/jsform/233467061911151"></script>';
+// Encode fullName to be URL-safe
+const encodedFullName = encodeURIComponent(fullName);
+
+// Modify the JotForm URL to include the 'caseType' field with the value of fullName
+const jotFormScriptUrl = `https://form.jotform.com/jsform/233467061911151?caseType=${encodedFullName}`;
+
+// Use the modified JotForm URL in your htmlBlock
+const htmlBlock = `<style>#footer .contact-form {display: none !important;}</style><a id="sign-up"></a><script type="text/javascript" src="${jotFormScriptUrl}"></script>`;  
+const fullContent = generatedContentSite + htmlBlock;
   // const stockShortcode = generateStockShortcode();
 
   const headers = {
@@ -157,9 +174,8 @@ const createPage = async () => {
   };
 
   const linkData = {
-    url: 'https://bgandg.cliogrow.com/intake/ebee54a0a1767fc007fd74f57043cc47', // The URL of the link
-    title: 'Clio intake form', // The text of the link that will be displayed
-    target: '_blank' // Optional. Set to '_blank' for opening in new tab or leave it out
+    url: '#sign-up', // The URL of the link
+    // title: 'Clio intake form', // The text of the link that will be displayed
 };
 
 
@@ -169,16 +185,35 @@ const createPage = async () => {
    const acfData = {
     custom_banner_title: fullName,
     certification_form: linkData,
-    toggle_certification_form: showCertification,
-    toggle_stock: showStock,
-    toggle_countdown: showCountdown,
-    toggle_complaint: showComplaint,
+    toggle_certification_form: true,
+    toggle_stock: true,
+    // toggle_countdown: showCountdown,
+    // toggle_complaint: showComplaint,
 };
 
+// Check if there is a document to upload
+if (complaintDocument) {
+    try {
+      // Upload the document first
+      const uploadedDocument = await uploadDocument(complaintDocument);
+      // Add the uploaded document ID to the ACF data
+    //   setShowComplaint(true);
+      acfData.toggle_complaint = true;
+      acfData.complaint_document = uploadedDocument.id;
+    } catch (error) {
+      console.error('Error uploading document:', error);
+      setUploadStatus('Error uploading document.');
+      return;
+    }
+  }
+
 // Conditionally add stock_shortcode
-if (showStock) {
+
     acfData.stock_shortcode = generateStockShortcode();
-}
+
+    const folderId = folderSelection === 'cases' ? 11 : 
+                   folderSelection === 'investigations' ? 13 : 
+                   null;
 
 // Construct pageData with the acf object
 const pageData = {
@@ -188,6 +223,7 @@ const pageData = {
     template: 'template-class-action.php',
     menu_order: -1,
     acf: acfData,
+    wf_page_folders: [folderId],
 };
 
   try {
@@ -200,6 +236,28 @@ const pageData = {
   }
 };
 
+const uploadDocument = async (document) => {
+    const formData = new FormData();
+    formData.append('file', document);
+  
+    const uploadHeaders = {
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Basic ${window.btoa(username + ':' + appPassword)}`,
+    };
+  
+    try {
+      const response = await axios.post('https://bgandg.com/wp-json/wp/v2/media', formData, { headers: uploadHeaders });
+      return response.data;  // Return the uploaded document details
+    } catch (error) {
+      console.error('Error uploading document:', error);
+      throw error;
+    }
+  };
+
+const handleFileChange = (e) => {
+    setComplaintDocument(e.target.files[0]);
+};
+
 
 const handleUploadToSite = () => {
     createPage();
@@ -209,7 +267,75 @@ const handleUploadToSite = () => {
 
 
 
+const tabs = [
+    {
+        label: 'Newswire Version',
+        key: 'newswire',
+        children: (
+            <>
+                {generatedContentWord && (
+                    <>
+                        <textarea value={generatedContentWord} readOnly className="output-box" />
+                        <button onClick={() => downloadDocument(generatedContentWord)}>Download Word Document</button>
+                    </>
+                )}
+            </>
+        ),
+    },
+    {
+        label: 'Site Version',
+        key: 'site',
+        children: (
+            <>
+                {generatedContentSite && (
+                    <>
+                        <textarea value={generatedContentSite} readOnly className="output-box" />
 
+                        {/* Additional questions for Site Version */}
+                        <div className="form-section">
+                            {/* <label>
+                                Show Certification Form:
+                                <input
+                                    type="checkbox"
+                                    checked={showCertification}
+                                    onChange={() => setShowCertification(!showCertification)}
+                                />
+                            </label>
+                            <label>
+                                Show Stock Information:
+                                <input
+                                    type="checkbox"
+                                    checked={showStock}
+                                    onChange={() => setShowStock(!showStock)}
+                                />
+                            </label> */}
+                             <label>
+                                Select Folder:
+                                <select value={folderSelection} onChange={e => setFolderSelection(e.target.value)}>
+                                    <option value="" disabled>Select Folder</option>
+                                    <option value="cases">Cases</option>
+                                    <option value="investigations">Investigations</option>
+                                </select>
+                            </label>
+                            {/* File input for uploading complaint document */}
+                            <label>
+                                Upload Complaint Document:
+                                <input
+                                    type="file"
+                                    onChange={handleFileChange} // Function to handle file selection
+                                />
+                            </label>
+                        </div>
+
+                        <button onClick={handleUploadToSite}>Upload to Site</button>
+                        {uploadStatus && <p className="status-message">{uploadStatus}</p>}
+                    </>
+                )}
+            </>
+        ),
+    },
+    // Add more tabs here if needed
+];
 
 
 
@@ -453,64 +579,76 @@ return (
             {errorMessage && <p className="error-message">{errorMessage}</p>}
 
             {(generatedContentWord || generatedContentSite) && (
-                <Tabs defaultActiveKey="newswire">
-                    <TabPane tab="Newswire Version" key="newswire">
-                        {generatedContentWord && (
-                            <>
-                                <textarea value={generatedContentWord} readOnly className="output-box" />
-                                <button onClick={() => downloadDocument(generatedContentWord)}>Download Word Document</button>
-                            </>
-                        )}
-                    </TabPane>
-                    <TabPane tab="Site Version" key="site">
-                    {generatedContentSite && (
-                        <>
-                            <textarea value={generatedContentSite} readOnly className="output-box" />
+                <Tabs items={tabs} defaultActiveKey="newswire" />
+                // <Tabs defaultActiveKey="newswire">
+                //     <TabPane tab="Newswire Version" key="newswire">
+                //         {generatedContentWord && (
+                //             <>
+                //                 <textarea value={generatedContentWord} readOnly className="output-box" />
+                //                 <button onClick={() => downloadDocument(generatedContentWord)}>Download Word Document</button>
+                //             </>
+                //         )}
+                //     </TabPane>
+                //     <TabPane tab="Site Version" key="site">
+                //     {generatedContentSite && (
+                //         <>
+                //             <textarea value={generatedContentSite} readOnly className="output-box" />
                             
-                            {/* Additional questions for Site Version */}
-                            <div className="form-section">
-                                <label>
-                                    Show Countdown:
-                                    <input
-                                        type="checkbox"
-                                        checked={showCountdown}
-                                        onChange={() => setShowCountdown(!showCountdown)}
-                                    />
-                                </label>
-                                <label>
-                                    Show Complaint:
-                                    <input
-                                        type="checkbox"
-                                        checked={showComplaint}
-                                        onChange={() => setShowComplaint(!showComplaint)}
-                                    />
-                                </label>
-                                <label>
-                                    Show Certification Form:
-                                    <input
-                                        type="checkbox"
-                                        checked={showCertification}
-                                        onChange={() => setShowCertification(!showCertification)}
-                                    />
-                                </label>
-                                <label>
-                                    Show Stock Information:
-                                    <input
-                                        type="checkbox"
-                                        checked={showStock}
-                                        onChange={() => setShowStock(!showStock)}
-                                    />
-                                </label>
-                            </div>
+                //             {/* Additional questions for Site Version */}
+                //             <div className="form-section">
+                //                 {/* <label>
+                //                     Show Countdown:
+                //                     <input
+                //                         type="checkbox"
+                //                         checked={showCountdown}
+                //                         onChange={() => setShowCountdown(!showCountdown)}
+                //                     />
+                //                 </label> */}
+                //                 {/* <label>
+                //                     Show Complaint:
+                //                     <input
+                //                         type="checkbox"
+                //                         checked={showComplaint}
+                //                         onChange={() => setShowComplaint(!showComplaint)}
+                //                     />
+                //                 </label> */}
+                //                 <label>
+                //                     Show Certification Form:
+                //                     <input
+                //                         type="checkbox"
+                //                         checked={showCertification}
+                //                         onChange={() => setShowCertification(!showCertification)}
+                //                     />
+                //                 </label>
+                //                 <label>
+                //                     Show Stock Information:
+                //                     <input
+                //                         type="checkbox"
+                //                         checked={showStock}
+                //                         onChange={() => setShowStock(!showStock)}
+                //                     />
+                //                 </label>
 
-                            <button onClick={handleUploadToSite}>Upload to Site</button>
-                            {uploadStatus && <p className="status-message">{uploadStatus}</p>}
-                        </>
-                    )}
-                </TabPane>
+                //                 {/* File input for uploading complaint document */}
+      
+                // <label>
+                //     Upload Complaint Document:
+                //     <input
+                //         type="file"
+                //         onChange={handleFileChange} // Function to handle file selection
+                //     />
+                // </label>
+    
+                //             </div>
+
+                //             <button onClick={handleUploadToSite}>Upload to Site</button>
+                //             {uploadStatus && <p className="status-message">{uploadStatus}</p>}
+                //         </>
+                //     )}
+                // </TabPane>
 
 
-                </Tabs>
+                // </Tabs>
             )}
         </main>
     </div>
