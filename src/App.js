@@ -217,7 +217,7 @@ if (complaintDocument) {
 
 // Construct pageData with the acf object
 const pageData = {
-    title: ticker,
+    title: fullName + ' (' + ticker + ')',
     content: fullContent,
     status: 'publish',
     template: 'template-class-action.php',

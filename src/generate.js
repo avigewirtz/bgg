@@ -344,9 +344,7 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
     const formattedPurchaseDate = formatDate(purchaseDate);
     
     return (
-        `<strong>${full_name} (${ticker})</strong>
-
-        <p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities prior to ${formattedPurchaseDate}, and continue to hold to the present, are encouraged to obtain additional information and assist the investigation.</p>
+        `<p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities prior to ${formattedPurchaseDate}, and continue to hold to the present, are encouraged to obtain additional information and assist the investigation.</p>
 
         <p><strong>Investigation Details:</strong><br/>
         The investigation concerns whether ${short_name} and certain of its officers and/or directors have engaged in corporate wrongdoing.</p>
@@ -375,9 +373,7 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
  export const generate_spac_investigation_site = (full_name, short_name, exchange, ticker, spac_full_name, spac_short_name, merger_date) => {
     const formattedMergerDate = formatDate(merger_date);
     return (
-        `<strong>${full_name} (${ticker})</strong>
-
-        <p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${spac_full_name} (“${spac_short_name}”), which merged with ${full_name} (“${short_name}”) (${exchange}: ${ticker}) on ${formattedMergerDate}. Investors who purchased ${spac_short_name} and continue to hold to the present, are encouraged to obtain additional information and assist the investigation.</p>
+        `<p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${spac_full_name} (“${spac_short_name}”), which merged with ${full_name} (“${short_name}”) (${exchange}: ${ticker}) on ${formattedMergerDate}. Investors who purchased ${spac_short_name} and continue to hold to the present, are encouraged to obtain additional information and assist the investigation.</p>
 
         <p><strong>Investigation Details:</strong><br/>
         The investigation concerns whether ${spac_short_name} failed to provide relevant information to its shareholders before the merger.</p>
@@ -404,9 +400,7 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
 
 export const generate_10b_investigation_site = (full_name, short_name, exchange, ticker, investigation_paragraph) => {
     return (
-        `<strong>${full_name} (${ticker})</strong>
-
-        <p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities are encouraged to obtain additional information and assist the investigation.</p>
+        `<p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities are encouraged to obtain additional information and assist the investigation.</p>
 
         <p>The investigation concerns whether ${short_name} has violated federal securities laws.</p>
 
