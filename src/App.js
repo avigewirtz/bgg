@@ -412,7 +412,7 @@ return (
             </header>
         <main>
 
-        <Card className="form-container" style={{ width: '50%', margin: '0 auto',}}>
+        <Card className="form-container" style={{ width: '50%', margin: '0 auto', marginBottom: '50px'}}>
         <Form 
     layout="vertical" 
     onFinish={handleSubmit} 
