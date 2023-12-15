@@ -18,7 +18,7 @@ export const generate_ipo_html = (
         ${case_details}</p>
 
         <p><strong>What’s Next?</strong><br/>
-        A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a> or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at <a href="tel:332-239-2660">332-239-2660</a>. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.</p>
+        A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a> or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at <a href="tel:332-239-2660">332-239-2660</a>. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as lead plaintiff.</p>
 
         <p><strong>There is No Cost to You</strong><br/>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
@@ -59,7 +59,7 @@ export const generate_class_period_html = (
         ${case_details}</p>
 
         <p><strong>What’s Next?</strong><br/>
-        A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a> or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at <a href="tel:332-239-2660">332-239-2660</a>. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.</p>
+        A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a> or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at <a href="tel:332-239-2660">332-239-2660</a>. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as lead plaintiff.</p>
 
         <p><strong>There is No Cost to You</strong><br/>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
@@ -98,7 +98,7 @@ export const generate_class_period_and_ipo_html = (
         ${case_details}</p>
 
         <p><strong>What’s Next?</strong><br/>
-        A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a> or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at <a href="tel:332-239-2660">332-239-2660</a>. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as a lead plaintiff.</p>
+        A class action lawsuit has already been filed. If you wish to review a copy of the Complaint, you can visit the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a> or you may contact Peretz Bronstein, Esq. or his Law Clerk and Client Relations Manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC at <a href="tel:332-239-2660">332-239-2660</a>. If you suffered a loss in ${short_name} you have until ${formattedLeadPlaintiffDeadline}, to request that the Court appoint you as lead plaintiff. Your ability to share in any recovery doesn't require that you serve as lead plaintiff.</p>
 
         <p><strong>There is No Cost to You</strong><br/>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
