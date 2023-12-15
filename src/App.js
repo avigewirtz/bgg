@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload} from 'antd';
+import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload, Spin} from 'antd';
 import axios from 'axios';
 import DOMPurify from 'dompurify';
 
@@ -51,6 +51,8 @@ function App() {
     const exchanges = ['NYSE', 'NASDAQ', 'OTCMKTS', 'Other'];
     const [exchange, setExchange] = useState("");
     const [fileList, setFileList] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
 
     // const username = process.env.WP_USERNAME;
     // const appPassword = process.env.WP_APP_PASSWORD;
@@ -152,6 +154,7 @@ const generateStockShortcode = () => {
 };
 
 const createPage = async () => {
+setIsLoading(true);
 const apiEndpoint = 'https://bgandg.com/wp-json/wp/v2/pages';
 const encodedFullName = encodeURIComponent(fullName);
 
@@ -216,10 +219,15 @@ const pageData = {
     const response = await axios.post(apiEndpoint, pageData, { headers });
     console.log('Page created:', response.data);
     setUploadStatus('Page uploaded successfully!');
+
   } catch (error) {
     console.error('Error creating page:', error);
     setUploadStatus('Error uploading page.');
+
   }
+  finally {
+    setIsLoading(false); // Stop loading regardless of the outcome
+}
 };
 
 const uploadDocument = async (document) => {
@@ -331,16 +339,21 @@ const tabs = [
     <p className="ant-upload-drag-icon">
         <UploadOutlined />
     </p>
-    <p className="ant-upload-text">Click or drag file to this area to upload</p>
+    <p className="ant-upload-text">Upload complaint document</p>
 </Dragger>
 
                                     </Form.Item>
                                 </Col>
                             </Row>
                             <Row gutter={16}>
-                                <Col span={24} style={{ textAlign: 'center' }}>
-                                    <Button type="primary" onClick={handleUploadToSite}>Upload to bgandg.com</Button>
-                                </Col>
+                            <Col span={24} style={{ textAlign: 'center' }}>
+    {isLoading ? (
+        <Spin />
+    ) : (
+        <Button type="primary" onClick={handleUploadToSite}>Upload to bgandg.com</Button>
+    )}
+</Col>
+
                             </Row>
                         </Form>
                         {uploadStatus && <p className="status-message">{uploadStatus}</p>}
@@ -485,7 +498,7 @@ return (
             name="leadPlaintiffDeadline"
             rules={[{ required: true, message: '' }]}
         >
-            <DatePicker placeholder="Lead Plaintiff Deadline" value={leadPlaintiffDeadline} onChange={setLeadPlaintiffDeadline} />
+            <DatePicker placeholder="Lead Plaintiff Deadline" value={leadPlaintiffDeadline} style={{ width: '100%' }} onChange={setLeadPlaintiffDeadline} />
         </Form.Item>
 </Col>
 <Col span={8}>  
@@ -494,7 +507,7 @@ return (
             name="classPeriodStartDate"
             rules={[{ required: true, message: '' }]}
         >
-            <DatePicker placeholder="Class Period Start Date" value={classPeriodStartDate} onChange={setClassPeriodStartDate} />
+            <DatePicker placeholder="Class Period Start Date" value={classPeriodStartDate} style={{ width: '100%' }} onChange={setClassPeriodStartDate} />
         </Form.Item>
 </Col>
 <Col span={8}>  
