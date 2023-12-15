@@ -1,14 +1,12 @@
-function formatDate(inputDate) {
-    const months = [
-        'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-    ];
 
-    const [year, month, day] = inputDate.split('-');
-    const formattedDate = `${months[parseInt(month, 10) - 1]} ${parseInt(day, 10)}, ${year}`;
-    
-    return formattedDate;
+
+function formatDate(momentDate) {
+    if (!momentDate) {
+        return '';
+    }
+    // Use Moment.js formatting to get the desired output
+    return momentDate.format('MMMM D, YYYY');
 }
-
 
 
 export const generate_ipo = (

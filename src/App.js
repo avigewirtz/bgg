@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Tabs } from 'antd';
+import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload} from 'antd';
 import axios from 'axios';
-import './App.css';
+import DOMPurify from 'dompurify';
+
+import { UploadOutlined } from '@ant-design/icons';
 
 import {downloadDocument} from './downloadWord'
 
@@ -20,13 +22,16 @@ import {
     generate_10b_investigation_site
 } from './generate';
 
+const { TextArea } = Input;
+const { Option } = Select;
+const { Title } = Typography;
+const { Dragger } = Upload;
 
 function App() {
     const [fullName, setFullName] = useState('');
     const [shortName, setShortName] = useState('');
     const [ticker, setTicker] = useState('');
     const [caseType, setCaseType] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
     const [leadPlaintiffDeadline, setLeadPlaintiffDeadline] = useState("");
     const [classPeriodStartDate, setClassPeriodStartDate] = useState("");
     const [classPeriodEndDate, setClassPeriodEndDate] = useState("");
@@ -35,8 +40,6 @@ function App() {
     const [investigationParagraph, setInvestigationParagraph] = useState('');
     const [purchaseDate, setPurchaseDate] = useState('');
     const [spacFullName, setSpacFullName] = useState('');
-    // const [stockExchange, setStockExchange] = useState('');
-    // const [stockShortcode, setStockShortcode] = useState('');
     const [spacShortName, setSpacShortName] = useState('');
     const [mergerDate, setMergerDate] = useState('');
     const [generatedContentWord, setGeneratedContentWord] = useState('');
@@ -44,33 +47,19 @@ function App() {
     const [uploadStatus, setUploadStatus] = useState('');
     const [showCustomInput, setShowCustomInput] = useState(false);
     const [folderSelection, setFolderSelection] = useState('');
-
-    // const [showCountdown, setShowCountdown] = useState(false);
-// const [showComplaint, setShowComplaint] = useState(false);
-// const [showCertification, setShowCertification] = useState(false);
-// const [showStock, setShowStock] = useState(false);
-const [complaintDocument, setComplaintDocument] = useState(null);
-
-
-
-    // const { TabPane } = Tabs;
-
+    const [complaintDocument, setComplaintDocument] = useState(null);
     const exchanges = ['NYSE', 'NASDAQ', 'OTCMKTS', 'Other'];
     const [exchange, setExchange] = useState("");
+    const [fileList, setFileList] = useState([]);
 
     // const username = process.env.WP_USERNAME;
     // const appPassword = process.env.WP_APP_PASSWORD;
-    
     const username = 'Shlomo'; 
     const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
-
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation'];
 
     const handleSubmit = () => {
-        if (!fullName || !shortName || !ticker || !exchange || !caseType) {
-            setErrorMessage('Please fill in all fields and make your choices.');
-            return;
-        }
+    
         setUploadStatus('');
         if (caseType === 'SPAC investigation') {
             const generatedReleaseWord = generate_spac_investigation(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
@@ -136,8 +125,7 @@ const [complaintDocument, setComplaintDocument] = useState(null);
 
     };
 
-    const handleExchangeChange = (e) => {
-        const value = e.target.value;
+    const handleExchangeChange = (value) => {
         if (value === "Other") {
             setShowCustomInput(true);
         } else {
@@ -148,16 +136,23 @@ const [complaintDocument, setComplaintDocument] = useState(null);
     
 
 
+
+    const handleCaseTypeChange = (value) => {
+        setCaseType(value);
+    
+        if (['Class period', 'IPO', 'Class period and IPO'].includes(value)) {
+            setFolderSelection('cases');
+        } else if (['10b investigation', 'Derivative investigation', 'SPAC investigation'].includes(value)) {
+            setFolderSelection('investigations');
+        }
+    };
+
 const generateStockShortcode = () => {
     return `[stockdio-historical-chart stockExchange=”NYSENasdaq” symbol="${ticker}" includeImage="true" includeDescription="true" culture="English-US" includeRelated="true"]`;
 };
 
 const createPage = async () => {
-  const apiEndpoint = 'https://bgandg.com/wp-json/wp/v2/pages';
-//   const username = 'Shlomo'; 
-//   const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
-//  const htmlBlock = '<style>#footer .contact-form {display: none !important;}</style><a id="sign-up"></a><script type="text/javascript" src="https://form.jotform.com/jsform/233467061911151"></script>';
-// Encode fullName to be URL-safe
+const apiEndpoint = 'https://bgandg.com/wp-json/wp/v2/pages';
 const encodedFullName = encodeURIComponent(fullName);
 
 // Modify the JotForm URL to include the 'caseType' field with the value of fullName
@@ -166,7 +161,7 @@ const jotFormScriptUrl = `https://form.jotform.com/jsform/233467061911151?caseTy
 // Use the modified JotForm URL in your htmlBlock
 const htmlBlock = `<style>#footer .contact-form {display: none !important;}</style><a id="sign-up"></a><script type="text/javascript" src="${jotFormScriptUrl}"></script>`;  
 const fullContent = generatedContentSite + htmlBlock;
-  // const stockShortcode = generateStockShortcode();
+  
 
   const headers = {
     'Content-Type': 'application/json',
@@ -174,8 +169,7 @@ const fullContent = generatedContentSite + htmlBlock;
   };
 
   const linkData = {
-    url: '#sign-up', // The URL of the link
-    // title: 'Clio intake form', // The text of the link that will be displayed
+    url: '#sign-up', 
 };
 
 
@@ -187,17 +181,14 @@ const fullContent = generatedContentSite + htmlBlock;
     certification_form: linkData,
     toggle_certification_form: true,
     toggle_stock: true,
-    // toggle_countdown: showCountdown,
-    // toggle_complaint: showComplaint,
+    
 };
 
 // Check if there is a document to upload
 if (complaintDocument) {
     try {
-      // Upload the document first
       const uploadedDocument = await uploadDocument(complaintDocument);
-      // Add the uploaded document ID to the ACF data
-    //   setShowComplaint(true);
+
       acfData.toggle_complaint = true;
       acfData.complaint_document = uploadedDocument.id;
     } catch (error) {
@@ -206,18 +197,13 @@ if (complaintDocument) {
       return;
     }
   }
-
-// Conditionally add stock_shortcode
-
     acfData.stock_shortcode = generateStockShortcode();
-
     const folderId = folderSelection === 'cases' ? 11 : 
                    folderSelection === 'investigations' ? 13 : 
                    null;
-
-// Construct pageData with the acf object
 const pageData = {
     title: fullName + ' (' + ticker + ')',
+    slug: ticker,
     content: fullContent,
     status: 'publish',
     template: 'template-class-action.php',
@@ -254,9 +240,18 @@ const uploadDocument = async (document) => {
     }
   };
 
-const handleFileChange = (e) => {
-    setComplaintDocument(e.target.files[0]);
+  const handleFileChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+
+    // Assuming you want to store the last selected file as the complaint document
+    if (newFileList.length > 0) {
+        const lastFile = newFileList[newFileList.length - 1];
+        setComplaintDocument(lastFile.originFileObj);
+    } else {
+        setComplaintDocument(null); // Reset if no file is selected
+    }
 };
+
 
 
 const handleUploadToSite = () => {
@@ -264,7 +259,27 @@ const handleUploadToSite = () => {
 };
 
 
+const handleTickerChange = (e) => {
+    setTicker(e.target.value.toUpperCase());
+};
 
+const createMarkup = (htmlContent) => {
+    return {
+        __html: DOMPurify.sanitize(htmlContent)
+    };
+};
+
+
+const siteStyle = {
+    overflow: 'auto', padding: '4px 11px', marginBottom: '20px', borderRadius: '8px', border: '1px solid #d9d9d9', minHeight: '100px', 
+    maxHeight: '600px', 
+    overflowY: 'auto',
+};
+const wordStyle = {
+    overflow: 'auto', padding: '4px 11px', whiteSpace: 'pre-wrap', marginBottom: '20px', borderRadius: '8px', border: '1px solid #d9d9d9', minHeight: '100px', 
+    maxHeight: '600px', 
+    overflowY: 'auto',
+};
 
 
 const tabs = [
@@ -275,66 +290,65 @@ const tabs = [
             <>
                 {generatedContentWord && (
                     <>
-                        <textarea value={generatedContentWord} readOnly className="output-box" />
-                        <button onClick={() => downloadDocument(generatedContentWord)}>Download Word Document</button>
+                    <div 
+                    className="output-box" 
+                    style={wordStyle}
+                >
+                    {generatedContentWord}
+                </div>
+                     
+                        <div style={{ textAlign: 'center' }}>
+                            <Button type="primary" onClick={() => downloadDocument(generatedContentWord)}>Download Word Document</Button>
+                        </div>
                     </>
                 )}
             </>
         ),
     },
     {
-        label: 'Site Version',
+        label: 'bgandg.com Version',
         key: 'site',
         children: (
             <>
                 {generatedContentSite && (
                     <>
-                        <textarea value={generatedContentSite} readOnly className="output-box" />
-
+                        <div
+    dangerouslySetInnerHTML={createMarkup(generatedContentSite)} 
+    className="output-box" 
+    style={siteStyle} 
+/>
+                        
                         {/* Additional questions for Site Version */}
-                        <div className="form-section">
-                            {/* <label>
-                                Show Certification Form:
-                                <input
-                                    type="checkbox"
-                                    checked={showCertification}
-                                    onChange={() => setShowCertification(!showCertification)}
-                                />
-                            </label>
-                            <label>
-                                Show Stock Information:
-                                <input
-                                    type="checkbox"
-                                    checked={showStock}
-                                    onChange={() => setShowStock(!showStock)}
-                                />
-                            </label> */}
-                             <label>
-                                Select Folder:
-                                <select value={folderSelection} onChange={e => setFolderSelection(e.target.value)}>
-                                    <option value="" disabled>Select Folder</option>
-                                    <option value="cases">Cases</option>
-                                    <option value="investigations">Investigations</option>
-                                </select>
-                            </label>
-                            {/* File input for uploading complaint document */}
-                            <label>
-                                Upload Complaint Document:
-                                <input
-                                    type="file"
-                                    onChange={handleFileChange} // Function to handle file selection
-                                />
-                            </label>
-                        </div>
+                        <Form layout="vertical">
+                            <Row gutter={16}>
+                                <Col span={24}>
+                                    <Form.Item label="" name="complaintDocument">
+                                    <Dragger
+    beforeUpload={() => false} // Prevent automatic upload
+    onChange={handleFileChange}
+    fileList={fileList} // Use fileList state here
+>
+    <p className="ant-upload-drag-icon">
+        <UploadOutlined />
+    </p>
+    <p className="ant-upload-text">Click or drag file to this area to upload</p>
+</Dragger>
 
-                        <button onClick={handleUploadToSite}>Upload to Site</button>
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                            <Row gutter={16}>
+                                <Col span={24} style={{ textAlign: 'center' }}>
+                                    <Button type="primary" onClick={handleUploadToSite}>Upload to bgandg.com</Button>
+                                </Col>
+                            </Row>
+                        </Form>
                         {uploadStatus && <p className="status-message">{uploadStatus}</p>}
                     </>
                 )}
             </>
         ),
     },
-    // Add more tabs here if needed
 ];
 
 
@@ -342,317 +356,298 @@ const tabs = [
 
 return (
     <div className="app">
-        <header>
-            <h1>Company Details Form</h1>
-        </header>
-
+        <header style={{ textAlign: 'center' }}>
+                <Title level={1}>Press Release Generator Form</Title>
+            </header>
         <main>
-            <input
-                type="text"
-                placeholder="Enter full company name"
-                value={fullName}
-                onChange={e => setFullName(e.target.value)}
-            />
-            <input
-                type="text"
-                placeholder="Enter short company name"
-                value={shortName}
-                onChange={e => setShortName(e.target.value)}
-            />
-            <input
-                type="text"
-                placeholder="Enter ticker"
-                value={ticker}
-                onChange={e => setTicker(e.target.value)}
-            />
 
-<div>
-                    <span>Choose stock market exchange:</span>
-                    <select value={showCustomInput ? "Other" : exchange} onChange={handleExchangeChange}>
-                        <option value="" disabled hidden>Select an exchange</option>
-                        {exchanges.map((item, index) => (
-                            <option key={index} value={item}>
-                                {item}
-                            </option>
-                        ))}
-                    </select>
-                    {showCustomInput && (
-                        <input 
-                            type="text" 
-                            placeholder="Enter custom exchange" 
-                            value={exchange}
-                            onChange={e => setExchange(e.target.value)}
-                            required
-                        />
-                    )}
-                </div>
+        <Card className="form-container" style={{ width: '50%', margin: '0 auto',}}>
+        <Form 
+    layout="vertical" 
+    onFinish={handleSubmit} 
+>
+<Row gutter={16}>
+        <Col span={15}>
+        <Form.Item 
+                            label="Full Name" 
+                            name="fullName"
+                            rules={[{ required: true, message: '' }]}
+                        >
+                            <Input placeholder="full name" value={fullName} onChange={e => setFullName(e.target.value)} />
+                        </Form.Item>
+                </Col>
+        <Col span={9}>
+        <Form.Item 
+                            label="Short Name" 
+                            name="shortName"
+                            rules={[{ required: true, message: '' }]}
+                        >
+                            <Input placeholder="short name" value={shortName} onChange={e => setShortName(e.target.value)} />
+                        </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={16}>
+        <Col span={6}>
+        <Form.Item 
+    label="Ticker" 
+    name="ticker"
+    rules={[{ required: true, message: '' }]}
+>
+    <Input placeholder="ticker" value={ticker} onChange={handleTickerChange} />
+</Form.Item>
 
-            <div>
-                <span>What type of case is it?</span>
-                <select value={caseType} onChange={e => setCaseType(e.target.value)}>
-                    <option value="" disabled hidden>Select a case type</option>
-                    {cases.map((item, index) => (
-                        <option key={index} value={item}>
-                            {item}
-                        </option>
-                    ))}
-                </select>
-            </div>
-
-            {caseType === 'IPO' && (
-                <>
-                    <label>
-                        IPO Date:
-                        <input
-                            type="date"
-                            placeholder="Enter IPO Date"
-                            value={ipoDate}
-                            onChange={e => setIpoDate(e.target.value)}
-                        />
-                    </label>
-
-                    <label>
-                        Lead Plaintiff Deadline:
-                        <input
-                            type="date"
-                            placeholder="Enter Lead Plaintiff Deadline"
-                            value={leadPlaintiffDeadline}
-                            onChange={e => setLeadPlaintiffDeadline(e.target.value)}
-                        />
-                    </label>
-
-                    <label>
-                        Case Details:
-                        <textarea
-                            placeholder="Enter Case Details"
-                            value={caseDetails}
-                            onChange={e => setCaseDetails(e.target.value)}
-                        />
-                    </label>
-                </>
-            )}
-
-            {caseType === 'Class period and IPO' && (
-                <div>
-                    <label>
-                        IPO Date:
-                        <input
-                            type="date"
-                            value={ipoDate}
-                            onChange={e => setIpoDate(e.target.value)}
-                        />
-                    </label>
-
-                    <label>
-                        Class Period Start Date:
-                        <input
-                            type="date"
-                            value={classPeriodStartDate}
-                            onChange={e => setClassPeriodStartDate(e.target.value)}
-                        />
-                    </label>
-
-                    <label>
-                        Class Period End Date:
-                        <input
-                            type="date"
-                            value={classPeriodEndDate}
-                            onChange={e => setClassPeriodEndDate(e.target.value)}
-                        />
-                    </label>
-
-                    <label>
-                        Lead Plaintiff Deadline:
-                        <input
-                            type="date"
-                            value={leadPlaintiffDeadline}
-                            onChange={e => setLeadPlaintiffDeadline(e.target.value)}
-                        />
-                    </label>
-
-                    <label>
-                        Complaint Allegations:
-                        <textarea
-                            value={caseDetails}
-                            onChange={e => setCaseDetails(e.target.value)}
-                        />
-                    </label>
-                </div>
-            )}
-
-            {caseType === 'Class period' && (
-                <div>
-                    <label>
-                        Enter Lead Plaintiff Deadline:
-                        <input
-                            type="date"
-                            value={leadPlaintiffDeadline}
-                            onChange={e => setLeadPlaintiffDeadline(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Enter Class Period Start Date:
-                        <input
-                            type="date"
-                            value={classPeriodStartDate}
-                            onChange={e => setClassPeriodStartDate(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Enter Class Period End Date:
-                        <input
-                            type="date"
-                            value={classPeriodEndDate}
-                            onChange={e => setClassPeriodEndDate(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Enter Case Details:
-                        <textarea
-                            value={caseDetails}
-                            onChange={e => setCaseDetails(e.target.value)}
-                        />
-                    </label>
-                </div>
-            )}
-
-            {caseType === '10b investigation' && (
-                <label>
-                    Investigation Details:
-                    <textarea
-                        placeholder="Enter paragraph of investigation"
-                        value={investigationParagraph}
-                        onChange={e => setInvestigationParagraph(e.target.value)}
-                        rows="4"
-                        cols="50"
-                    />
-                </label>
-            )}
-
-            {caseType === 'Derivative investigation' && (
-                <div>
-                    <label>
-                        Date of Purchase:
-                        <input
-                            type="date"
-                            value={purchaseDate}
-                            onChange={e => setPurchaseDate(e.target.value)}
-                        />
-                    </label>
-                </div>
-            )}
-
-            {caseType === 'SPAC investigation' && (
-                <div>
-                    <label>
-                        SPAC Full Name:
-                        <input
-                            type="text"
-                            placeholder="Enter SPAC Full Name"
-                            value={spacFullName}
-                            onChange={e => setSpacFullName(e.target.value)}
-                        />
-                    </label>
-
-                    <label>
-                        SPAC Short Name:
-                        <input
-                            type="text"
-                            placeholder="Enter SPAC Short Name"
-                            value={spacShortName}
-                            onChange={e => setSpacShortName(e.target.value)}
-                        />
-                    </label>
-
-                    <label>
-                        Merger Date:
-                        <input
-                            type="date"
-                            value={mergerDate}
-                            onChange={e => setMergerDate(e.target.value)}
-                        />
-                    </label>
-                </div>
-            )}
-
-            <button onClick={handleSubmit}>Submit</button>
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-            {(generatedContentWord || generatedContentSite) && (
-                <Tabs items={tabs} defaultActiveKey="newswire" />
-                // <Tabs defaultActiveKey="newswire">
-                //     <TabPane tab="Newswire Version" key="newswire">
-                //         {generatedContentWord && (
-                //             <>
-                //                 <textarea value={generatedContentWord} readOnly className="output-box" />
-                //                 <button onClick={() => downloadDocument(generatedContentWord)}>Download Word Document</button>
-                //             </>
-                //         )}
-                //     </TabPane>
-                //     <TabPane tab="Site Version" key="site">
-                //     {generatedContentSite && (
-                //         <>
-                //             <textarea value={generatedContentSite} readOnly className="output-box" />
-                            
-                //             {/* Additional questions for Site Version */}
-                //             <div className="form-section">
-                //                 {/* <label>
-                //                     Show Countdown:
-                //                     <input
-                //                         type="checkbox"
-                //                         checked={showCountdown}
-                //                         onChange={() => setShowCountdown(!showCountdown)}
-                //                     />
-                //                 </label> */}
-                //                 {/* <label>
-                //                     Show Complaint:
-                //                     <input
-                //                         type="checkbox"
-                //                         checked={showComplaint}
-                //                         onChange={() => setShowComplaint(!showComplaint)}
-                //                     />
-                //                 </label> */}
-                //                 <label>
-                //                     Show Certification Form:
-                //                     <input
-                //                         type="checkbox"
-                //                         checked={showCertification}
-                //                         onChange={() => setShowCertification(!showCertification)}
-                //                     />
-                //                 </label>
-                //                 <label>
-                //                     Show Stock Information:
-                //                     <input
-                //                         type="checkbox"
-                //                         checked={showStock}
-                //                         onChange={() => setShowStock(!showStock)}
-                //                     />
-                //                 </label>
-
-                //                 {/* File input for uploading complaint document */}
-      
-                // <label>
-                //     Upload Complaint Document:
-                //     <input
-                //         type="file"
-                //         onChange={handleFileChange} // Function to handle file selection
-                //     />
-                // </label>
+                </Col>
     
-                //             </div>
-
-                //             <button onClick={handleUploadToSite}>Upload to Site</button>
-                //             {uploadStatus && <p className="status-message">{uploadStatus}</p>}
-                //         </>
-                //     )}
-                // </TabPane>
-
-
-                // </Tabs>
+    <Col span={7}>
+    <Form.Item
+            label="Exchange"
+            name="exchange"
+            rules={[{ required: true, message: '' }]}
+        >
+            <Select placeholder="exchange" value={showCustomInput ? "Other" : exchange} onChange={handleExchangeChange}>
+                <Option value="" disabled>Select an exchange</Option>
+                {exchanges.map((item, index) => (
+                    <Option key={index} value={item}>{item}</Option>
+                ))}
+            </Select>
+            {showCustomInput && (
+                <Input
+                    type="text"
+                    placeholder="custom exchange"
+                    value={exchange}
+                    onChange={e => setExchange(e.target.value)}
+                />
             )}
-        </main>
-    </div>
+            
+        </Form.Item>
+                </Col>
+
+                <Col span={11}>
+                <Form.Item
+    label="Case Type"
+    name="caseType"
+    rules={[{ required: true, message: '' }]}
+>
+    <Select placeholder="case type" value={caseType} onChange={handleCaseTypeChange}>
+        <Option value="" disabled>Select case type</Option>
+        {cases.map((item, index) => (
+            <Option key={index} value={item}>{item}</Option>
+        ))}
+    </Select>
+</Form.Item>
+                </Col>
+                </Row>
+
+           {/* Conditional rendering based on the case type */}
+{caseType === 'IPO' && (
+    <>
+     <Row gutter={16}>
+     <Col span={12}>
+        <Form.Item
+            label="IPO Date"
+            name="ipoDate"
+            rules={[{ required: true, message: '' }]}
+        >
+            <DatePicker placeholder="IPO Date" value={ipoDate} style={{ width: '100%' }} onChange={setIpoDate} />
+         
+        </Form.Item>
+</Col>
+<Col span={12}>
+        <Form.Item
+            label="Lead Plaintiff Deadline"
+            name="leadPlaintiffDeadline"
+            rules={[{ required: true, message: '' }]}
+        >
+            <DatePicker placeholder="Lead Plaintiff Deadline" value={leadPlaintiffDeadline} style={{ width: '100%' }} onChange={setLeadPlaintiffDeadline} />
+        </Form.Item>
+        </Col>
+        </Row>
+    <Row gutter={16}>
+    <Col span={24}>
+        <Form.Item
+            label="Case Details"
+            name="caseDetails"
+            rules={[{ required: true, message: '' }]}
+        >
+            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} />
+        </Form.Item>
+        </Col>
+        </Row>
+    </>
+)}
+
+{caseType === 'Class period' && (
+   
+         <Row gutter={16}>
+           <Col span={8}>  
+       <Form.Item
+            label="Lead Plaintiff Deadline"
+            name="leadPlaintiffDeadline"
+            rules={[{ required: true, message: '' }]}
+        >
+            <DatePicker placeholder="Lead Plaintiff Deadline" value={leadPlaintiffDeadline} onChange={setLeadPlaintiffDeadline} />
+        </Form.Item>
+</Col>
+<Col span={8}>  
+        <Form.Item
+            label="Class Period Start Date"
+            name="classPeriodStartDate"
+            rules={[{ required: true, message: '' }]}
+        >
+            <DatePicker placeholder="Class Period Start Date" value={classPeriodStartDate} onChange={setClassPeriodStartDate} />
+        </Form.Item>
+</Col>
+<Col span={8}>  
+        <Form.Item
+            label="Class Period End Date"
+            name="classPeriodEndDate"
+            rules={[{ required: true, message: '' }]}
+        >
+            <DatePicker placeholder="Class Period End Date" value={classPeriodEndDate} style={{ width: '100%' }} onChange={setClassPeriodEndDate} />
+        </Form.Item>
+</Col>
+<Col span={24}>  
+        <Form.Item
+            label="Case Details"
+            name="caseDetails"
+            rules={[{ required: true, message: '' }]}
+        >
+            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} />
+        </Form.Item>
+        </Col>
+        </Row>
+  
+)}
+
+{caseType === 'Class period and IPO' && (
+     <Row gutter={16}>
+            <Col span={6}>  
+        <Form.Item
+    label="IPO Date"
+    name="ipoDate"
+    rules={[{ required: true, message: '' }]}
+>
+    <DatePicker placeholder="IPO Date" value={ipoDate} style={{ width: '100%' }} onChange={setIpoDate} />
+</Form.Item>
+</Col>
+<Col span={6}>  
+<Form.Item
+    label="Class Period Start Date"
+    name="classPeriodStartDate"
+    rules={[{ required: true, message: '' }]}
+>
+    <DatePicker placeholder="Class Period Start Date" value={classPeriodStartDate} style={{ width: '100%' }} onChange={setClassPeriodStartDate} />
+</Form.Item>
+</Col>
+<Col span={6}>  
+<Form.Item
+    label="Class Period End Date"
+    name="classPeriodEndDate"
+    rules={[{ required: true, message: '' }]}
+>
+    <DatePicker placeholder="Class Period End Date" value={classPeriodEndDate} style={{ width: '100%' }} onChange={setClassPeriodEndDate} />
+</Form.Item>
+</Col>
+<Col span={6}>  
+<Form.Item
+    label="Lead Plaintiff Deadline"
+    name="leadPlaintiffDeadline"
+    rules={[{ required: true, message: '' }]}
+>
+    <DatePicker placeholder="Lead Plaintiff Deadline" value={leadPlaintiffDeadline} style={{ width: '100%' }} onChange={setLeadPlaintiffDeadline} />
+</Form.Item>
+</Col>
+<Col span={24}>  
+
+        <Form.Item
+            label="Case Details"
+            name="caseDetails"
+            rules={[{ required: true, message: '' }]}
+        >
+            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} />
+        </Form.Item>
+        </Col>
+        </Row>
+)}
+
+{caseType === '10b investigation' && (
+      <Row gutter={16}>
+          <Col span={24}>  
+    <Form.Item
+    label="Investigation Details"
+    name="investigationParagraph"
+    rules={[{ required: true, message: '' }]}
+>
+    <TextArea placeholder="Details of the investigation" value={investigationParagraph} onChange={e => setInvestigationParagraph(e.target.value)} />
+</Form.Item>
+</Col>
+</Row>
+)}
+
+{caseType === 'Derivative investigation' && (
+      <Row gutter={16}>
+          <Col span={24}>  
+     <Form.Item
+     label="Date of Purchase"
+     name="purchaseDate"
+     rules={[{ required: true, message: '' }]}
+ >
+     <DatePicker placeholder="Date of Purchase" value={purchaseDate} style={{ width: '100%' }} onChange={setPurchaseDate} />
+ </Form.Item>
+ </Col>
+ </Row>
+)}
+
+{caseType === 'SPAC investigation' && (
+      <Row gutter={16}>
+          <Col span={8}>  
+        <Form.Item
+            label="SPAC Full Name"
+            name="spacFullName"
+            rules={[{ required: true, message: '' }]}
+        >
+            <Input placeholder="SPAC Full Name" value={spacFullName} onChange={e => setSpacFullName(e.target.value)} />
+        </Form.Item>
+</Col>
+<Col span={8}>  
+        <Form.Item
+            label="SPAC Short Name"
+            name="spacShortName"
+            rules={[{ required: true, message: '' }]}
+        >
+            <Input placeholder="SPAC Short Name" value={spacShortName} onChange={e => setSpacShortName(e.target.value)} />
+        </Form.Item>
+</Col>
+<Col span={8}>  
+        <Form.Item
+            label="Merger Date"
+            name="mergerDate"
+            rules={[{ required: true, message: '' }]}
+        >
+            <DatePicker placeholder="Merger Date" value={mergerDate} style={{ width: '100%' }} onChange={setMergerDate} />
+        </Form.Item>
+        </Col>
+    </Row>
+)}
+
+<Form.Item
+ 
+    style={{ textAlign: 'center' }} // Center the button within the Form.Item
+>
+    <Button type="primary" htmlType="submit">Generate release</Button>
+</Form.Item>
+   </Form>
+{/* {errorMessage && <Alert message={errorMessage} type="error" showIcon />} */}
+
+{/* Tabs with content */}
+{(generatedContentWord || generatedContentSite) && (
+                        <Tabs items={tabs} defaultActiveKey="newswire" className="tabs-container" />
+                    )}
+     </Card>
+</main>
+</div>
+
 );
 }
-export default App;
 
+export default App;
