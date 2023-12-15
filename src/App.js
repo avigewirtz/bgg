@@ -14,6 +14,12 @@ import {
     generate_derivative_investigation,
     generate_spac_investigation,
     generate_10b_investigation,
+    generate_ipo_html,
+    generate_class_period_html,
+    generate_class_period_and_ipo_html,
+    generate_derivative_investigation_html,
+    generate_spac_investigation_html,
+    generate_10b_investigation_html,
     generate_ipo_site,
     generate_class_period_site,
     generate_class_period_and_ipo_site,
@@ -44,6 +50,7 @@ function App() {
     const [mergerDate, setMergerDate] = useState('');
     const [generatedContentWord, setGeneratedContentWord] = useState('');
     const [generatedContentSite, setGeneratedContentSite] = useState('');
+    const [generatedContentWordHTML, setGeneratedContentWordHTML] = useState('');
     const [uploadStatus, setUploadStatus] = useState('');
     const [showCustomInput, setShowCustomInput] = useState(false);
     const [folderSelection, setFolderSelection] = useState('');
@@ -52,6 +59,7 @@ function App() {
     const [exchange, setExchange] = useState("");
     const [fileList, setFileList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [siteDisplay, setSiteDisplay] = useState('');
 
 
     // const username = process.env.WP_USERNAME;
@@ -65,26 +73,40 @@ function App() {
         setUploadStatus('');
         if (caseType === 'SPAC investigation') {
             const generatedReleaseWord = generate_spac_investigation(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
+            const generatedReleaseWordHTML = generate_spac_investigation_html(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
             const generatedReleaseSite = generate_spac_investigation_site(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
             setGeneratedContentWord(generatedReleaseWord);
             setGeneratedContentSite(generatedReleaseSite);
+            setGeneratedContentWordHTML(generatedReleaseWordHTML);
+            setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
 
         }
         if (caseType === '10b investigation') {
             const generatedReleaseWord = generate_10b_investigation(fullName, shortName, exchange, ticker, investigationParagraph);
+            const generatedReleaseWordHTML = generate_10b_investigation_html(fullName, shortName, exchange, ticker, investigationParagraph);
             const generatedReleaseSite = generate_10b_investigation_site(fullName, shortName, exchange, ticker, investigationParagraph);
             setGeneratedContentWord(generatedReleaseWord);
             setGeneratedContentSite(generatedReleaseSite);
+            setGeneratedContentWordHTML(generatedReleaseWordHTML);
+            setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
         }
 
         if (caseType === 'Derivative investigation') {
             const generatedReleaseWord = generate_derivative_investigation(fullName, ticker, shortName, exchange, purchaseDate);
+            const generatedReleaseWordHTML = generate_derivative_investigation_html(fullName, ticker, shortName, exchange, purchaseDate);
             const generatedReleaseSite = generate_derivative_investigation_site(fullName, ticker, shortName, exchange, purchaseDate);
             setGeneratedContentWord(generatedReleaseWord);
             setGeneratedContentSite(generatedReleaseSite);
+            setGeneratedContentWordHTML(generatedReleaseWordHTML);
+            setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
         }
         if (caseType === 'Class period and IPO') {
             const generatedReleaseWord = generate_class_period_and_ipo(
+                fullName, ticker, shortName, exchange,
+                ipoDate, classPeriodStartDate, classPeriodEndDate,
+                caseDetails, leadPlaintiffDeadline
+            );
+            const generatedReleaseWordHTML = generate_class_period_and_ipo_html(
                 fullName, ticker, shortName, exchange,
                 ipoDate, classPeriodStartDate, classPeriodEndDate,
                 caseDetails, leadPlaintiffDeadline
@@ -96,18 +118,26 @@ function App() {
             );
             setGeneratedContentWord(generatedReleaseWord);
             setGeneratedContentSite(generatedReleaseSite);
+            setGeneratedContentWordHTML(generatedReleaseWordHTML);
+            setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
         }
        if (caseType === 'IPO') {
            const generatedReleaseWord = generate_ipo(
                fullName, ticker, shortName, exchange,
                ipoDate, caseDetails, leadPlaintiffDeadline
            );
+           const generatedReleaseWordHTML = generate_ipo_html(
+            fullName, ticker, shortName, exchange,
+            ipoDate, caseDetails, leadPlaintiffDeadline
+        );
            const generatedReleaseSite = generate_ipo_site(
             fullName, ticker, shortName, exchange,
             ipoDate, caseDetails, leadPlaintiffDeadline
         );
            setGeneratedContentWord(generatedReleaseWord);
            setGeneratedContentSite(generatedReleaseSite);
+           setGeneratedContentWordHTML(generatedReleaseWordHTML);
+           setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
        }
 
        if (caseType === 'Class period') {
@@ -116,6 +146,11 @@ function App() {
                classPeriodStartDate, classPeriodEndDate, caseDetails,
                leadPlaintiffDeadline
            );
+           const generatedReleaseWordHTML = generate_class_period_html(
+            fullName, ticker, shortName, exchange,
+            classPeriodStartDate, classPeriodEndDate, caseDetails,
+            leadPlaintiffDeadline
+        );
            const generatedReleaseSite = generate_class_period_site(
             fullName, ticker, shortName, exchange,
             classPeriodStartDate, classPeriodEndDate, caseDetails,
@@ -123,8 +158,10 @@ function App() {
         );
            setGeneratedContentWord(generatedReleaseWord);
            setGeneratedContentSite(generatedReleaseSite);
+           setGeneratedContentWordHTML(generatedReleaseWordHTML);
+           setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
        }
-
+       
     };
 
     const handleExchangeChange = (value) => {
@@ -278,16 +315,16 @@ const createMarkup = (htmlContent) => {
 };
 
 
-const siteStyle = {
+const commonStyle = {
     overflow: 'auto', padding: '4px 11px', marginBottom: '20px', borderRadius: '8px', border: '1px solid #d9d9d9', minHeight: '100px', 
     maxHeight: '600px', 
     overflowY: 'auto',
 };
-const wordStyle = {
-    overflow: 'auto', padding: '4px 11px', whiteSpace: 'pre-wrap', marginBottom: '20px', borderRadius: '8px', border: '1px solid #d9d9d9', minHeight: '100px', 
-    maxHeight: '600px', 
-    overflowY: 'auto',
-};
+// const wordStyle = {
+//     overflow: 'auto', padding: '4px 11px', whiteSpace: 'pre-wrap', marginBottom: '20px', borderRadius: '8px', border: '1px solid #d9d9d9', minHeight: '100px', 
+//     maxHeight: '600px', 
+//     overflowY: 'auto',
+// };
 
 
 const tabs = [
@@ -299,10 +336,11 @@ const tabs = [
                 {generatedContentWord && (
                     <>
                     <div 
+                    dangerouslySetInnerHTML={createMarkup(generatedContentWordHTML)} 
                     className="output-box" 
-                    style={wordStyle}
+                    style={commonStyle}
                 >
-                    {generatedContentWord}
+                    {/* {generatedContentWord} */}
                 </div>
                      
                         <div style={{ textAlign: 'center' }}>
@@ -321,9 +359,9 @@ const tabs = [
                 {generatedContentSite && (
                     <>
                         <div
-    dangerouslySetInnerHTML={createMarkup(generatedContentSite)} 
+    dangerouslySetInnerHTML={createMarkup(siteDisplay)} 
     className="output-box" 
-    style={siteStyle} 
+    style={commonStyle} 
 />
                         
                         {/* Additional questions for Site Version */}
