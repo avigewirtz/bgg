@@ -370,7 +370,7 @@ const tabs = [
 return (
     <div className="app">
         <header style={{ textAlign: 'center' }}>
-                <Title level={1}>Press Release Generator Form</Title>
+                <Title level={1}>Press Release Generator</Title>
             </header>
         <main>
 
