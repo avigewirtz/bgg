@@ -445,9 +445,9 @@ export const generate_ipo_html = (
     const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
 
     return (
-        `<p><strong>${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${full_name} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!</p>
+        `<p><strong>${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${full_name} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!</strong></p>
 
-        <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</strong></p>
+        <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
         <p><strong>Class Definition:</strong><br/>
         This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIpoDate} initial public offering ("IPO"). Such investors are encouraged to join this case by visiting the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
