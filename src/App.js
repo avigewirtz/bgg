@@ -193,7 +193,7 @@ const generateStockShortcode = () => {
 const createPage = async () => {
 setIsLoading(true);
 const apiEndpoint = 'https://bgandg.com/wp-json/wp/v2/pages';
-const encodedFullName = encodeURIComponent(fullName);
+const encodedFullName = encodeURIComponent(ticker + ' (' + fullName + ')');
 
 // Modify the JotForm URL to include the 'caseType' field with the value of fullName
 const jotFormScriptUrl = `https://form.jotform.com/jsform/233467061911151?caseType=${encodedFullName}`;
