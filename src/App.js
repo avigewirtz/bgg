@@ -368,19 +368,21 @@ const tabs = [
                         <Form layout="vertical">
                             <Row gutter={16}>
                                 <Col span={24}>
-                                    <Form.Item label="" name="complaintDocument">
-                                    <Dragger
-    beforeUpload={() => false} // Prevent automatic upload
-    onChange={handleFileChange}
-    fileList={fileList} // Use fileList state here
->
-    <p className="ant-upload-drag-icon">
-        <UploadOutlined />
-    </p>
-    <p className="ant-upload-text">Upload complaint document</p>
-</Dragger>
+                                {folderSelection === 'cases' && (
+    <Form.Item label="" name="complaintDocument">
+        <Dragger
+            beforeUpload={() => false} // Prevent automatic upload
+            onChange={handleFileChange}
+            fileList={fileList} // Use fileList state here
+        >
+            <p className="ant-upload-drag-icon">
+                <UploadOutlined />
+            </p>
+            <p className="ant-upload-text">Upload complaint document</p>
+        </Dragger>
+    </Form.Item>
+)}
 
-                                    </Form.Item>
                                 </Col>
                             </Row>
                             <Row gutter={16}>
