@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload, Spin} from 'antd';
+import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload, Spin, Alert} from 'antd';
 import axios from 'axios';
 import DOMPurify from 'dompurify';
 
@@ -60,6 +60,9 @@ function App() {
     const [fileList, setFileList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [siteDisplay, setSiteDisplay] = useState('');
+    const [showCopyAlert, setShowCopyAlert] = useState(false);
+
+
 
 
     // const username = process.env.WP_USERNAME;
@@ -297,6 +300,27 @@ const uploadDocument = async (document) => {
     }
 };
 
+const copyToClipboard = async text => {
+    try {
+        if ('clipboard' in navigator) {
+            await navigator.clipboard.writeText(text);
+            setShowCopyAlert(true);
+        } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            setShowCopyAlert(true);
+        }
+        setTimeout(() => setShowCopyAlert(false), 3000); // Alert disappears after 3 seconds
+    } catch (error) {
+        // Handle error scenario
+    }
+};
+
+
 
 
 const handleUploadToSite = () => {
@@ -342,10 +366,25 @@ const tabs = [
                 >
                     {/* {generatedContentWord} */}
                 </div>
-                     
-                        <div style={{ textAlign: 'center' }}>
-                            <Button type="primary" onClick={() => downloadDocument(generatedContentWord, shortName + '-' + ticker)}>Download Word Document</Button>
-                        </div>
+                <div style={{ textAlign: 'center' }}>
+    <Button type="primary" onClick={() => downloadDocument(generatedContentWord, shortName + '-' + ticker)}>
+        Download Word Document
+    </Button>
+    <Button type="default" style={{ marginLeft: '10px' }} onClick={() => copyToClipboard(generatedContentWord)}>
+        Copy to Clipboard
+    </Button>
+    {showCopyAlert && (
+        <Alert
+            message="Content copied to clipboard"
+            type="success"
+            showIcon
+            style={{ marginTop: '10px' }}
+        />
+    )}
+</div>
+
+
+
                     </>
                 )}
             </>
@@ -391,6 +430,18 @@ const tabs = [
         <Spin />
     ) : (
         <Button type="primary" onClick={handleUploadToSite}>Upload to bgandg.com</Button>
+        
+    )}
+        <Button type="default" style={{ marginLeft: '10px' }} onClick={() => copyToClipboard(generatedContentWord)}>
+        Copy to Clipboard
+    </Button>
+    {showCopyAlert && (
+        <Alert
+            message="Content copied to clipboard"
+            type="success"
+            showIcon
+            style={{ marginTop: '10px' }}
+        />
     )}
 </Col>
 
