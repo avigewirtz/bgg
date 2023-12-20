@@ -65,10 +65,9 @@ function App() {
 
 
 
-    // const username = process.env.WP_USERNAME;
-    // const appPassword = process.env.WP_APP_PASSWORD;
-    const username = 'Shlomo'; 
-    const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
+    const username = process.env.WP_USERNAME;
+    const appPassword = process.env.WP_APP_PASSWORD;
+   
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation'];
 
     const handleSubmit = () => {
@@ -344,11 +343,7 @@ const commonStyle = {
     maxHeight: '800px', 
     overflowY: 'auto',
 };
-// const wordStyle = {
-//     overflow: 'auto', padding: '4px 11px', whiteSpace: 'pre-wrap', marginBottom: '20px', borderRadius: '8px', border: '1px solid #d9d9d9', minHeight: '100px', 
-//     maxHeight: '600px', 
-//     overflowY: 'auto',
-// };
+
 
 
 const tabs = [
