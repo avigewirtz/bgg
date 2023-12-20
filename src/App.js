@@ -344,7 +344,7 @@ const tabs = [
                 </div>
                      
                         <div style={{ textAlign: 'center' }}>
-                            <Button type="primary" onClick={() => downloadDocument(generatedContentWord)}>Download Word Document</Button>
+                            <Button type="primary" onClick={() => downloadDocument(generatedContentWord, shortName + '-' + ticker)}>Download Word Document</Button>
                         </div>
                     </>
                 )}

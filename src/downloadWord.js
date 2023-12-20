@@ -1,6 +1,6 @@
 import { Document, Packer, Paragraph, TextRun, ExternalHyperlink} from 'docx';
 
-export const downloadDocument = (content) => {
+export const downloadDocument = (content, fileName) => {
     const paragraphs = contentToParagraphs(content);
 
 
@@ -21,7 +21,7 @@ export const downloadDocument = (content) => {
                const url = URL.createObjectURL(blob);
                const a = document.createElement('a');
                a.href = url;
-               a.download = 'document.docx';
+               a.download = fileName;
                a.click();
            });
    } catch (e) {
