@@ -341,7 +341,7 @@ const createMarkup = (htmlContent) => {
 
 const commonStyle = {
     overflow: 'auto', padding: '4px 11px', marginBottom: '20px', borderRadius: '8px', border: '1px solid #d9d9d9', minHeight: '100px', 
-    maxHeight: '6500px', 
+    maxHeight: '650px', 
     overflowY: 'auto',
 };
 // const wordStyle = {
