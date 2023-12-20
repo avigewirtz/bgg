@@ -65,9 +65,10 @@ function App() {
 
 
 
-    const username = process.env.WP_USERNAME;
-    const appPassword = process.env.WP_APP_PASSWORD;
-   
+    // const username = process.env.WP_USERNAME;
+    // const appPassword = process.env.WP_APP_PASSWORD;
+    const username = 'Shlomo'; 
+    const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation'];
 
     const handleSubmit = () => {
