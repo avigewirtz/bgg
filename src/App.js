@@ -61,6 +61,9 @@ function App() {
     const [isLoading, setIsLoading] = useState(false);
     const [siteDisplay, setSiteDisplay] = useState('');
     const [showCopyAlert, setShowCopyAlert] = useState(false);
+    const [alertInfo, setAlertInfo] = useState({ type: '', message: '', visible: false });
+
+
 
 
 
@@ -258,16 +261,20 @@ const pageData = {
   try {
     const response = await axios.post(apiEndpoint, pageData, { headers });
     console.log('Page created:', response.data);
-    setUploadStatus('Page uploaded successfully!');
+    setAlertInfo({ type: 'success', message: 'Page uploaded successfully!', visible: true });
 
   } catch (error) {
     console.error('Error creating page:', error);
-    setUploadStatus('Error uploading page.');
+    setAlertInfo({ type: 'error', message: 'Error uploading page.', visible: true });
 
   }
   finally {
     setIsLoading(false); // Stop loading regardless of the outcome
+    // Inside createPage function, after successful upload
+
+
 }
+setTimeout(() => setAlertInfo({ ...alertInfo, visible: false }), 3000); // Hide alert after 3 seconds
 };
 
 const uploadDocument = async (document) => {
@@ -428,15 +435,26 @@ const tabs = [
         <Button type="primary" onClick={handleUploadToSite}>Upload to bgandg.com</Button>
         
     )}
+
         <Button type="default" style={{ marginLeft: '10px' }} onClick={() => copyToClipboard(generatedContentWord)}>
         Copy to Clipboard
     </Button>
+    {
+    alertInfo.visible && (
+        <Alert
+            message={alertInfo.message}
+            type={alertInfo.type}
+            showIcon
+            style={{ marginTop: '20px' }}
+        />
+    )
+}
     {showCopyAlert && (
         <Alert
             message="Content copied to clipboard"
             type="success"
             showIcon
-            style={{ marginTop: '10px' }}
+            style={{ marginTop: '20px' }}
         />
     )}
 </Col>
