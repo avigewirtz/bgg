@@ -62,7 +62,7 @@ function App() {
     const [siteDisplay, setSiteDisplay] = useState('');
     const [showCopyAlert, setShowCopyAlert] = useState(false);
     const [alertInfo, setAlertInfo] = useState({ type: '', message: '', visible: false });
-    const [selectedTags, setSelectedTags] = useState([]);
+
 
 
 
@@ -250,6 +250,11 @@ if (complaintDocument) {
     const folderId = folderSelection === 'cases' ? 11 : 
                    folderSelection === 'investigations' ? 13 : 
                    null;
+
+    const tag = folderSelection === 'cases' ? 45 : 
+                   folderSelection === 'investigations' ? 46 : 
+                   null;
+
 const pageData = {
     title: fullName + ' (' + ticker + ')',
     slug: ticker,
@@ -259,7 +264,7 @@ const pageData = {
     menu_order: -1,
     acf: acfData,
     wf_page_folders: [folderId],
-    tags: selectedTags
+    tags: tag
 };
 
   try {
@@ -281,9 +286,6 @@ const pageData = {
 setTimeout(() => setAlertInfo({ ...alertInfo, visible: false }), 3000); // Hide alert after 3 seconds
 };
 
-const handleTagChange = (checkedValues) => {
-    setSelectedTags(checkedValues);
-};
 
 
 const uploadDocument = async (document) => {
@@ -434,18 +436,7 @@ const tabs = [
     </Form.Item>
 )}
 
-<Form.Item label="Select Tag(s):" name="tag">
-                            <Row>
-                            <Checkbox.Group style={{ width: '100%' }} onChange={handleTagChange}>
-    <Row>
-        <Col span={2}><Checkbox value={46}>INV</Checkbox></Col>
-        <Col span={2}><Checkbox value={45}>CA</Checkbox></Col>
-        <Col span={2}><Checkbox value={21}>Deadline</Checkbox></Col>
-    </Row>
-</Checkbox.Group>
 
-                            </Row>
-                        </Form.Item>
 
 
                                 </Col>
