@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload, Spin, Alert} from 'antd';
+import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload, Spin, Alert, Checkbox} from 'antd';
 import axios from 'axios';
 import DOMPurify from 'dompurify';
 
@@ -62,6 +62,9 @@ function App() {
     const [siteDisplay, setSiteDisplay] = useState('');
     const [showCopyAlert, setShowCopyAlert] = useState(false);
     const [alertInfo, setAlertInfo] = useState({ type: '', message: '', visible: false });
+    const [selectedTags, setSelectedTags] = useState([]);
+
+
 
 
 
@@ -256,6 +259,7 @@ const pageData = {
     menu_order: -1,
     acf: acfData,
     wf_page_folders: [folderId],
+    tags: selectedTags
 };
 
   try {
@@ -276,6 +280,11 @@ const pageData = {
 }
 setTimeout(() => setAlertInfo({ ...alertInfo, visible: false }), 3000); // Hide alert after 3 seconds
 };
+
+const handleTagChange = (checkedValues) => {
+    setSelectedTags(checkedValues);
+};
+
 
 const uploadDocument = async (document) => {
     const formData = new FormData();
@@ -371,10 +380,10 @@ const tabs = [
                 </div>
                 <div style={{ textAlign: 'center' }}>
     <Button type="primary" onClick={() => downloadDocument(generatedContentWord, shortName + '-' + ticker)}>
-        Download Word Document
+        Download Word Doc
     </Button>
     <Button type="default" style={{ marginLeft: '10px' }} onClick={() => copyToClipboard(generatedContentWord)}>
-        Copy to Clipboard
+        Copy text
     </Button>
     {showCopyAlert && (
         <Alert
@@ -425,6 +434,20 @@ const tabs = [
     </Form.Item>
 )}
 
+<Form.Item label="Select Tag(s):" name="tag">
+                            <Row>
+                            <Checkbox.Group style={{ width: '100%' }} onChange={handleTagChange}>
+    <Row>
+        <Col span={2}><Checkbox value={46}>INV</Checkbox></Col>
+        <Col span={2}><Checkbox value={45}>CA</Checkbox></Col>
+        <Col span={2}><Checkbox value={21}>Deadline</Checkbox></Col>
+    </Row>
+</Checkbox.Group>
+
+                            </Row>
+                        </Form.Item>
+
+
                                 </Col>
                             </Row>
                             <Row gutter={16}>
@@ -437,7 +460,7 @@ const tabs = [
     )}
 
         <Button type="default" style={{ marginLeft: '10px' }} onClick={() => copyToClipboard(generatedContentWord)}>
-        Copy to Clipboard
+        Copy text
     </Button>
     {
     alertInfo.visible && (
