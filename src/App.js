@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload, Spin, Alert} from 'antd';
 import axios from 'axios';
-import DOMPurify from 'dompurify';
+// import DOMPurify from 'dompurify';
 import uploadImage from './uploadImage';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import the styles
+import { downloadAsWord } from './download';
 
 import { UploadOutlined } from '@ant-design/icons';
 
-import {downloadDocument} from './downloadWord'
+// import {downloadDocument} from './downloadWord'
 
 import {
-    generate_ipo,
-    generate_class_period,
-    generate_class_period_and_ipo,
-    generate_derivative_investigation,
-    generate_spac_investigation,
-    generate_10b_investigation,
+    // generate_ipo,
+    // generate_class_period,
+    // generate_class_period_and_ipo,
+    // generate_derivative_investigation,
+    // generate_spac_investigation,
+    // generate_10b_investigation,
     generate_ipo_html,
     generate_class_period_html,
     generate_class_period_and_ipo_html,
@@ -49,7 +52,7 @@ function App() {
     const [spacFullName, setSpacFullName] = useState('');
     const [spacShortName, setSpacShortName] = useState('');
     const [mergerDate, setMergerDate] = useState('');
-    const [generatedContentWord, setGeneratedContentWord] = useState('');
+    // const [generatedContentWord, setGeneratedContentWord] = useState('');
     const [generatedContentSite, setGeneratedContentSite] = useState('');
     const [generatedContentWordHTML, setGeneratedContentWordHTML] = useState('');
     const [uploadStatus, setUploadStatus] = useState('');
@@ -60,7 +63,7 @@ function App() {
     const [exchange, setExchange] = useState("");
     const [fileList, setFileList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [siteDisplay, setSiteDisplay] = useState('');
+    // const [siteDisplay, setSiteDisplay] = useState('');
     const [showCopyAlert, setShowCopyAlert] = useState(false);
     const [alertInfo, setAlertInfo] = useState({ type: '', message: '', visible: false });
     const [featuredImage, setFeaturedImage] = useState(null);
@@ -84,40 +87,40 @@ function App() {
     
         setUploadStatus('');
         if (caseType === 'SPAC investigation') {
-            const generatedReleaseWord = generate_spac_investigation(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
+            // const generatedReleaseWord = generate_spac_investigation(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
             const generatedReleaseWordHTML = generate_spac_investigation_html(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
             const generatedReleaseSite = generate_spac_investigation_site(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
-            setGeneratedContentWord(generatedReleaseWord);
+            // setGeneratedContentWord(generatedReleaseWord);
             setGeneratedContentSite(generatedReleaseSite);
             setGeneratedContentWordHTML(generatedReleaseWordHTML);
-            setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+            // setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
 
         }
         if (caseType === '10b investigation') {
-            const generatedReleaseWord = generate_10b_investigation(fullName, shortName, exchange, ticker, investigationParagraph);
+            // const generatedReleaseWord = generate_10b_investigation(fullName, shortName, exchange, ticker, investigationParagraph);
             const generatedReleaseWordHTML = generate_10b_investigation_html(fullName, shortName, exchange, ticker, investigationParagraph);
             const generatedReleaseSite = generate_10b_investigation_site(fullName, shortName, exchange, ticker, investigationParagraph);
-            setGeneratedContentWord(generatedReleaseWord);
+            // setGeneratedContentWord(generatedReleaseWord);
             setGeneratedContentSite(generatedReleaseSite);
             setGeneratedContentWordHTML(generatedReleaseWordHTML);
-            setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+            // setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
         }
 
         if (caseType === 'Derivative investigation') {
-            const generatedReleaseWord = generate_derivative_investigation(fullName, ticker, shortName, exchange, purchaseDate);
+            // const generatedReleaseWord = generate_derivative_investigation(fullName, ticker, shortName, exchange, purchaseDate);
             const generatedReleaseWordHTML = generate_derivative_investigation_html(fullName, ticker, shortName, exchange, purchaseDate);
             const generatedReleaseSite = generate_derivative_investigation_site(fullName, ticker, shortName, exchange, purchaseDate);
-            setGeneratedContentWord(generatedReleaseWord);
+            // setGeneratedContentWord(generatedReleaseWord);
             setGeneratedContentSite(generatedReleaseSite);
             setGeneratedContentWordHTML(generatedReleaseWordHTML);
-            setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+            // setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
         }
         if (caseType === 'Class period and IPO') {
-            const generatedReleaseWord = generate_class_period_and_ipo(
-                fullName, ticker, shortName, exchange,
-                ipoDate, classPeriodStartDate, classPeriodEndDate,
-                caseDetails, leadPlaintiffDeadline
-            );
+            // const generatedReleaseWord = generate_class_period_and_ipo(
+            //     fullName, ticker, shortName, exchange,
+            //     ipoDate, classPeriodStartDate, classPeriodEndDate,
+            //     caseDetails, leadPlaintiffDeadline
+            // );
             const generatedReleaseWordHTML = generate_class_period_and_ipo_html(
                 fullName, ticker, shortName, exchange,
                 ipoDate, classPeriodStartDate, classPeriodEndDate,
@@ -128,16 +131,16 @@ function App() {
                 ipoDate, classPeriodStartDate, classPeriodEndDate,
                 caseDetails, leadPlaintiffDeadline
             );
-            setGeneratedContentWord(generatedReleaseWord);
+            // setGeneratedContentWord(generatedReleaseWord);
             setGeneratedContentSite(generatedReleaseSite);
             setGeneratedContentWordHTML(generatedReleaseWordHTML);
-            setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+            // setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
         }
        if (caseType === 'IPO') {
-           const generatedReleaseWord = generate_ipo(
-               fullName, ticker, shortName, exchange,
-               ipoDate, caseDetails, leadPlaintiffDeadline
-           );
+        //    const generatedReleaseWord = generate_ipo(
+        //        fullName, ticker, shortName, exchange,
+        //        ipoDate, caseDetails, leadPlaintiffDeadline
+        //    );
            const generatedReleaseWordHTML = generate_ipo_html(
             fullName, ticker, shortName, exchange,
             ipoDate, caseDetails, leadPlaintiffDeadline
@@ -146,18 +149,18 @@ function App() {
             fullName, ticker, shortName, exchange,
             ipoDate, caseDetails, leadPlaintiffDeadline
         );
-           setGeneratedContentWord(generatedReleaseWord);
+        //    setGeneratedContentWord(generatedReleaseWord);
            setGeneratedContentSite(generatedReleaseSite);
            setGeneratedContentWordHTML(generatedReleaseWordHTML);
-           setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+        //    setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
        }
 
        if (caseType === 'Class period') {
-           const generatedReleaseWord = generate_class_period(
-               fullName, ticker, shortName, exchange,
-               classPeriodStartDate, classPeriodEndDate, caseDetails,
-               leadPlaintiffDeadline
-           );
+        //    const generatedReleaseWord = generate_class_period(
+        //        fullName, ticker, shortName, exchange,
+        //        classPeriodStartDate, classPeriodEndDate, caseDetails,
+        //        leadPlaintiffDeadline
+        //    );
            const generatedReleaseWordHTML = generate_class_period_html(
             fullName, ticker, shortName, exchange,
             classPeriodStartDate, classPeriodEndDate, caseDetails,
@@ -168,10 +171,10 @@ function App() {
             classPeriodStartDate, classPeriodEndDate, caseDetails,
             leadPlaintiffDeadline
         );
-           setGeneratedContentWord(generatedReleaseWord);
+        //    setGeneratedContentWord(generatedReleaseWord);
            setGeneratedContentSite(generatedReleaseSite);
            setGeneratedContentWordHTML(generatedReleaseWordHTML);
-           setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+        //    setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
        }
        
     };
@@ -194,7 +197,14 @@ function App() {
         }
     };
     
-
+    const handleContentWordChange = (content) => {
+        setGeneratedContentWordHTML(content);
+    };
+    
+    const handleContentSiteChange = (content) => {
+        setGeneratedContentSite(content);
+    };
+    
 
     const handleCaseTypeChange = (value) => {
         setCaseType(value);
@@ -372,18 +382,6 @@ const handleTickerChange = (e) => {
     setTicker(e.target.value.toUpperCase());
 };
 
-const createMarkup = (htmlContent) => {
-    return {
-        __html: DOMPurify.sanitize(htmlContent)
-    };
-};
-
-
-const commonStyle = {
-    overflow: 'auto', padding: '4px 11px', marginBottom: '20px', borderRadius: '8px', border: '1px solid #d9d9d9', minHeight: '100px', 
-    maxHeight: '800px', 
-    overflowY: 'auto',
-};
 
 
 
@@ -393,20 +391,22 @@ const tabs = [
         key: 'newswire',
         children: (
             <>
-                {generatedContentWord && (
+         
+
+                {generatedContentWordHTML && (
                     <>
-                    <div 
-                    dangerouslySetInnerHTML={createMarkup(generatedContentWordHTML)} 
-                    className="output-box" 
-                    style={commonStyle}
-                >
-                    {/* {generatedContentWord} */}
-                </div>
+               <Form.Item label="">
+                    <ReactQuill
+                        value={generatedContentWordHTML}
+                        onChange={handleContentWordChange} // Attach the handler here
+                    />
+                </Form.Item>
                 <div style={{ textAlign: 'center' }}>
-    <Button type="primary" onClick={() => downloadDocument(generatedContentWord, shortName + '-' + ticker)}>
-        Download Word Doc
-    </Button>
-    <Button type="default" style={{ marginLeft: '10px' }} onClick={() => copyToClipboard(generatedContentWord)}>
+                <Button type="primary" onClick={() => downloadAsWord(generatedContentWordHTML, `${shortName}-${ticker}.docx`)}>
+    Download Word Doc
+</Button>
+
+    <Button type="default" style={{ marginLeft: '10px' }} onClick={() => copyToClipboard(generatedContentWordHTML)}>
         Copy text
     </Button>
     {showCopyAlert && (
@@ -433,11 +433,12 @@ const tabs = [
             <>
                 {generatedContentSite && (
                     <>
-                        <div
-    dangerouslySetInnerHTML={createMarkup(siteDisplay)} 
-    className="output-box" 
-    style={commonStyle} 
-/>
+              <Form.Item label="">
+                    <ReactQuill
+                        value={generatedContentSite}
+                        onChange={handleContentSiteChange} // Attach the handler here
+                    />
+                </Form.Item>
                         
                         {/* Additional questions for Site Version */}
                         <Form layout="vertical">
@@ -453,7 +454,7 @@ const tabs = [
                             <p className="ant-upload-drag-icon">
                                 <UploadOutlined />
                             </p>
-                            <p className="ant-upload-text">Upload Featured Image</p>
+                            <p className="ant-upload-text">Upload featured image</p>
             
                         </Upload.Dragger>
                     </Form.Item>
@@ -486,7 +487,7 @@ const tabs = [
         
     )}
 
-        <Button type="default" style={{ marginLeft: '10px' }} onClick={() => copyToClipboard(generatedContentWord)}>
+        <Button type="default" style={{ marginLeft: '10px' }} onClick={() => copyToClipboard(generatedContentSite)}>
         Copy text
     </Button>
     {
@@ -808,8 +809,8 @@ return (
 {/* {errorMessage && <Alert message={errorMessage} type="error" showIcon />} */}
 
 {/* Tabs with content */}
-{(generatedContentWord || generatedContentSite) && (
-                        <Tabs items={tabs} defaultActiveKey="newswire" className="tabs-container" />
+{(generatedContentSite || generatedContentWordHTML) && (
+                        <Tabs items={tabs} defaultActiveKey="site" className="tabs-container" />
                     )}
      </Card>
 </main>
