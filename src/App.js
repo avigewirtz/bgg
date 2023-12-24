@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload, Spin, Alert, Checkbox} from 'antd';
+import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload, Spin, Alert} from 'antd';
 import axios from 'axios';
 import DOMPurify from 'dompurify';
+import uploadImage from './uploadImage';
 
 import { UploadOutlined } from '@ant-design/icons';
 
@@ -62,6 +63,8 @@ function App() {
     const [siteDisplay, setSiteDisplay] = useState('');
     const [showCopyAlert, setShowCopyAlert] = useState(false);
     const [alertInfo, setAlertInfo] = useState({ type: '', message: '', visible: false });
+    const [featuredImage, setFeaturedImage] = useState(null);
+
 
 
 
@@ -182,7 +185,15 @@ function App() {
         }
     };
     
-
+    const handleImageUpload = ({ fileList: newFileList }) => {
+        if (newFileList.length > 0) {
+            const lastFile = newFileList[newFileList.length - 1].originFileObj;
+            setFeaturedImage(lastFile); // Set the selected image file to state
+        } else {
+            setFeaturedImage(null); // Reset if no file is selected
+        }
+    };
+    
 
 
     const handleCaseTypeChange = (value) => {
@@ -222,7 +233,17 @@ const fullContent = generatedContentSite + htmlBlock;
 };
 
 
-
+let featuredImageId = null;
+if (featuredImage) {
+    try {
+        featuredImageId = await uploadImage(featuredImage, username, appPassword, 'https://bgandg.com');
+    } catch (error) {
+        console.error('Error uploading featured image:', error);
+        setUploadStatus('Error uploading featured image.');
+        setIsLoading(false);
+        return;
+    }
+}
 
    // Create the acf object
    const acfData = {
@@ -264,7 +285,8 @@ const pageData = {
     menu_order: -1,
     acf: acfData,
     wf_page_folders: [folderId],
-    tags: tag
+    tags: tag,
+    featured_media: featuredImageId 
 };
 
   try {
@@ -421,6 +443,20 @@ const tabs = [
                         <Form layout="vertical">
                             <Row gutter={16}>
                                 <Col span={24}>
+                                            {/* Image Upload Section */}
+                    <Form.Item label="">
+                        <Upload.Dragger
+                            name="file"
+                            beforeUpload={() => false} // Prevent automatic upload
+                            onChange={handleImageUpload}
+                        >
+                            <p className="ant-upload-drag-icon">
+                                <UploadOutlined />
+                            </p>
+                            <p className="ant-upload-text">Upload Featured Image</p>
+            
+                        </Upload.Dragger>
+                    </Form.Item>
                                 {folderSelection === 'cases' && (
     <Form.Item label="" name="complaintDocument">
         <Dragger
