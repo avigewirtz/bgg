@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload, Spin, Alert} from 'antd';
+import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload, Spin, Alert, AutoComplete} from 'antd';
 import axios from 'axios';
-// import DOMPurify from 'dompurify';
 import uploadImage from './uploadImage';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // Import the styles
+import 'react-quill/dist/quill.snow.css'; 
 import { downloadAsWord } from './download';
 
 import { UploadOutlined } from '@ant-design/icons';
 
-// import {downloadDocument} from './downloadWord'
+import stockData from './stock.json'; 
 
 import {
-    // generate_ipo,
-    // generate_class_period,
-    // generate_class_period_and_ipo,
-    // generate_derivative_investigation,
-    // generate_spac_investigation,
-    // generate_10b_investigation,
+
     generate_ipo_html,
     generate_class_period_html,
     generate_class_period_and_ipo_html,
@@ -67,6 +61,9 @@ function App() {
     const [showCopyAlert, setShowCopyAlert] = useState(false);
     const [alertInfo, setAlertInfo] = useState({ type: '', message: '', visible: false });
     const [featuredImage, setFeaturedImage] = useState(null);
+    const [tickerOptions, setTickerOptions] = useState([]);
+    const [form] = Form.useForm();
+
 
 
 
@@ -83,44 +80,96 @@ function App() {
     const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation'];
 
+    
+    const handleSearch = (value) => {
+        setTickerOptions(
+            !value ? [] : stockData.filter(stock => 
+                stock.ticker.toLowerCase().includes(value.toLowerCase())
+            ).map(stock => ({
+                value: stock.ticker,
+                label: `${stock.ticker} - ${stock.name} - ${stock.exchange}`
+            }))
+        );
+    };
+    
+    const handleNameSearch = (value) => {
+        setTickerOptions(
+            !value ? [] : stockData.filter(stock => 
+                stock.name.toLowerCase().includes(value.toLowerCase())
+            ).map(stock => ({
+                value: stock.name,  // Here we're using 'name' instead of 'ticker'
+                label: `${stock.name} - ${stock.ticker} - ${stock.exchange}`
+            }))
+        );
+    };
+    
+    
+    const onSelectTicker = (value, option) => {
+        const selectedStock = stockData.find(stock => stock.ticker === value);
+        if (selectedStock) {
+            setFullName(selectedStock.name); // Set the full name
+            setTicker(selectedStock.ticker); // Set the ticker
+            setExchange(selectedStock.exchange); // Set the exchange
+            console.log('full name: ', fullName);
+
+            form.setFieldsValue({
+                fullName: selectedStock.name,
+                ticker: selectedStock.ticker,
+                exchange: selectedStock.exchange
+            });
+        }
+    };
+    
+    
+    const onSelectFullName = (value, option) => {
+        const selectedStock = stockData.find(stock => stock.name === value);
+        if (selectedStock) {
+            setFullName(selectedStock.name);
+            setTicker(selectedStock.ticker);
+            setExchange(selectedStock.exchange);
+
+            form.setFieldsValue({
+                fullName: selectedStock.name,
+                ticker: selectedStock.ticker,
+                exchange: selectedStock.exchange
+            });
+        }
+    };
+    
     const handleSubmit = () => {
     
         setUploadStatus('');
         if (caseType === 'SPAC investigation') {
-            // const generatedReleaseWord = generate_spac_investigation(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
+            
             const generatedReleaseWordHTML = generate_spac_investigation_html(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
             const generatedReleaseSite = generate_spac_investigation_site(fullName, shortName, exchange, ticker, spacFullName, spacShortName, mergerDate);
-            // setGeneratedContentWord(generatedReleaseWord);
+         
             setGeneratedContentSite(generatedReleaseSite);
             setGeneratedContentWordHTML(generatedReleaseWordHTML);
-            // setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+           
 
         }
         if (caseType === '10b investigation') {
-            // const generatedReleaseWord = generate_10b_investigation(fullName, shortName, exchange, ticker, investigationParagraph);
+           
             const generatedReleaseWordHTML = generate_10b_investigation_html(fullName, shortName, exchange, ticker, investigationParagraph);
             const generatedReleaseSite = generate_10b_investigation_site(fullName, shortName, exchange, ticker, investigationParagraph);
-            // setGeneratedContentWord(generatedReleaseWord);
+
             setGeneratedContentSite(generatedReleaseSite);
             setGeneratedContentWordHTML(generatedReleaseWordHTML);
-            // setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+       
         }
 
         if (caseType === 'Derivative investigation') {
-            // const generatedReleaseWord = generate_derivative_investigation(fullName, ticker, shortName, exchange, purchaseDate);
+           
             const generatedReleaseWordHTML = generate_derivative_investigation_html(fullName, ticker, shortName, exchange, purchaseDate);
             const generatedReleaseSite = generate_derivative_investigation_site(fullName, ticker, shortName, exchange, purchaseDate);
-            // setGeneratedContentWord(generatedReleaseWord);
+          
             setGeneratedContentSite(generatedReleaseSite);
             setGeneratedContentWordHTML(generatedReleaseWordHTML);
-            // setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+            
         }
         if (caseType === 'Class period and IPO') {
-            // const generatedReleaseWord = generate_class_period_and_ipo(
-            //     fullName, ticker, shortName, exchange,
-            //     ipoDate, classPeriodStartDate, classPeriodEndDate,
-            //     caseDetails, leadPlaintiffDeadline
-            // );
+     
             const generatedReleaseWordHTML = generate_class_period_and_ipo_html(
                 fullName, ticker, shortName, exchange,
                 ipoDate, classPeriodStartDate, classPeriodEndDate,
@@ -131,16 +180,13 @@ function App() {
                 ipoDate, classPeriodStartDate, classPeriodEndDate,
                 caseDetails, leadPlaintiffDeadline
             );
-            // setGeneratedContentWord(generatedReleaseWord);
+     
             setGeneratedContentSite(generatedReleaseSite);
             setGeneratedContentWordHTML(generatedReleaseWordHTML);
-            // setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+
         }
        if (caseType === 'IPO') {
-        //    const generatedReleaseWord = generate_ipo(
-        //        fullName, ticker, shortName, exchange,
-        //        ipoDate, caseDetails, leadPlaintiffDeadline
-        //    );
+   
            const generatedReleaseWordHTML = generate_ipo_html(
             fullName, ticker, shortName, exchange,
             ipoDate, caseDetails, leadPlaintiffDeadline
@@ -149,18 +195,14 @@ function App() {
             fullName, ticker, shortName, exchange,
             ipoDate, caseDetails, leadPlaintiffDeadline
         );
-        //    setGeneratedContentWord(generatedReleaseWord);
+
            setGeneratedContentSite(generatedReleaseSite);
            setGeneratedContentWordHTML(generatedReleaseWordHTML);
-        //    setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+    
        }
 
        if (caseType === 'Class period') {
-        //    const generatedReleaseWord = generate_class_period(
-        //        fullName, ticker, shortName, exchange,
-        //        classPeriodStartDate, classPeriodEndDate, caseDetails,
-        //        leadPlaintiffDeadline
-        //    );
+
            const generatedReleaseWordHTML = generate_class_period_html(
             fullName, ticker, shortName, exchange,
             classPeriodStartDate, classPeriodEndDate, caseDetails,
@@ -171,10 +213,10 @@ function App() {
             classPeriodStartDate, classPeriodEndDate, caseDetails,
             leadPlaintiffDeadline
         );
-        //    setGeneratedContentWord(generatedReleaseWord);
+
            setGeneratedContentSite(generatedReleaseSite);
            setGeneratedContentWordHTML(generatedReleaseWordHTML);
-        //    setSiteDisplay('<h1>' + fullName + ' (' + ticker + ')</h1>' + generatedReleaseSite);
+
        }
        
     };
@@ -191,9 +233,9 @@ function App() {
     const handleImageUpload = ({ fileList: newFileList }) => {
         if (newFileList.length > 0) {
             const lastFile = newFileList[newFileList.length - 1].originFileObj;
-            setFeaturedImage(lastFile); // Set the selected image file to state
+            setFeaturedImage(lastFile); 
         } else {
-            setFeaturedImage(null); // Reset if no file is selected
+            setFeaturedImage(null); 
         }
     };
     
@@ -225,10 +267,10 @@ setIsLoading(true);
 const apiEndpoint = 'https://bgandg.com/wp-json/wp/v2/pages';
 const encodedFullName = encodeURIComponent(ticker + ' (' + fullName + ')');
 
-// Modify the JotForm URL to include the 'caseType' field with the value of fullName
+
 const jotFormScriptUrl = `https://form.jotform.com/jsform/233467061911151?caseType=${encodedFullName}`;
 
-// Use the modified JotForm URL in your htmlBlock
+
 const htmlBlock = `<style>#footer .contact-form {display: none !important;}</style><a id="sign-up"></a><script type="text/javascript" src="${jotFormScriptUrl}"></script>`;  
 const fullContent = generatedContentSite + htmlBlock;
   
@@ -255,7 +297,7 @@ if (featuredImage) {
     }
 }
 
-   // Create the acf object
+
    const acfData = {
     custom_banner_title: fullName,
     certification_form: linkData,
@@ -264,7 +306,7 @@ if (featuredImage) {
     
 };
 
-// Check if there is a document to upload
+
 if (complaintDocument) {
     try {
       const uploadedDocument = await uploadDocument(complaintDocument);
@@ -310,12 +352,12 @@ const pageData = {
 
   }
   finally {
-    setIsLoading(false); // Stop loading regardless of the outcome
-    // Inside createPage function, after successful upload
+    setIsLoading(false); 
+
 
 
 }
-setTimeout(() => setAlertInfo({ ...alertInfo, visible: false }), 3000); // Hide alert after 3 seconds
+setTimeout(() => setAlertInfo({ ...alertInfo, visible: false }), 3000); 
 };
 
 
@@ -331,7 +373,7 @@ const uploadDocument = async (document) => {
   
     try {
       const response = await axios.post('https://bgandg.com/wp-json/wp/v2/media', formData, { headers: uploadHeaders });
-      return response.data;  // Return the uploaded document details
+      return response.data; 
     } catch (error) {
       console.error('Error uploading document:', error);
       throw error;
@@ -341,12 +383,12 @@ const uploadDocument = async (document) => {
   const handleFileChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
 
-    // Assuming you want to store the last selected file as the complaint document
+
     if (newFileList.length > 0) {
         const lastFile = newFileList[newFileList.length - 1];
         setComplaintDocument(lastFile.originFileObj);
     } else {
-        setComplaintDocument(null); // Reset if no file is selected
+        setComplaintDocument(null); 
     }
 };
 
@@ -364,9 +406,9 @@ const copyToClipboard = async text => {
             document.body.removeChild(textarea);
             setShowCopyAlert(true);
         }
-        setTimeout(() => setShowCopyAlert(false), 3000); // Alert disappears after 3 seconds
+        setTimeout(() => setShowCopyAlert(false), 3000); 
     } catch (error) {
-        // Handle error scenario
+
     }
 };
 
@@ -378,9 +420,9 @@ const handleUploadToSite = () => {
 };
 
 
-const handleTickerChange = (e) => {
-    setTicker(e.target.value.toUpperCase());
-};
+// const handleTickerChange = (e) => {
+//     setTicker(e.target.value.toUpperCase());
+// };
 
 
 
@@ -398,7 +440,7 @@ const tabs = [
                <Form.Item label="">
                     <ReactQuill
                         value={generatedContentWordHTML}
-                        onChange={handleContentWordChange} // Attach the handler here
+                        onChange={handleContentWordChange}
                     />
                 </Form.Item>
                 <div style={{ textAlign: 'center' }}>
@@ -436,19 +478,19 @@ const tabs = [
               <Form.Item label="">
                     <ReactQuill
                         value={generatedContentSite}
-                        onChange={handleContentSiteChange} // Attach the handler here
+                        onChange={handleContentSiteChange} 
                     />
                 </Form.Item>
                         
-                        {/* Additional questions for Site Version */}
+               
                         <Form layout="vertical">
                             <Row gutter={16}>
                                 <Col span={24}>
-                                            {/* Image Upload Section */}
+                             
                     <Form.Item label="">
                         <Upload.Dragger
                             name="file"
-                            beforeUpload={() => false} // Prevent automatic upload
+                            beforeUpload={() => false} 
                             onChange={handleImageUpload}
                         >
                             <p className="ant-upload-drag-icon">
@@ -461,9 +503,9 @@ const tabs = [
                                 {folderSelection === 'cases' && (
     <Form.Item label="" name="complaintDocument">
         <Dragger
-            beforeUpload={() => false} // Prevent automatic upload
+            beforeUpload={() => false} 
             onChange={handleFileChange}
-            fileList={fileList} // Use fileList state here
+            fileList={fileList} 
         >
             <p className="ant-upload-drag-icon">
                 <UploadOutlined />
@@ -531,44 +573,56 @@ return (
         <main>
 
         <Card className="form-container" style={{ width: '50%', margin: '0 auto', marginBottom: '50px'}}>
-        <Form 
-    layout="vertical" 
-    onFinish={handleSubmit} 
->
-<Row gutter={16}>
-        <Col span={15}>
-        <Form.Item 
-                            label="Full Name" 
-                            name="fullName"
-                            rules={[{ required: true, message: '' }]}
-                        >
-                            <Input placeholder="full name" value={fullName} onChange={e => setFullName(e.target.value)} />
-                        </Form.Item>
-                </Col>
-        <Col span={9}>
-        <Form.Item 
-                            label="Short Name" 
-                            name="shortName"
-                            rules={[{ required: true, message: '' }]}
-                        >
-                            <Input placeholder="short name" value={shortName} onChange={e => setShortName(e.target.value)} />
-                        </Form.Item>
-                </Col>
-                </Row>
-                <Row gutter={16}>
-        <Col span={6}>
+        <Form form={form} layout="vertical" onFinish={handleSubmit}>
+<Row gutter={24}>
+        <Col span={12}>
+
+
         <Form.Item 
     label="Ticker" 
     name="ticker"
     rules={[{ required: true, message: '' }]}
 >
-    <Input placeholder="ticker" value={ticker} onChange={handleTickerChange} />
+    <AutoComplete
+        options={tickerOptions}
+        onSearch={handleSearch}
+        onSelect={onSelectTicker}
+        placeholder="Enter ticker"
+        value={ticker} 
+        onChange={setTicker} 
+    />
+    
+</Form.Item>
+</Col>
+<Col span={12}>
+
+                        <Form.Item 
+    label="Full Name" 
+    name="fullName"
+    rules={[{ required: true, message: '' }]}
+>
+    {/* <Input 
+        placeholder="Full name" 
+        value={fullName} 
+        onChange={e => setFullName(e.target.value)} 
+    /> */}
+
+<AutoComplete
+        options={tickerOptions}
+        onSearch={handleNameSearch}
+        onSelect={onSelectFullName}
+        placeholder="Enter full name"
+        value={fullName} 
+        onChange={setFullName} 
+    />
 </Form.Item>
 
                 </Col>
-    
-    <Col span={7}>
-    <Form.Item
+                </Row>
+                <Row gutter={24}>
+        <Col span={4}>
+            
+        <Form.Item
             label="Exchange"
             name="exchange"
             rules={[{ required: true, message: '' }]}
@@ -590,8 +644,21 @@ return (
             
         </Form.Item>
                 </Col>
+                
+    
+    <Col span={8}>
+ 
 
-                <Col span={11}>
+        <Form.Item 
+                            label="Short Name" 
+                            name="shortName"
+                            rules={[{ required: true, message: '' }]}
+                        >
+                            <Input placeholder="short name" value={shortName} onChange={e => setShortName(e.target.value)} />
+                        </Form.Item>
+                </Col>
+
+                <Col span={12}>
                 <Form.Item
     label="Case Type"
     name="caseType"
@@ -607,7 +674,7 @@ return (
                 </Col>
                 </Row>
 
-           {/* Conditional rendering based on the case type */}
+
 {caseType === 'IPO' && (
     <>
      <Row gutter={16}>
@@ -801,14 +868,12 @@ return (
 
 <Form.Item
  
-    style={{ textAlign: 'center' }} // Center the button within the Form.Item
+    style={{ textAlign: 'center' }} 
 >
     <Button type="primary" htmlType="submit">Generate release</Button>
 </Form.Item>
    </Form>
-{/* {errorMessage && <Alert message={errorMessage} type="error" showIcon />} */}
 
-{/* Tabs with content */}
 {(generatedContentSite || generatedContentWordHTML) && (
                         <Tabs items={tabs} defaultActiveKey="site" className="tabs-container" />
                     )}
