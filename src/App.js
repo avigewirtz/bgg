@@ -7,7 +7,6 @@ import 'react-quill/dist/quill.snow.css';
 import { downloadAsWord } from './download';
 
 import { UploadOutlined } from '@ant-design/icons';
-
 import stockData from './stock.json'; 
 
 import {
@@ -30,6 +29,11 @@ const { TextArea } = Input;
 const { Option } = Select;
 const { Title } = Typography;
 const { Dragger } = Upload;
+
+
+
+
+
 
 function App() {
     const [fullName, setFullName] = useState('');
@@ -72,8 +76,6 @@ function App() {
 
 
 
-
-
     // const username = process.env.WP_USERNAME;
     // const appPassword = process.env.WP_APP_PASSWORD;
     const username = 'Shlomo'; 
@@ -84,7 +86,7 @@ function App() {
     const handleSearch = (value) => {
         setTickerOptions(
             !value ? [] : stockData.filter(stock => 
-                stock.ticker.toLowerCase().includes(value.toLowerCase())
+                stock.ticker.toLowerCase().startsWith(value.toLowerCase())
             ).map(stock => ({
                 value: stock.ticker,
                 label: `${stock.ticker} - ${stock.name} - ${stock.exchange}`
@@ -95,7 +97,7 @@ function App() {
     const handleNameSearch = (value) => {
         setTickerOptions(
             !value ? [] : stockData.filter(stock => 
-                stock.name.toLowerCase().includes(value.toLowerCase())
+                stock.name.toLowerCase().startsWith(value.toLowerCase())
             ).map(stock => ({
                 value: stock.name,  // Here we're using 'name' instead of 'ticker'
                 label: `${stock.name} - ${stock.ticker} - ${stock.exchange}`
@@ -566,6 +568,8 @@ const tabs = [
 
 
 return (
+
+
     <div className="app">
         <header style={{ textAlign: 'center' }}>
                 <Title level={1}>Press Release Generator</Title>
