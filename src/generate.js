@@ -17,7 +17,13 @@ export const generate_ipo = (
     const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
 
     return (
-`${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${full_name} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!
+` <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${full_name} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!
 
 Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.
 
@@ -41,7 +47,9 @@ Attorney advertising. Prior results do not guarantee similar outcomes.
 Contact:
 Bronstein, Gewirtz & Grossman, LLC
 Peretz Bronstein or Yael Nathanson
-332-239-2660 | info@bgandg.com`
+332-239-2660 | info@bgandg.com
+</body>
+</html>`
     );
 };
 
@@ -229,7 +237,13 @@ export const generate_ipo_site = (
     const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
 
     return (
-        `<p>Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p>Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
         <p><strong>Class Definition:</strong><br/>
         This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIpoDate} initial public offering ("IPO"). Such investors are encouraged to join this case.</p>
@@ -251,7 +265,9 @@ export const generate_ipo_site = (
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
     );
 };
 
@@ -266,7 +282,13 @@ export const generate_class_period_site = (
     const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
     
     return (
-        `<p>Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p>Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
         <p><strong>Class Definition:</strong><br/>
         This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, inclusive (the “Class Period”). Such investors are encouraged to join this case.</p>
@@ -288,7 +310,9 @@ export const generate_class_period_site = (
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
     );
 };
 
@@ -304,7 +328,13 @@ export const generate_class_period_and_ipo_site = (
     const formattedClassPeriodEndDate = formatDate(class_period_end_date);
     
     return (
-        `<p>Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p>Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
         <p><strong>Class Definition:</strong><br/>
         This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities: (1) pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIPODate} initial public offering ("IPO"); or (ii) between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, both dates inclusive (the “Class Period”). Such investors are encouraged to join this case.</p>
@@ -326,7 +356,9 @@ export const generate_class_period_and_ipo_site = (
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
     );
 };
 
@@ -336,7 +368,13 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
     const formattedPurchaseDate = formatDate(purchaseDate);
     
     return (
-        `<p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities prior to ${formattedPurchaseDate}, and continue to hold to the present, are encouraged to obtain additional information and assist the investigation.</p>
+        ` <!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities prior to ${formattedPurchaseDate}, and continue to hold to the present, are encouraged to obtain additional information and assist the investigation.</p>
 
         <p><strong>Investigation Details:</strong><br/>
         The investigation concerns whether ${short_name} and certain of its officers and/or directors have engaged in corporate wrongdoing.</p>
@@ -355,7 +393,10 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+</html>`
+
     );
 };
 
@@ -365,7 +406,13 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
  export const generate_spac_investigation_site = (full_name, short_name, exchange, ticker, spac_full_name, spac_short_name, merger_date) => {
     const formattedMergerDate = formatDate(merger_date);
     return (
-        `<p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${spac_full_name} (“${spac_short_name}”), which merged with ${full_name} (“${short_name}”) (${exchange}: ${ticker}) on ${formattedMergerDate}. Investors who purchased ${spac_short_name} and continue to hold to the present, are encouraged to obtain additional information and assist the investigation.</p>
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${spac_full_name} (“${spac_short_name}”), which merged with ${full_name} (“${short_name}”) (${exchange}: ${ticker}) on ${formattedMergerDate}. Investors who purchased ${spac_short_name} and continue to hold to the present, are encouraged to obtain additional information and assist the investigation.</p>
 
         <p><strong>Investigation Details:</strong><br/>
         The investigation concerns whether ${spac_short_name} failed to provide relevant information to its shareholders before the merger.</p>
@@ -384,7 +431,9 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
     );
 };
 
@@ -392,7 +441,13 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
 
 export const generate_10b_investigation_site = (full_name, short_name, exchange, ticker, investigation_paragraph) => {
     return (
-        `<p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities are encouraged to obtain additional information and assist the investigation.</p>
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities are encouraged to obtain additional information and assist the investigation.</p>
 
         <p>The investigation concerns whether ${short_name} has violated federal securities laws.</p>
 
@@ -413,7 +468,9 @@ export const generate_10b_investigation_site = (full_name, short_name, exchange,
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
     );
 };
 
@@ -445,7 +502,13 @@ export const generate_ipo_html = (
     const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
 
     return (
-        `<p><strong>${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${full_name} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!</strong></p>
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p><strong>${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${full_name} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!</strong></p>
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
@@ -469,7 +532,9 @@ export const generate_ipo_html = (
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
     );
 };
 
@@ -486,7 +551,13 @@ export const generate_class_period_html = (
     const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
 
     return (
-        `<p><strong>${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${full_name} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!</strong></p>
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p><strong>${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${full_name} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!</strong></p>
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC, a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
@@ -510,7 +581,9 @@ export const generate_class_period_html = (
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
     );
 };
 
@@ -525,7 +598,13 @@ export const generate_class_period_and_ipo_html = (
     const formattedClassPeriodEndDate = formatDate(class_period_end_date);
 
     return (
-        `<p><strong>${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${full_name} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!</strong></p>
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p><strong>${ticker} INVESTOR ALERT: Bronstein, Gewirtz & Grossman LLC Announces that ${full_name} Investors with Substantial Losses Have Opportunity to Lead Class Action Lawsuit!</strong></p>
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC, a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
@@ -549,7 +628,9 @@ export const generate_class_period_and_ipo_html = (
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
     );
 };
 
@@ -557,7 +638,13 @@ export const generate_derivative_investigation_html = (full_name, ticker, short_
     const formattedPurchaseDate = formatDate(purchaseDate);
 
     return (
-        `<p><strong>Bronstein, Gewirtz & Grossman, LLC Notifies Shareholders of ${full_name} (${ticker}) Investigation</strong></p>
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p><strong>Bronstein, Gewirtz & Grossman, LLC Notifies Shareholders of ${full_name} (${ticker}) Investigation</strong></p>
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities prior to ${formattedPurchaseDate}, and continue to hold to the present, are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
@@ -578,7 +665,9 @@ export const generate_derivative_investigation_html = (full_name, ticker, short_
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
     );
 };
 
@@ -586,7 +675,13 @@ export const generate_spac_investigation_html = (full_name, short_name, exchange
     const formattedMergerDate = formatDate(merger_date);
 
     return (
-        `<p><strong>Calling All ${full_name} (${ticker}) Investors: Contact Bronstein, Gewirtz & Grossman, LLC To Claim Your Losses</strong></p>
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p><strong>Calling All ${full_name} (${ticker}) Investors: Contact Bronstein, Gewirtz & Grossman, LLC To Claim Your Losses</strong></p>
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${spac_full_name} (“${spac_short_name}”), which merged with ${full_name} (“${short_name}”) (${exchange}: ${ticker}) on ${formattedMergerDate}. Investors who purchased ${spac_short_name} and continue to hold to the present, are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
@@ -607,7 +702,9 @@ export const generate_spac_investigation_html = (full_name, short_name, exchange
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
     );
 };
 
@@ -615,7 +712,13 @@ export const generate_spac_investigation_html = (full_name, short_name, exchange
 
 export const generate_10b_investigation_html = (full_name, short_name, exchange, ticker, investigation_paragraph) => {
     return (
-        `<p><strong>${full_name} (${ticker}) Investigation: Bronstein, Gewirtz & Grossman, LLC Encourages Investors to Seek Compensation for Alleged Wrongdoings</strong></p>
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p><strong>${full_name} (${ticker}) Investigation: Bronstein, Gewirtz & Grossman, LLC Encourages Investors to Seek Compensation for Alleged Wrongdoings</strong></p>
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
@@ -636,7 +739,9 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
         <p><strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Yael Nathanson<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>`
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
     );
 };
 
