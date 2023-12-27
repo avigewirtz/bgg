@@ -1,9 +1,9 @@
 .form-container {
     margin: 0 auto;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-right: 10px;
     margin-left: 10px;
-    width: 100%; /* Default width for mobile screens */
+    width: 90%; /* Default width for mobile screens */
   }
   
   /* For tablets and small desktops */
