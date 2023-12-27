@@ -99,11 +99,13 @@ function App() {
             !value ? [] : stockData.filter(stock => 
                 stock.name.toLowerCase().startsWith(value.toLowerCase())
             ).map(stock => ({
-                value: stock.name,  // Here we're using 'name' instead of 'ticker'
-                label: `${stock.name} - ${stock.ticker} - ${stock.exchange}`
+                value: stock.name, // Use name for the value
+                label: `${stock.name} (${stock.ticker} - ${stock.exchange})`, // Differentiate with ticker and exchange
+                key: `${stock.name}-${stock.ticker}` // Unique key
             }))
         );
     };
+    
     
     
     const onSelectTicker = (value, option) => {
