@@ -580,53 +580,43 @@ return (
 
         <Card className="form-container" style={{ width: '50%', margin: '0 auto', marginBottom: '50px'}}>
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
-<Row gutter={24}>
-        <Col span={12}>
-
-
+        <Row gutter={24}>
+    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
         <Form.Item 
-    label="Ticker" 
-    name="ticker"
-    rules={[{ required: true, message: '' }]}
->
-    <AutoComplete
-        options={tickerOptions}
-        onSearch={handleSearch}
-        onSelect={onSelectTicker}
-        placeholder="Enter ticker"
-        value={ticker} 
-        onChange={setTicker} 
-    />
-    
-</Form.Item>
-</Col>
-<Col span={12}>
+            label="Ticker" 
+            name="ticker"
+            rules={[{ required: true, message: '' }]}
+        >
+            <AutoComplete
+                options={tickerOptions}
+                onSearch={handleSearch}
+                onSelect={onSelectTicker}
+                placeholder="Enter ticker"
+                value={ticker} 
+                onChange={setTicker} 
+            />
+        </Form.Item>
+    </Col>
+    <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+        <Form.Item 
+            label="Full Name" 
+            name="fullName"
+            rules={[{ required: true, message: '' }]}
+        >
+            <AutoComplete
+                options={tickerOptions}
+                onSearch={handleNameSearch}
+                onSelect={onSelectFullName}
+                placeholder="Enter full name"
+                value={fullName} 
+                onChange={setFullName} 
+            />
+        </Form.Item>
+    </Col>
+</Row>
 
-                        <Form.Item 
-    label="Full Name" 
-    name="fullName"
-    rules={[{ required: true, message: '' }]}
->
-    {/* <Input 
-        placeholder="Full name" 
-        value={fullName} 
-        onChange={e => setFullName(e.target.value)} 
-    /> */}
-
-<AutoComplete
-        options={tickerOptions}
-        onSearch={handleNameSearch}
-        onSelect={onSelectFullName}
-        placeholder="Enter full name"
-        value={fullName} 
-        onChange={setFullName} 
-    />
-</Form.Item>
-
-                </Col>
-                </Row>
                 <Row gutter={24}>
-        <Col span={4}>
+                <Col xs={24} sm={24} md={8} lg={4} xl={4}>
             
         <Form.Item
             label="Exchange"
@@ -652,7 +642,7 @@ return (
                 </Col>
                 
     
-    <Col span={8}>
+                <Col xs={24} sm={24} md={16} lg={8} xl={8}>
  
 
         <Form.Item 
@@ -664,7 +654,7 @@ return (
                         </Form.Item>
                 </Col>
 
-                <Col span={12}>
+                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                 <Form.Item
     label="Case Type"
     name="caseType"
@@ -684,7 +674,7 @@ return (
 {caseType === 'IPO' && (
     <>
      <Row gutter={16}>
-     <Col span={12}>
+     <Col xs={24} sm={24} md={24} lg={12} xl={12}>
         <Form.Item
             label="IPO Date"
             name="ipoDate"
@@ -694,7 +684,7 @@ return (
          
         </Form.Item>
 </Col>
-<Col span={12}>
+<Col xs={24} sm={24} md={24} lg={12} xl={12}>
         <Form.Item
             label="Lead Plaintiff Deadline"
             name="leadPlaintiffDeadline"
@@ -721,7 +711,7 @@ return (
 {caseType === 'Class period' && (
    
          <Row gutter={16}>
-           <Col span={8}>  
+           <Col xs={24} sm={24} md={24} lg={8} xl={8}> 
        <Form.Item
             label="Lead Plaintiff Deadline"
             name="leadPlaintiffDeadline"
@@ -730,7 +720,7 @@ return (
             <DatePicker placeholder="Lead Plaintiff Deadline" value={leadPlaintiffDeadline} style={{ width: '100%' }} onChange={setLeadPlaintiffDeadline} />
         </Form.Item>
 </Col>
-<Col span={8}>  
+<Col xs={24} sm={24} md={24} lg={8} xl={8}>
         <Form.Item
             label="Class Period Start Date"
             name="classPeriodStartDate"
@@ -739,7 +729,7 @@ return (
             <DatePicker placeholder="Class Period Start Date" value={classPeriodStartDate} style={{ width: '100%' }} onChange={setClassPeriodStartDate} />
         </Form.Item>
 </Col>
-<Col span={8}>  
+<Col xs={24} sm={24} md={24} lg={8} xl={8}>
         <Form.Item
             label="Class Period End Date"
             name="classPeriodEndDate"
@@ -763,7 +753,7 @@ return (
 
 {caseType === 'Class period and IPO' && (
      <Row gutter={16}>
-            <Col span={6}>  
+            <Col xs={24} sm={24} md={24} lg={6} xl={6}>
         <Form.Item
     label="IPO Date"
     name="ipoDate"
@@ -772,7 +762,7 @@ return (
     <DatePicker placeholder="IPO Date" value={ipoDate} style={{ width: '100%' }} onChange={setIpoDate} />
 </Form.Item>
 </Col>
-<Col span={6}>  
+<Col xs={24} sm={24} md={24} lg={6} xl={6}> 
 <Form.Item
     label="Class Period Start Date"
     name="classPeriodStartDate"
@@ -781,7 +771,7 @@ return (
     <DatePicker placeholder="Class Period Start Date" value={classPeriodStartDate} style={{ width: '100%' }} onChange={setClassPeriodStartDate} />
 </Form.Item>
 </Col>
-<Col span={6}>  
+<Col xs={24} sm={24} md={24} lg={6} xl={6}>  
 <Form.Item
     label="Class Period End Date"
     name="classPeriodEndDate"
@@ -790,7 +780,7 @@ return (
     <DatePicker placeholder="Class Period End Date" value={classPeriodEndDate} style={{ width: '100%' }} onChange={setClassPeriodEndDate} />
 </Form.Item>
 </Col>
-<Col span={6}>  
+<Col xs={24} sm={24} md={24} lg={6} xl={6}>  
 <Form.Item
     label="Lead Plaintiff Deadline"
     name="leadPlaintiffDeadline"
@@ -842,7 +832,7 @@ return (
 
 {caseType === 'SPAC investigation' && (
       <Row gutter={16}>
-          <Col span={8}>  
+          <Col xs={24} sm={24} md={24} lg={8} xl={8}>  
         <Form.Item
             label="SPAC Full Name"
             name="spacFullName"
@@ -851,7 +841,7 @@ return (
             <Input placeholder="SPAC Full Name" value={spacFullName} onChange={e => setSpacFullName(e.target.value)} />
         </Form.Item>
 </Col>
-<Col span={8}>  
+<Col xs={24} sm={24} md={24} lg={8} xl={8}>  
         <Form.Item
             label="SPAC Short Name"
             name="spacShortName"
@@ -860,7 +850,7 @@ return (
             <Input placeholder="SPAC Short Name" value={spacShortName} onChange={e => setSpacShortName(e.target.value)} />
         </Form.Item>
 </Col>
-<Col span={8}>  
+<Col xs={24} sm={24} md={24} lg={8} xl={8}>   
         <Form.Item
             label="Merger Date"
             name="mergerDate"
