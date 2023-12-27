@@ -8,6 +8,7 @@ import { downloadAsWord } from './download';
 
 import { UploadOutlined } from '@ant-design/icons';
 import stockData from './stock.json'; 
+import './App.css';
 
 import {
 
@@ -578,7 +579,7 @@ return (
             </header>
         <main>
 
-        <Card className="form-container" style={{ width: '50%', margin: '0 auto', marginBottom: '50px'}}>
+        <Card className="form-container">
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Row gutter={24}>
     <Col xs={24} sm={24} md={12} lg={12} xl={12}>
