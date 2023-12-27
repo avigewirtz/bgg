@@ -712,15 +712,7 @@ return (
 {caseType === 'Class period' && (
    
          <Row gutter={16}>
-           <Col xs={24} sm={24} md={24} lg={8} xl={8}> 
-       <Form.Item
-            label="Lead Plaintiff Deadline"
-            name="leadPlaintiffDeadline"
-            rules={[{ required: true, message: '' }]}
-        >
-            <DatePicker placeholder="Lead Plaintiff Deadline" value={leadPlaintiffDeadline} style={{ width: '100%' }} onChange={setLeadPlaintiffDeadline} />
-        </Form.Item>
-</Col>
+
 <Col xs={24} sm={24} md={24} lg={8} xl={8}>
         <Form.Item
             label="Class Period Start Date"
@@ -737,6 +729,15 @@ return (
             rules={[{ required: true, message: '' }]}
         >
             <DatePicker placeholder="Class Period End Date" value={classPeriodEndDate} style={{ width: '100%' }} onChange={setClassPeriodEndDate} />
+        </Form.Item>
+</Col>
+<Col xs={24} sm={24} md={24} lg={8} xl={8}> 
+       <Form.Item
+            label="Lead Plaintiff Deadline"
+            name="leadPlaintiffDeadline"
+            rules={[{ required: true, message: '' }]}
+        >
+            <DatePicker placeholder="Lead Plaintiff Deadline" value={leadPlaintiffDeadline} style={{ width: '100%' }} onChange={setLeadPlaintiffDeadline} />
         </Form.Item>
 </Col>
 <Col span={24}>  
