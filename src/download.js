@@ -3,6 +3,9 @@ import { saveAs } from 'file-saver';
 import * as htmlDocx from 'html-docx-js/dist/html-docx';
 
 export const downloadAsWord = (htmlContent, fileName) => {
+
+    htmlContent = htmlContent.replace(/'/g, '&apos;').replace(/"/g, '&quot;');
+
     const blob = htmlDocx.asBlob(htmlContent);
     saveAs(blob, fileName);
 };
