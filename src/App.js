@@ -575,7 +575,7 @@ return (
 
     <div className="app">
         <header style={{ textAlign: 'center' }}>
-                <Title level={1}>Press Release Generator</Title>
+                <Title level={2}>Press Release Generator</Title>
             </header>
         <main>
 
