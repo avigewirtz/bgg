@@ -1,7 +1,10 @@
 import { Document, Packer, Paragraph, TextRun, ExternalHyperlink} from 'docx';
 
-export const downloadDocument = (content, fileName) => {
-    const paragraphs = contentToParagraphs(content);
+export const downloadAsWord = (content, fileName) => {
+
+  const plainTextContent = removeHtmlTags(content);
+
+    const paragraphs = contentToParagraphs(plainTextContent);
 
 
     if (paragraphs.length === 0) return;
@@ -28,6 +31,12 @@ export const downloadDocument = (content, fileName) => {
        console.error("Detailed error:", e);
    }
 };
+
+function removeHtmlTags(htmlString) {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = htmlString;
+  return tempDiv.textContent || tempDiv.innerText || "";
+}
 
 const contentToParagraphs = (content) => {
     if (!content || typeof content !== 'string') return [];
