@@ -1,0 +1,31 @@
+// This is my Prisma schema file,
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PressRelease {
+  ticker                String   @id
+  fullName              String
+  shortName             String?
+  caseType              String?
+  leadPlaintiffDeadline DateTime?
+  classPeriodStartDate  DateTime?
+  classPeriodEndDate    DateTime?
+  caseDetails           String?
+  ipoDate               DateTime?
+  investigationParagraph String?
+  purchaseDate          DateTime?
+  spacFullName          String?
+  spacShortName         String?
+  mergerDate            DateTime?
+  exchange              String?
+  content               String // The content of the press release
+  createdAt             DateTime @default(now())
+}

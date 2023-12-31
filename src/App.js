@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, DatePicker, Tabs, Typography, Row, Col, Card, Upload, Spin, Alert, AutoComplete} from 'antd';
+import { Form, Input, Button, Select, DatePicker, Tabs, Row, Col, Card, Upload, Spin, Alert, AutoComplete} from 'antd';
 import axios from 'axios';
 import uploadImage from './uploadImage';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
 import { downloadAsWord } from './download';
+import Header from './Header';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PressReleaseHistory from './PressReleaseHistory';
 
 import { UploadOutlined } from '@ant-design/icons';
 import stockData from './stock.json'; 
@@ -28,7 +31,7 @@ import {
 
 const { TextArea } = Input;
 const { Option } = Select;
-const { Title } = Typography;
+// const { Title } = Typography;
 const { Dragger } = Upload;
 
 
@@ -51,7 +54,6 @@ function App() {
     const [spacFullName, setSpacFullName] = useState('');
     const [spacShortName, setSpacShortName] = useState('');
     const [mergerDate, setMergerDate] = useState('');
-    // const [generatedContentWord, setGeneratedContentWord] = useState('');
     const [generatedContentSite, setGeneratedContentSite] = useState('');
     const [generatedContentWordHTML, setGeneratedContentWordHTML] = useState('');
     const [uploadStatus, setUploadStatus] = useState('');
@@ -62,7 +64,6 @@ function App() {
     const [exchange, setExchange] = useState("");
     const [fileList, setFileList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    // const [siteDisplay, setSiteDisplay] = useState('');
     const [showCopyAlert, setShowCopyAlert] = useState(false);
     const [alertInfo, setAlertInfo] = useState({ type: '', message: '', visible: false });
     const [featuredImage, setFeaturedImage] = useState(null);
@@ -351,6 +352,25 @@ const pageData = {
     console.log('Page created:', response.data);
     setAlertInfo({ type: 'success', message: 'Page uploaded successfully!', visible: true });
 
+    const pressReleaseData = {
+        fullName,
+        shortName,
+        ticker,
+        caseType,
+        leadPlaintiffDeadline,
+        classPeriodStartDate,
+        classPeriodEndDate,
+        caseDetails,
+        ipoDate,
+        investigationParagraph,
+        purchaseDate,
+        spacFullName,
+        spacShortName,
+        mergerDate,
+        exchange,
+        content: generatedContentSite, // Assuming this is the press release content
+    };
+    await savePressReleaseToDatabase(pressReleaseData);
   } catch (error) {
     console.error('Error creating page:', error);
     setAlertInfo({ type: 'error', message: 'Error uploading page.', visible: true });
@@ -365,7 +385,14 @@ const pageData = {
 setTimeout(() => setAlertInfo({ ...alertInfo, visible: false }), 3000); 
 };
 
-
+const savePressReleaseToDatabase = async (data) => {
+    try {
+        await axios.post('/.netlify/functions/savePressRelease', data);
+        console.log('Press release saved to database');
+    } catch (error) {
+        console.error('Error saving press release:', error);
+    }
+};
 
 const uploadDocument = async (document) => {
     const formData = new FormData();
@@ -424,10 +451,6 @@ const handleUploadToSite = () => {
     createPage();
 };
 
-
-// const handleTickerChange = (e) => {
-//     setTicker(e.target.value.toUpperCase());
-// };
 
 
 
@@ -574,11 +597,16 @@ return (
 
 
     <div className="app">
-        <header style={{ textAlign: 'center' }}>
+        
+         {/* <Header /> */}
+        {/* <header style={{ textAlign: 'center' }}>
                 <Title level={2}>Press Release Generator</Title>
-            </header>
+            </header> */}
         <main>
-
+        <Router>
+            <Header />
+            <Routes>
+                <Route path="/"  element={
         <Card className="form-container">
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Row gutter={24}>
@@ -876,6 +904,11 @@ return (
                         <Tabs items={tabs} defaultActiveKey="site" className="tabs-container" />
                     )}
      </Card>
+     } />
+              <Route path="/history" element={<PressReleaseHistory />} />
+                {/* Add other routes as needed */}
+            </Routes>
+        </Router>
 </main>
 </div>
 
