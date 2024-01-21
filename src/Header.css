@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     position: relative; /* Allows absolute positioning inside */
-    width: 100%;
+    width: 90%;
 }
 
 .header-title, .history-link {
