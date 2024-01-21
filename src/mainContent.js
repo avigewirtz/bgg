@@ -130,7 +130,6 @@ const MainContent = () => {
     const username = 'Shlomo'; 
     const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation'];
-
     
     const handleSearch = (value) => {
         setTickerOptions(
@@ -471,7 +470,7 @@ const createPage = async () => {
     } else {
         await createNewWordpressPage(); // Create new page
     }
-
+    setTimeout(() => setAlertInfo({ ...alertInfo, visible: false }), 3000); 
     setIsLoading(false);
 };
 
