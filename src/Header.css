@@ -1,5 +1,3 @@
-/* Header.css */
-
 .custom-header {
     background-color: #1890ff; /* Ant Design primary blue */
     display: flex;
@@ -9,10 +7,11 @@
 }
 
 .header-content {
-    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: relative; /* Allows absolute positioning inside */
+    width: 100%;
 }
 
 .header-title, .history-link {
@@ -22,5 +21,12 @@
 }
 
 .header-title:hover, .history-link:hover {
-    text-decoration: underline;
+    /* Keep the hover effect but remove the underline */
+    /* Example: Change color on hover, no underline */
+    color: #e6f7ff; /* Lighter blue on hover */
+}
+
+.history-link {
+    position: absolute;
+    right: 20px; /* Adjust as needed */
 }

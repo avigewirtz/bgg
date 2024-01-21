@@ -46,6 +46,8 @@ exports.handler = async function(event) {
                 mergerDate: data.mergerDate ? new Date(data.mergerDate) : null,
                 exchange: data.exchange,
                 content: data.content,
+                contentWord: data.contentWord,
+                wordpressPageId: data.wordpressPageId,
                 // Add other fields as necessary
             }
         });
