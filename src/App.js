@@ -15,7 +15,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<MainContent />} />
                         <Route path="/history" element={<PressReleaseHistory />} />
-                        <Route path="/press-release/:ticker" element={<PressReleaseContent />} />
+                        {/* <Route path="/press-release/:ticker" element={<PressReleaseContent />} /> */}
                         {/* Add other routes as needed */}
                     </Routes>
                 </main>
