@@ -21,12 +21,26 @@
 }
 
 .header-title:hover, .history-link:hover {
-    /* Keep the hover effect but remove the underline */
-    /* Example: Change color on hover, no underline */
     color: #e6f7ff; /* Lighter blue on hover */
 }
 
 .history-link {
     position: absolute;
     right: 20px; /* Adjust as needed */
+}
+
+/* Mobile Screen Adjustment */
+@media screen and (max-width: 768px) {
+    .header-content {
+        justify-content: space-between;
+    }
+
+    .history-link {
+        position: static;
+        order: 2; /* Push to the right */
+    }
+
+    .header-title {
+        order: 1; /* Keep on the left */
+    }
 }
