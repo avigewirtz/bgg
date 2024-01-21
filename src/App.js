@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import MainContent from './mainContent'; // Import the MainContent component
 import PressReleaseHistory from './PressReleaseHistory';
-import PressReleaseContent from './PressReleaseContent';
+
 // import './App.css';
 
 const App = () => {
