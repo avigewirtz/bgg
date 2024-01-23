@@ -1040,7 +1040,7 @@ return (
             name="caseDetails"
             rules={[{ required: true, message: '' }]}
         >
-            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} />
+            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={8}/>
         </Form.Item>
         </Col>
         </Row>
@@ -1077,14 +1077,16 @@ return (
         >
             <DatePicker placeholder="Lead Plaintiff Deadline" value={leadPlaintiffDeadline} style={{ width: '100%' }} onChange={setLeadPlaintiffDeadline} />
         </Form.Item>
-</Col>
+    </Col>
+    
+
 <Col span={24}>  
         <Form.Item
             label="Case Details"
             name="caseDetails"
             rules={[{ required: true, message: '' }]}
         >
-            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} />
+            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={8}/>
         </Form.Item>
         </Col>
         </Row>
@@ -1136,7 +1138,7 @@ return (
             name="caseDetails"
             rules={[{ required: true, message: '' }]}
         >
-            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} />
+            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={8}/>
         </Form.Item>
         </Col>
         </Row>
@@ -1150,7 +1152,7 @@ return (
     name="investigationParagraph"
     rules={[{ required: true, message: '' }]}
 >
-    <TextArea placeholder="Details of the investigation" value={investigationParagraph} onChange={e => setInvestigationParagraph(e.target.value)} />
+    <TextArea placeholder="Details of the investigation" value={investigationParagraph} onChange={e => setInvestigationParagraph(e.target.value)} rows={8} />
 </Form.Item>
 </Col>
 </Row>
