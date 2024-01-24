@@ -921,7 +921,7 @@ return (
             name="caseDetails"
             rules={[{ required: true, message: '' }]}
         >
-            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={8}/>
+            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={12}/>
         </Form.Item>
         </Col>
         </Row>
@@ -967,7 +967,7 @@ return (
             name="caseDetails"
             rules={[{ required: true, message: '' }]}
         >
-            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={8}/>
+            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={12}/>
         </Form.Item>
         </Col>
         </Row>
@@ -1019,7 +1019,7 @@ return (
             name="caseDetails"
             rules={[{ required: true, message: '' }]}
         >
-            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={8}/>
+            <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={12}/>
         </Form.Item>
         </Col>
         </Row>
@@ -1033,7 +1033,7 @@ return (
     name="investigationParagraph"
     rules={[{ required: true, message: '' }]}
 >
-    <TextArea placeholder="Details of the investigation" value={investigationParagraph} onChange={e => setInvestigationParagraph(e.target.value)} rows={8} />
+    <TextArea placeholder="Details of the investigation" value={investigationParagraph} onChange={e => setInvestigationParagraph(e.target.value)} rows={12} />
 </Form.Item>
 </Col>
 </Row>
