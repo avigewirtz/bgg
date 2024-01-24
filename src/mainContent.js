@@ -311,9 +311,12 @@ const MainContent = () => {
         }
     };
 
-const generateStockShortcode = () => {
-    return `[stockdio-historical-chart stockExchange=”NYSENasdaq” symbol="${ticker}" includeImage="true" includeDescription="true" culture="English-US" includeRelated="true"]`;
-};
+    const generateStockShortcode = () => {
+        console.log("exchange = " + exchange)
+        let stockExchange = exchange === "NYSE" || exchange === "NASDAQ" ? "NYSENasdaq" : exchange;
+        return `[stockdio-historical-chart stockExchange="${stockExchange}" symbol="${ticker}" includeImage="true" includeDescription="true" culture="English-US" includeRelated="true"]`;
+    };
+    
 
 
 

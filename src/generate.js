@@ -17,7 +17,20 @@ export const generate_ipo_site = (
     const formattedIpoDate = formatDate(ipo_date);
     const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
 
-    const formatted_case_details = case_details.replace(/\n/g, '<br>');
+    const formatCaseDetails = (case_details) => {
+        // Split the text into paragraphs based on line breaks
+        const paragraphs = case_details.split('\n').filter(p => p.trim() !== '');
+    
+        // Wrap each paragraph in <p> tags
+        const formattedParagraphs = paragraphs.map(p => `<p>${p}</p>`);
+    
+        // Join the paragraphs back into a single string
+        return formattedParagraphs.join('\n');
+    };
+    
+
+    
+    const formatted_case_details = formatCaseDetails(case_details);
 
     return (
         `<!DOCTYPE html>
@@ -64,7 +77,20 @@ export const generate_class_period_site = (
     const formattedClassPeriodEndDate = formatDate(class_period_end_date);
     const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
     
-    const formatted_case_details = case_details.replace(/\n/g, '<br>');
+    const formatCaseDetails = (case_details) => {
+        // Split the text into paragraphs based on line breaks
+        const paragraphs = case_details.split('\n').filter(p => p.trim() !== '');
+    
+        // Wrap each paragraph in <p> tags
+        const formattedParagraphs = paragraphs.map(p => `<p>${p}</p>`);
+    
+        // Join the paragraphs back into a single string
+        return formattedParagraphs.join('\n');
+    };
+    
+
+    
+    const formatted_case_details = formatCaseDetails(case_details);
 
     return (
         `<!DOCTYPE html>
@@ -111,7 +137,20 @@ export const generate_class_period_and_ipo_site = (
     const formattedIPODate = formatDate(ipo_date);
     const formattedClassPeriodStartDate = formatDate(class_period_start_date);
     const formattedClassPeriodEndDate = formatDate(class_period_end_date);
-    const formatted_case_details = case_details.replace(/\n/g, '<br>');
+    const formatCaseDetails = (case_details) => {
+        // Split the text into paragraphs based on line breaks
+        const paragraphs = case_details.split('\n').filter(p => p.trim() !== '');
+    
+        // Wrap each paragraph in <p> tags
+        const formattedParagraphs = paragraphs.map(p => `<p>${p}</p>`);
+    
+        // Join the paragraphs back into a single string
+        return formattedParagraphs.join('\n');
+    };
+    
+
+    
+    const formatted_case_details = formatCaseDetails(case_details);
     
     return (
         `<!DOCTYPE html>
@@ -228,7 +267,23 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
 
 export const generate_10b_investigation_site = (full_name, short_name, exchange, ticker, investigation_paragraph) => {
 
-    const formatted_nvestigation_paragraph = investigation_paragraph.replace(/\n/g, '<br>');
+    const formatInvestigationParagraph = (investigation_paragraph) => {
+        // Split the text into paragraphs based on line breaks
+        const paragraphs = investigation_paragraph.split('\n').filter(p => p.trim() !== '');
+    
+        // Wrap each paragraph in <p> tags
+        const formattedParagraphs = paragraphs.map(p => `<p>${p}</p>`);
+    
+        // Join the paragraphs back into a single string
+        return formattedParagraphs.join('\n');
+    };
+    
+
+    
+    const formatted_investigation_paragraph = formatInvestigationParagraph(investigation_paragraph);
+
+    
+    // console.log("IP = " + investigation_paragraph);
     return (
         `<!DOCTYPE html>
         <html>
@@ -241,7 +296,7 @@ export const generate_10b_investigation_site = (full_name, short_name, exchange,
         <p>The investigation concerns whether ${short_name} has violated federal securities laws.</p>
 
         <p><strong>Investigation Details:</strong><br/>
-        ${formatted_nvestigation_paragraph}</p>
+        ${formatted_investigation_paragraph}</p>
 
         <p><strong>What’s Next?</strong><br/>
         If you are aware of any facts relating to this investigation or purchased ${short_name} securities, you can assist this investigation. You can also contact Peretz Bronstein or his law clerk and client relations manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC: <a href="tel:332-239-2660"> 332-239-2660</a>.</p>
@@ -289,7 +344,20 @@ export const generate_ipo_html = (
 ) => {
     const formattedIpoDate = formatDate(ipo_date);
     const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
-    const formatted_case_details = case_details.replace(/\n/g, '<br>');
+    const formatCaseDetails = (case_details) => {
+        // Split the text into paragraphs based on line breaks
+        const paragraphs = case_details.split('\n').filter(p => p.trim() !== '');
+    
+        // Wrap each paragraph in <p> tags
+        const formattedParagraphs = paragraphs.map(p => `<p>${p}</p>`);
+    
+        // Join the paragraphs back into a single string
+        return formattedParagraphs.join('\n');
+    };
+    
+
+    
+    const formatted_case_details = formatCaseDetails(case_details);
 
     return (
         `<!DOCTYPE html>
@@ -340,7 +408,20 @@ export const generate_class_period_html = (
     const formattedClassPeriodEndDate = formatDate(class_period_end_date);
     const formattedLeadPlaintiffDeadline = formatDate(lead_plaintiff_deadline);
 
-    const formatted_case_details = case_details.replace(/\n/g, '<br>');
+    const formatCaseDetails = (case_details) => {
+        // Split the text into paragraphs based on line breaks
+        const paragraphs = case_details.split('\n').filter(p => p.trim() !== '');
+    
+        // Wrap each paragraph in <p> tags
+        const formattedParagraphs = paragraphs.map(p => `<p>${p}</p>`);
+    
+        // Join the paragraphs back into a single string
+        return formattedParagraphs.join('\n');
+    };
+    
+
+    
+    const formatted_case_details = formatCaseDetails(case_details);
 
     return (
         `<!DOCTYPE html>
@@ -389,7 +470,20 @@ export const generate_class_period_and_ipo_html = (
     const formattedClassPeriodStartDate = formatDate(class_period_start_date);
     const formattedClassPeriodEndDate = formatDate(class_period_end_date);
 
-    const formatted_case_details = case_details.replace(/\n/g, '<br>');
+    const formatCaseDetails = (case_details) => {
+        // Split the text into paragraphs based on line breaks
+        const paragraphs = case_details.split('\n').filter(p => p.trim() !== '');
+    
+        // Wrap each paragraph in <p> tags
+        const formattedParagraphs = paragraphs.map(p => `<p>${p}</p>`);
+    
+        // Join the paragraphs back into a single string
+        return formattedParagraphs.join('\n');
+    };
+    
+
+    
+    const formatted_case_details = formatCaseDetails(case_details);
 
     return (
         `<!DOCTYPE html>
@@ -506,7 +600,21 @@ export const generate_spac_investigation_html = (full_name, short_name, exchange
 
 export const generate_10b_investigation_html = (full_name, short_name, exchange, ticker, investigation_paragraph) => {
 
-    const formattedInvestigationParagraph = investigation_paragraph.replace(/\n/g, '<br>');
+    const formatInvestigationParagraph = (investigation_paragraph) => {
+        // Split the text into paragraphs based on line breaks
+        const paragraphs = investigation_paragraph.split('\n').filter(p => p.trim() !== '');
+    
+        // Wrap each paragraph in <p> tags
+        const formattedParagraphs = paragraphs.map(p => `<p>${p}</p>`);
+    
+        // Join the paragraphs back into a single string
+        return formattedParagraphs.join('\n');
+    };
+    
+
+    
+    const formatted_investigation_paragraph = formatInvestigationParagraph(investigation_paragraph);
+    // console.log("IP = " + investigation_paragraph);
     return (
         `<!DOCTYPE html>
         <html>
@@ -519,7 +627,7 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
         <p><strong>Investigation Details:</strong><br/>
-        ${formattedInvestigationParagraph}</p>
+        ${formatted_investigation_paragraph}</p>
 
         <p><strong>What’s Next?</strong><br/>
         If you are aware of any facts relating to this investigation or purchased ${short_name} securities, you can assist this investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>. You can also contact Peretz Bronstein or his law clerk and client relations manager, Yael Nathanson of Bronstein, Gewirtz & Grossman, LLC: <a href="tel:332-239-2660">332-239-2660</a>.</p>
