@@ -357,7 +357,7 @@ const createPage = async () => {
 
 const createNewWordpressPage = async () => {
     const apiEndpoint = 'https://bgandg.com/wp-json/wp/v2/pages';
-    const encodedFullName = encodeURIComponent(ticker + ' (' + fullName + ')');
+    const encodedFullName = encodeURIComponent(fullName + ' (' + ticker + ')');
 
     const jotFormScriptUrl = `https://form.jotform.com/jsform/233467061911151?caseType=${encodedFullName}`;
     const htmlBlock = `<style>#footer .contact-form {display: none !important;}</style><a id="sign-up"></a><script type="text/javascript" src="${jotFormScriptUrl}"></script>`;  
