@@ -313,11 +313,10 @@ export const generate_10b_investigation_site = (full_name, short_name, exchange,
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p style="line-height: 0.5;">
-        <strong>Contact:</strong><br/>
-        Bronstein, Gewirtz & Grossman, LLC<br/>
-        Peretz Bronstein or Nathan Miller<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        <div><strong>Contact:</strong></div>
+        <div>Bronstein, Gewirtz & Grossman, LLC</div>
+        <div>Peretz Bronstein or Nathan Miller</div>
+        <div><a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></div> 
         </body>
         </html>`
     );
@@ -650,10 +649,10 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <pre><strong>Contact:</strong>
-       Bronstein, Gewirtz & Grossman, LLC
-        Peretz Bronstein or Nathan Miller
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a> </pre>   
+        <div><strong>Contact:</strong></div>
+        <div>Bronstein, Gewirtz & Grossman, LLC</div>
+        <div>Peretz Bronstein or Nathan Miller</div>
+        <div><a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></div>   
         </body>
         </html>`
     );
