@@ -640,7 +640,7 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p style="line-height: 1;">
+        <p style="line-height: 0.5;">
         <strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Nathan Miller<br/>
