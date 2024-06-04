@@ -293,6 +293,11 @@ export const generate_10b_investigation_site = (full_name, short_name, exchange,
         <html>
         <head>
         <meta charset="UTF-8">
+        <style>
+br {
+  margin: 0;
+}
+</style>
         </head>
         <body>
         <p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities are encouraged to obtain additional information and assist the investigation.</p>
@@ -313,9 +318,7 @@ export const generate_10b_investigation_site = (full_name, short_name, exchange,
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        br {
-            margin: 0;
-          }
+      
         <strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Nathan Miller<br/>
@@ -631,6 +634,11 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
         `<!DOCTYPE html>
         <html>
         <head>
+        <style> 
+br {
+  margin: 0;
+}
+</style>
         <meta charset="UTF-8">
         </head>
         <body>
@@ -652,10 +660,7 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        br {
-            margin: 0;
-          }
-          
+     
         <strong>Contact:</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Nathan Miller<br/>
