@@ -308,11 +308,11 @@ export const generate_10b_investigation_site = (full_name, short_name, exchange,
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
-
-        <p><strong>Contact:</strong></br>
-<span>Bronstein, Gewirtz & Grossman, LLC</span>
-<span>Peretz Bronstein or Nathan Miller</span>
-<span><a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        
+        <p><strong>Contact:</strong><br>
+        Bronstein, Gewirtz & Grossman, LLC<br>
+        Peretz Bronstein or Nathan Miller<br>
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
 
               
         </body>
