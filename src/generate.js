@@ -308,13 +308,9 @@ export const generate_10b_investigation_site = (full_name, short_name, exchange,
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
-
-        [contact_info]
-
               
         </body>
-        </html>
-        [contact_info]`
+        </html>`
     );
 };
 
