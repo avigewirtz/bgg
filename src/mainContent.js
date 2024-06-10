@@ -460,7 +460,7 @@ const updateWordpressPage = async (pageId) => {
     const jotFormScriptUrl = `https://form.jotform.com/jsform/233467061911151?caseType=${encodedFullName}`;
     const htmlBlock = `<style>#footer .contact-form {display: none !important;}</style><a id="sign-up"></a><script type="text/javascript" src="${jotFormScriptUrl}"></script>`;  
     const shortcode = '[contact_info]';
-    const fullContent = generatedContentSite + htmlBlock + shortcode;
+    const fullContent = generatedContentSite + shortcode + htmlBlock;
 
     const headers = {
         'Content-Type': 'application/json',
