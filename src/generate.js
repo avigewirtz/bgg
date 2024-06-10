@@ -58,10 +58,6 @@ export const generate_ipo_site = (
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact</strong><br>
-        Bronstein, Gewirtz & Grossman, LLC<br>
-        Peretz Bronstein or Nathan Miller<br>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
         </body>
         </html>`
     );
@@ -118,10 +114,6 @@ export const generate_class_period_site = (
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact</strong><br/>
-        Bronstein, Gewirtz & Grossman, LLC<br/>
-        Peretz Bronstein or Nathan Miller<br/>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
         </body>
         </html>`
     );
@@ -178,10 +170,6 @@ export const generate_class_period_and_ipo_site = (
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact</strong><br>
-        Bronstein, Gewirtz & Grossman, LLC<br>
-        Peretz Bronstein or Nathan Miller<br>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
         </body>
         </html>`
     );
@@ -216,10 +204,6 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact</strong><br>
-        Bronstein, Gewirtz & Grossman, LLC<br>
-        Peretz Bronstein or Nathan Miller<br>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
         </body>
 </html>`
 
@@ -254,10 +238,6 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact</strong><br>
-        Bronstein, Gewirtz & Grossman, LLC<br>
-        Peretz Bronstein or Nathan Miller<br>
-        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
         </body>
         </html>`
     );
