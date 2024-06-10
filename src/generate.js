@@ -41,10 +41,10 @@ export const generate_ipo_site = (
         <body>
         <p>Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
-        <p><strong>Class Definition:</strong><br>
+        <p><strong>Class Definition</strong><br>
         This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIpoDate} initial public offering ("IPO"). Such investors are encouraged to join this case.</p>
 
-        <p><strong>Case Details:</strong><br>
+        <p><strong>Case Details</strong><br>
         ${formatted_case_details}</p>
 
         <p><strong>What’s Next?</strong><br>
@@ -53,12 +53,12 @@ export const generate_ipo_site = (
         <p><strong>There is No Cost to You</strong><br/>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br/>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br>
+        <p><strong>Contact</strong><br>
         Bronstein, Gewirtz & Grossman, LLC<br>
         Peretz Bronstein or Nathan Miller<br>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
@@ -101,10 +101,10 @@ export const generate_class_period_site = (
         <body>
         <p>Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
-        <p><strong>Class Definition:</strong><br/>
+        <p><strong>Class Definition</strong><br/>
         This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, inclusive (the “Class Period”). Such investors are encouraged to join this case.</p>
 
-        <p><strong>Case Details:</strong><br/>
+        <p><strong>Case Details</strong><br/>
         ${formatted_case_details}</p>
 
         <p><strong>What’s Next?</strong><br/>
@@ -113,12 +113,12 @@ export const generate_class_period_site = (
         <p><strong>There is No Cost to You</strong><br/>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br/>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br/>
+        <p><strong>Contact</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Nathan Miller<br/>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
@@ -161,10 +161,10 @@ export const generate_class_period_and_ipo_site = (
         <body>
         <p>Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
-        <p><strong>Class Definition:</strong><br>
+        <p><strong>Class Definition</strong><br>
         This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities: (1) pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIPODate} initial public offering ("IPO"); or (ii) between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, both dates inclusive (the “Class Period”). Such investors are encouraged to join this case.</p>
 
-        <p><strong>Case Details:</strong><br>
+        <p><strong>Case Details</strong><br>
         ${formatted_case_details}</p>
 
         <p><strong>What’s Next?</strong><br>
@@ -173,12 +173,12 @@ export const generate_class_period_and_ipo_site = (
         <p><strong>There is No Cost to You</strong><br>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br>
+        <p><strong>Contact</strong><br>
         Bronstein, Gewirtz & Grossman, LLC<br>
         Peretz Bronstein or Nathan Miller<br>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
@@ -202,7 +202,7 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
         <body>
         <p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities prior to ${formattedPurchaseDate}, and continue to hold to the present, are encouraged to obtain additional information and assist the investigation.</p>
 
-        <p><strong>Investigation Details:</strong><br>
+        <p><strong>Investigation Details</strong><br>
         The investigation concerns whether ${short_name} and certain of its officers and/or directors have engaged in corporate wrongdoing.</p>
 
         <p><strong>What’s Next?</strong><br>
@@ -211,12 +211,12 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
         <p><strong>There is No Cost to You</strong><br>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br>
+        <p><strong>Contact</strong><br>
         Bronstein, Gewirtz & Grossman, LLC<br>
         Peretz Bronstein or Nathan Miller<br>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
@@ -240,7 +240,7 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
         <body>
         <p>Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${spac_full_name} (“${spac_short_name}”), which merged with ${full_name} (“${short_name}”) (${exchange}: ${ticker}) on ${formattedMergerDate}. Investors who purchased ${spac_short_name} and continue to hold to the present, are encouraged to obtain additional information and assist the investigation.</p>
 
-        <p><strong>Investigation Details:</strong><br>
+        <p><strong>Investigation Details</strong><br>
         The investigation concerns whether ${spac_short_name} failed to provide relevant information to its shareholders before the merger.</p>
 
         <p><strong>What’s Next?</strong><br>
@@ -249,12 +249,12 @@ export const generate_derivative_investigation_site = (full_name, ticker, short_
         <p><strong>There is No Cost to You</strong><br>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br>
+        <p><strong>Contact</strong><br>
         Bronstein, Gewirtz & Grossman, LLC<br>
         Peretz Bronstein or Nathan Miller<br>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
@@ -295,7 +295,7 @@ export const generate_10b_investigation_site = (full_name, short_name, exchange,
 
         <p>The investigation concerns whether ${short_name} has violated federal securities laws.</p>
 
-        <p><strong>Investigation Details:</strong><br>
+        <p><strong>Investigation Details</strong><br>
         ${formatted_investigation_paragraph}</p>
 
         <p><strong>What’s Next?</strong><br>
@@ -304,12 +304,12 @@ export const generate_10b_investigation_site = (full_name, short_name, exchange,
         <p><strong>There is No Cost to You</strong><br>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
-        
-        <p><strong>Contact:</strong><br>
+
+        <p><strong>Contact</strong><br>
         Bronstein, Gewirtz & Grossman, LLC<br>
         Peretz Bronstein or Nathan Miller<br>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
@@ -372,10 +372,10 @@ export const generate_ipo_html = (
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
-        <p><strong>Class Definition:</strong><br/>
+        <p><strong>Class Definition</strong><br/>
         This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIpoDate} initial public offering ("IPO"). Such investors are encouraged to join this case by visiting the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
-        <p><strong>Case Details:</strong><br/>
+        <p><strong>Case Details</strong><br/>
         ${formatted_case_details}</p>
 
         <p><strong>What’s Next?</strong><br/>
@@ -384,12 +384,12 @@ export const generate_ipo_html = (
         <p><strong>There is No Cost to You</strong><br/>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br/>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br/>
+        <p><strong>Contact</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Nathan Miller<br/>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
@@ -436,10 +436,10 @@ export const generate_class_period_html = (
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC, a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
-        <p><strong>Class Definition:</strong><br/>
+        <p><strong>Class Definition</strong><br/>
         This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, inclusive (the “Class Period”). Such investors are encouraged to join this case by visiting the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
-        <p><strong>Case Details:</strong><br/>
+        <p><strong>Case Details</strong><br/>
         ${formatted_case_details}</p>
 
         <p><strong>What’s Next?</strong><br/>
@@ -448,12 +448,12 @@ export const generate_class_period_html = (
         <p><strong>There is No Cost to You</strong><br/>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br/>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br/>
+        <p><strong>Contact</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Nathan Miller<br/>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
@@ -498,10 +498,10 @@ export const generate_class_period_and_ipo_html = (
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC, a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
-        <p><strong>Class Definition:</strong><br/>
+        <p><strong>Class Definition</strong><br/>
         This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities: (1) pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIPODate} initial public offering ("IPO"); or (ii) between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, both dates inclusive (the “Class Period”). Such investors are encouraged to join this case by visiting the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
-        <p><strong>Case Details:</strong><br/>
+        <p><strong>Case Details</strong><br/>
         ${formatted_case_details}</p>
 
         <p><strong>What’s Next?</strong><br/>
@@ -510,12 +510,12 @@ export const generate_class_period_and_ipo_html = (
         <p><strong>There is No Cost to You</strong><br/>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br/>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br/>
+        <p><strong>Contact</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Nathan Miller<br/>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
@@ -538,7 +538,7 @@ export const generate_derivative_investigation_html = (full_name, ticker, short_
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities prior to ${formattedPurchaseDate}, and continue to hold to the present, are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
-        <p><strong>Investigation Details:</strong><br/>
+        <p><strong>Investigation Details</strong><br/>
         The investigation concerns whether ${short_name} and certain of its officers and/or directors have engaged in corporate wrongdoing.</p>
 
         <p><strong>What’s Next?</strong><br/>
@@ -547,12 +547,12 @@ export const generate_derivative_investigation_html = (full_name, ticker, short_
         <p><strong>There is No Cost to You</strong><br/>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br/>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br/>
+        <p><strong>Contact</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Nathan Miller<br/>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
@@ -575,7 +575,7 @@ export const generate_spac_investigation_html = (full_name, short_name, exchange
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${spac_full_name} (“${spac_short_name}”), which merged with ${full_name} (“${short_name}”) (${exchange}: ${ticker}) on ${formattedMergerDate}. Investors who purchased ${spac_short_name} and continue to hold to the present, are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
-        <p><strong>Investigation Details:</strong><br/>
+        <p><strong>Investigation Details</strong><br/>
         The investigation concerns whether ${spac_short_name} failed to provide relevant information to its shareholders before the merger.</p>
 
         <p><strong>What’s Next?</strong><br/>
@@ -584,12 +584,12 @@ export const generate_spac_investigation_html = (full_name, short_name, exchange
         <p><strong>There is No Cost to You</strong><br/>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br/>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br/>
+        <p><strong>Contact</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Nathan Miller<br/>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
@@ -628,7 +628,7 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
 
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
-        <p><strong>Investigation Details:</strong><br/>
+        <p><strong>Investigation Details</strong><br/>
         ${formatted_investigation_paragraph}</p>
 
         <p><strong>What’s Next?</strong><br/>
@@ -637,12 +637,12 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
         <p><strong>There is No Cost to You</strong><br/>
         We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
 
-        <p><strong>Why Bronstein, Gewirtz & Grossman:</strong><br/>
+        <p><strong>Why Bronstein, Gewirtz & Grossman</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br/>
+        <p><strong>Contact</strong><br/>
         Bronstein, Gewirtz & Grossman, LLC<br/>
         Peretz Bronstein or Nathan Miller<br/>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
