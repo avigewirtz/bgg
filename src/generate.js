@@ -309,7 +309,10 @@ export const generate_10b_investigation_site = (full_name, short_name, exchange,
 
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
-        <p><strong>Contact:</strong><br> Bronstein, Gewirtz & Grossman, LLC<br> Peretz Bronstein or Nathan Miller<br> <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        <p class="contact-info"><strong>Contact:</strong></p>
+        <p class="contact-info">Bronstein, Gewirtz & Grossman, LLC</p>
+        <p class="contact-info">Peretz Bronstein or Nathan Miller</p>
+        <p class="contact-info"><a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>        
         </body>
         </html>`
     );
