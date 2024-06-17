@@ -98,7 +98,7 @@ export const generate_class_period_site = (
         <p>Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
         <h3>Class Definition</h3>
-        <p> This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, inclusive (the “Class Period”). Such investors are encouraged to join this case.</p>
+        <p> This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities between ${formattedClassPeriodStartDate}, and ${formattedClassPeriodEndDate}, inclusive (the “Class Period”). Such investors are encouraged to join this case.</p>
 
         <h3>Case Details</h3>
         ${formatted_case_details}
@@ -154,7 +154,7 @@ export const generate_class_period_and_ipo_site = (
         <p>Bronstein, Gewirtz & Grossman, LLC a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
        <h3>Class Definition</h3>
-        <p> This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities: (1) pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIPODate} initial public offering ("IPO"); or (ii) between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, both dates inclusive (the “Class Period”). Such investors are encouraged to join this case.</p>
+        <p> This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities: (1) pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIPODate} initial public offering ("IPO"); or (ii) between ${formattedClassPeriodStartDate}, and ${formattedClassPeriodEndDate}, both dates inclusive (the “Class Period”). Such investors are encouraged to join this case.</p>
 
         <h3>Case Details</h3>
         ${formatted_case_details}
@@ -411,7 +411,7 @@ export const generate_class_period_html = (
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC, a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
         <h3>Class Definition</h3>
-        <p> This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, inclusive (the “Class Period”). Such investors are encouraged to join this case by visiting the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
+        <p> This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities between ${formattedClassPeriodStartDate}, and ${formattedClassPeriodEndDate}, inclusive (the “Class Period”). Such investors are encouraged to join this case by visiting the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
         <h3>Case Details</h3>
         ${formatted_case_details}
@@ -473,7 +473,7 @@ export const generate_class_period_and_ipo_html = (
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC, a nationally recognized law firm, notifies investors that a class action lawsuit has been filed against ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}) and certain of its officers.</p>
 
         <h3>Class Definition</h3>
-        <p> This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities: (1) pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIPODate} initial public offering ("IPO"); or (ii) between ${formattedClassPeriodStartDate} and ${formattedClassPeriodEndDate}, both dates inclusive (the “Class Period”). Such investors are encouraged to join this case by visiting the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
+        <p> This lawsuit seeks to recover damages against Defendants for alleged violations of the federal securities laws on behalf of all persons and entities that purchased or otherwise acquired ${short_name} securities: (1) pursuant to the registration statement and prospectus issued in connection with the Company's ${formattedIPODate} initial public offering ("IPO"); or (ii) between ${formattedClassPeriodStartDate}, and ${formattedClassPeriodEndDate}, both dates inclusive (the “Class Period”). Such investors are encouraged to join this case by visiting the firm’s site: <a href="https://bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
 
         <h3>Case Details</h3>
         ${formatted_case_details}
@@ -617,8 +617,8 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
         <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
 
         <h3>Contact</h3>
-        <p> Bronstein, Gewirtz & Grossman, LLC<br/>
-        Peretz Bronstein or Nathan Miller<br/>
+        <p> Bronstein, Gewirtz & Grossman, LLC<br>
+        Peretz Bronstein or Nathan Miller<br>
         <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
         </body>
         </html>`
