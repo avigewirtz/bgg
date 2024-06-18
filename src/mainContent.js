@@ -21,12 +21,15 @@ import {
     generate_derivative_investigation_html,
     generate_spac_investigation_html,
     generate_10b_investigation_html,
+    generate_mergers_investigation_html,
     generate_ipo_site,
     generate_class_period_site,
     generate_class_period_and_ipo_site,
     generate_derivative_investigation_site,
     generate_spac_investigation_site,
-    generate_10b_investigation_site
+    generate_10b_investigation_site,
+    generate_mergers_investigation_site
+
 } from './generate';
 
 const { TextArea } = Input;
@@ -72,6 +75,11 @@ const MainContent = () => {
     const [featuredImage, setFeaturedImage] = useState(null);
     const [tickerOptions, setTickerOptions] = useState([]);
     const [form] = Form.useForm();
+
+    const [otherFullName, setOtherFullName] = useState('');
+    const [otherShortName, setOtherShortName] = useState('');
+    const [otherExchange, setOtherExchange] = useState('');
+    const [otherTicker, setOtherTicker] = useState('');
     // const [wordpressPageId, setWordpressPageId] = useState('');
 
 
@@ -81,6 +89,11 @@ const MainContent = () => {
         if (pressReleaseData) {
             // Update form fields
             form.setFieldsValue({
+                otherTicker: pressReleaseData.otherTicker || '',
+                otherFullName: pressReleaseData.otherFullName || '',
+                otherShortName: pressReleaseData.otherShortName || '',
+                otherExchange: pressReleaseData.otherExchange || '',
+
                 ticker: pressReleaseData.ticker || '',
                 fullName: pressReleaseData.fullName || '',
                 shortName: pressReleaseData.shortName || '',
@@ -101,6 +114,11 @@ const MainContent = () => {
             });
     
             // Update state variables
+            setOtherTicker(pressReleaseData.otherTicker || '');
+            setOtherFullName(pressReleaseData.otherFullName || '');
+            setOtherShortName(pressReleaseData.otherShortName || '');
+            setOtherExchange(pressReleaseData.otherExchange || '');
+
             setTicker(pressReleaseData.ticker || '');
             setFullName(pressReleaseData.fullName || '');
             setShortName(pressReleaseData.shortName || '');
@@ -129,7 +147,7 @@ const MainContent = () => {
 
     const username = 'Shlomo'; 
     const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
-    const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation'];
+    const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation', 'Mergers investigation'];
     
     const handleSearch = (value) => {
         setTickerOptions(
@@ -202,6 +220,19 @@ const MainContent = () => {
            
 
         }
+
+
+        if (caseType === 'Mergers investigation') {
+            
+            const generatedReleaseWordHTML = generate_mergers_investigation_html(fullName, shortName, exchange, ticker, otherFullName, otherShortName, otherExchange, otherTicker, investigationParagraph);
+            const generatedReleaseSite = generate_mergers_investigation_site(fullName, shortName, exchange, ticker, otherFullName, otherShortName, otherExchange, otherTicker, investigationParagraph);
+         
+            setGeneratedContentSite(generatedReleaseSite);
+            setGeneratedContentWordHTML(generatedReleaseWordHTML);
+           
+
+        }
+
         if (caseType === '10b investigation') {
            
             const generatedReleaseWordHTML = generate_10b_investigation_html(fullName, shortName, exchange, ticker, investigationParagraph);
@@ -271,6 +302,8 @@ const MainContent = () => {
            setGeneratedContentWordHTML(generatedReleaseWordHTML);
 
        }
+
+
   
     };
 
@@ -424,6 +457,10 @@ const createNewWordpressPage = async () => {
         // setWordpressPageId(response.data.id);
 
         const pressReleaseData = {
+            otherExchange,
+            otherFullName,
+            otherShortName,
+            otherTicker,
             fullName,
             shortName,
             ticker,
@@ -523,6 +560,10 @@ const updateWordpressPage = async (pageId) => {
 
         
         const updatedPressReleaseData = {
+            otherExchange,
+            otherFullName,
+            otherShortName,
+            otherTicker,
             fullName,
             shortName,
             ticker,
@@ -1086,6 +1127,77 @@ return (
         </Col>
     </Row>
 )}
+
+
+
+
+
+
+
+{caseType === 'Mergers investigation' && (
+      <Row gutter={16}>
+         <Col xs={24} sm={24} md={24} lg={6} xl={6}>   
+        <Form.Item
+            label="Other Full Name"
+            name="otherFullName"
+            rules={[{ required: true, message: '' }]}
+        >
+            <Input placeholder="Other Full Name" value={otherFullName} onChange={e => setOtherFullName(e.target.value)} />
+        </Form.Item>
+</Col>
+<Col xs={24} sm={24} md={24} lg={6} xl={6}>  
+        <Form.Item
+            label="Other Short Name"
+            name="otherShortName"
+            rules={[{ required: true, message: '' }]}
+        >
+            <Input placeholder="Other Short Name" value={otherShortName} onChange={e => setOtherShortName(e.target.value)} />
+        </Form.Item>
+</Col>
+
+<Col xs={24} sm={24} md={24} lg={6} xl={6}>  
+        <Form.Item
+            label="Other Ticker"
+            name="otherTicker"
+            rules={[{ required: true, message: '' }]}
+        >
+            <Input placeholder="Other ticker" value={otherTicker} onChange={e => setOtherTicker(e.target.value)} />
+        </Form.Item>
+</Col>
+
+<Col xs={24} sm={24} md={24} lg={6} xl={6}>  
+        <Form.Item
+            label="Other exchange"
+            name="otherExchange"
+            rules={[{ required: true, message: '' }]}
+        >
+            <Input placeholder="Other exchange" value={otherExchange} onChange={e => setOtherExchange(e.target.value)} />
+        </Form.Item>
+</Col>
+
+<Col span={24}>  
+
+        <Form.Item
+             label="Investigation Details"
+             name="investigationParagraph"
+            rules={[{ required: true, message: '' }]}
+        >
+           <TextArea placeholder="Details of the investigation" value={investigationParagraph} onChange={e => setInvestigationParagraph(e.target.value)} rows={12} />
+        </Form.Item>
+        </Col>
+
+        </Row>
+)}
+
+
+
+
+
+
+
+
+
+
 
 <Form.Item
  

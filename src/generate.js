@@ -300,7 +300,53 @@ export const generate_10b_investigation_site = (full_name, short_name, exchange,
 
 
 
+export const generate_mergers_investigation_site = (full_name, short_name, exchange, ticker, other_full_name, other_short_name, other_exchange, other_ticker, investigation_paragraph) => {
 
+
+    const formatInvestigationParagraph = (investigation_paragraph) => {
+        // Split the text into paragraphs based on line breaks
+        const paragraphs = investigation_paragraph.split('\n').filter(p => p.trim() !== '');
+    
+        // Wrap each paragraph in <p> tags
+        const formattedParagraphs = paragraphs.map(p => `<p>${p}</p>`);
+    
+        // Join the paragraphs back into a single string
+        return formattedParagraphs.join('\n');
+    };
+    
+
+    
+    const formatted_investigation_paragraph = formatInvestigationParagraph(investigation_paragraph);
+
+    return (
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+
+        <p>Bronstein, Gewirtz & Grossman, LLC is investigating the merger between ${full_name} (“${short_name}”) (${exchange}: ${ticker}) and ${other_full_name} (“${other_short_name}”) (${other_exchange}: ${other_ticker}). Investors who purchased ${short_name} and continue to hold to the present are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
+
+       <h3>Investigation Details</h3>
+        <p> The investigation concerns whether ${short_name}'s board of directors breached its fiduciary duties and failed to provide relevant information to its shareholders before the merger.</p>
+        <p>${formatted_investigation_paragraph}</p>
+
+        <h3>What's Next?</h3>
+        <p> If you are aware of any facts relating to this investigation or purchased ${short_name} shares, you can assist this investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>. You can also contact Peretz Bronstein or his client relations manager, Nathan Miller, of Bronstein, Gewirtz & Grossman, LLC: <a href="tel:332-239-2660">332-239-2660</a>.</p>
+
+        <h3>There is No Cost to You</h3>
+        <p> We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
+
+        <h3>Why Bronstein, Gewirtz & Grossman</h3>
+        <p> Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
+
+        <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
+
+        </body>
+        </html>`
+    );
+};
 
 
 
@@ -603,7 +649,58 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
 
 
 
+export const generate_mergers_investigation_html = (full_name, short_name, exchange, ticker, other_full_name, other_short_name, other_exchange, other_ticker, investigation_paragraph) => {
 
+
+    const formatInvestigationParagraph = (investigation_paragraph) => {
+        // Split the text into paragraphs based on line breaks
+        const paragraphs = investigation_paragraph.split('\n').filter(p => p.trim() !== '');
+    
+        // Wrap each paragraph in <p> tags
+        const formattedParagraphs = paragraphs.map(p => `<p>${p}</p>`);
+    
+        // Join the paragraphs back into a single string
+        return formattedParagraphs.join('\n');
+    };
+    
+
+    
+    const formatted_investigation_paragraph = formatInvestigationParagraph(investigation_paragraph);
+
+    return (
+        `<!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
+        <body>
+        <p><strong>Calling All ${full_name} (${ticker}) Investors: Contact Bronstein, Gewirtz & Grossman, LLC To Claim Your Losses</strong></p>
+
+        <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating the merger between ${full_name} (“${short_name}”) (${exchange}: ${ticker}) and ${other_full_name} (“${other_short_name}”) (${other_exchange}: ${other_ticker}). Investors who purchased ${short_name} and continue to hold to the present are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
+
+       <h3>Investigation Details</h3>
+        <p>The investigation concerns whether ${short_name}'s board of directors breached its fiduciary duties and failed to provide relevant information to its shareholders before the merger.</p>
+        <p>${formatted_investigation_paragraph}</p>
+
+        <h3>What's Next?</h3>
+        <p> If you are aware of any facts relating to this investigation or purchased ${short_name} shares, you can assist this investigation by visiting the firm’s site: <a href="bgandg.com/${ticker}">bgandg.com/${ticker}</a>. You can also contact Peretz Bronstein or his client relations manager, Nathan Miller, of Bronstein, Gewirtz & Grossman, LLC: <a href="tel:332-239-2660">332-239-2660</a>.</p>
+
+        <h3>There is No Cost to You</h3>
+        <p> We represent investors in class actions on a contingency fee basis. That means we will ask the court to reimburse us for out-of-pocket expenses and attorneys’ fees, usually a percentage of the total recovery, only if we are successful.</p>
+
+        <h3>Why Bronstein, Gewirtz & Grossman</h3>
+        <p> Bronstein, Gewirtz & Grossman, LLC is a nationally recognized firm that represents investors in securities fraud class actions and shareholder derivative suits. Our firm has recovered hundreds of millions of dollars for investors nationwide.</p>
+
+        <p>Attorney advertising. Prior results do not guarantee similar outcomes.</p>
+
+        <h3>Contact</h3>
+        <p> Bronstein, Gewirtz & Grossman, LLC<br/>
+        Peretz Bronstein or Nathan Miller<br/>
+        <a href="tel:332-239-2660">332-239-2660</a> | <a href="mailto:info@bgandg.com">info@bgandg.com</a></p>
+        </body>
+        </html>`
+    );
+};
 
 
 
