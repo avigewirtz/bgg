@@ -180,7 +180,7 @@ const MainContent = () => {
             setFullName(selectedStock.name); // Set the full name
             setTicker(selectedStock.ticker); // Set the ticker
             setExchange(selectedStock.exchange); // Set the exchange
-            console.log('full name: ', fullName);
+            // console.log('full name: ', fullName);
 
             form.setFieldsValue({
                 fullName: selectedStock.name,
@@ -324,13 +324,18 @@ const MainContent = () => {
             setFeaturedImage(null); 
         }
     };
+
     
-    const handleContentWordChange = (content) => {
-        setGeneratedContentWordHTML(content);
-    };
+    
+    // const handleContentWordChange = (content) => {
+    //     console.log('content: ', content)
+    //     setGeneratedContentWordHTML(content);
+    //     console.log('Generated word on change: ', generatedContentWordHTML)
+    // };
     
     const handleContentSiteChange = (content) => {
         setGeneratedContentSite(content);
+        console.log('content: ', content)
     };
     
 
@@ -705,16 +710,26 @@ const tabs = [
 
                 {generatedContentWordHTML && (
                     <>
+                   {console.log('Generated Content Word HTML:', generatedContentWordHTML)}
+
                <Form.Item label="">
                     <ReactQuill
                         value={generatedContentWordHTML}
-                        onChange={handleContentWordChange}
+                        // readOnly={true} // Always read-only
+                        // onChange={handleContentWordChange}
                     />
                 </Form.Item>
                 <div style={{ textAlign: 'center' }}>
-                <Button type="primary" onClick={() => downloadAsWord(generatedContentWordHTML, `${shortName}-${ticker}.docx`)}>
+                <Button
+    type="primary"
+    onClick={() => {
+        console.log('Generated Content download:', generatedContentWordHTML);
+        downloadAsWord(generatedContentWordHTML, `${shortName}-${ticker}.docx`);
+    }}
+>
     Download Word Doc
 </Button>
+
 
     <Button type="default" style={{ marginLeft: '10px' }} onClick={() => copyToClipboard(generatedContentWordHTML)}>
         Copy text
@@ -743,9 +758,12 @@ const tabs = [
             <>
                 {generatedContentSite && (
                     <>
+                       {console.log('Generated Content Word HTML:', generatedContentSite)}
               <Form.Item label="">
                     <ReactQuill
+                
                         value={generatedContentSite}
+                        // readOnly={true} // Always read-only
                         onChange={handleContentSiteChange} 
                     />
                 </Form.Item>
