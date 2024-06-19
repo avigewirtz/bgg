@@ -34,7 +34,7 @@ exports.handler = async function(event) {
                 fullName: data.fullName,
                 shortName: data.shortName,
                 otherTicker: data.ticker,
-                otherName: data.fullName,
+                otherFullName: data.fullName,
                 otherExchange: data.otherExchange,
                 otherShortName: data.shortName,
                 caseType: data.caseType,
