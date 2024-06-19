@@ -715,7 +715,7 @@ const tabs = [
                <Form.Item label="">
                     <ReactQuill
                         value={generatedContentWordHTML}
-                        // readOnly={true} // Always read-only
+                        readOnly={true} // Always read-only
                         // onChange={handleContentWordChange}
                     />
                 </Form.Item>
@@ -758,13 +758,13 @@ const tabs = [
             <>
                 {generatedContentSite && (
                     <>
-                       {console.log('Generated Content Word HTML:', generatedContentSite)}
+                       {console.log('Generated Content site:', generatedContentSite)}
               <Form.Item label="">
                     <ReactQuill
                 
                         value={generatedContentSite}
-                        // readOnly={true} // Always read-only
-                        onChange={handleContentSiteChange} 
+                        readOnly={true} // Always read-only
+                        // onChange={handleContentSiteChange} 
                     />
                 </Form.Item>
                         
