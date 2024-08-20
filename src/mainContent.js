@@ -793,7 +793,7 @@ const MainContent = () => {
                                         name="caseDetails"
                                         rules={[{ required: true, message: '' }]}
                                     >
-                                        <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={12}/>
+                                        <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={6}/>
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -834,7 +834,7 @@ const MainContent = () => {
                                         name="caseDetails"
                                         rules={[{ required: true, message: '' }]}
                                     >
-                                        <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={12}/>
+                                        <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={6}/>
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -884,7 +884,7 @@ const MainContent = () => {
                                         name="caseDetails"
                                         rules={[{ required: true, message: '' }]}
                                     >
-                                        <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={12}/>
+                                        <TextArea placeholder="Case Details" value={caseDetails} onChange={e => setCaseDetails(e.target.value)} rows={6}/>
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -898,7 +898,7 @@ const MainContent = () => {
                                         name="investigationParagraph"
                                         rules={[{ required: true, message: '' }]}
                                     >
-                                        <TextArea placeholder="Details of the investigation" value={investigationParagraph} onChange={e => setInvestigationParagraph(e.target.value)} rows={12} />
+                                        <TextArea placeholder="Details of the investigation" value={investigationParagraph} onChange={e => setInvestigationParagraph(e.target.value)} rows={6} />
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -997,7 +997,7 @@ const MainContent = () => {
                                         name="investigationParagraph"
                                         rules={[{ required: true, message: '' }]}
                                     >
-                                        <TextArea placeholder="Details of the investigation" value={investigationParagraph} onChange={e => setInvestigationParagraph(e.target.value)} rows={12} />
+                                        <TextArea placeholder="Details of the investigation" value={investigationParagraph} onChange={e => setInvestigationParagraph(e.target.value)} rows={6} />
                                     </Form.Item>
                                 </Col>
                             </Row>
