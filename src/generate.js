@@ -578,7 +578,7 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
     
     const formatted_investigation_paragraph = formatInvestigationParagraph(investigation_paragraph);
     return (
-        `<p><strong>${full_name} (${ticker}) Investigation: Bronstein, Gewirtz & Grossman, LLC Encourages Investors to Seek Compensation for Alleged Wrongdoings</strong></p>
+        `<p><strong>(${ticker}) INVESTOR ALERT: Bronstein, Gewirtz and Grossman, LLC Announces an Investigation into ${full_name} and Encourages Investors to Contact the Firm!</strong></p>
         
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: <a href="https://bgandg.com/${ticker}" title="bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
         
