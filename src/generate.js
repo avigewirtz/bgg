@@ -275,7 +275,7 @@ export const generate_mergers_investigation_site = (full_name, short_name, excha
 
        <h3>Investigation Details</h3>
         <p>The investigation concerns whether ${short_name}'s board of directors breached its fiduciary duties and failed to provide relevant information to its shareholders before the merger.</p>
-        <p>${formatted_investigation_paragraph}</p>
+        ${formatted_investigation_paragraph}
 
         <h3>What's Next?</h3>
         <p>If you are aware of any facts relating to this investigation or purchased ${short_name} shares, you can assist this investigation by visiting the firm’s site: <a href="https://bgandg.com/${ticker}" title="bgandg.com/${ticker}">bgandg.com/${ticker}</a>. You can also contact Peretz Bronstein or his client relations manager, Nathan Miller, of Bronstein, Gewirtz & Grossman, LLC: <a href="tel:332-239-2660">332-239-2660</a>.</p>
@@ -583,7 +583,7 @@ export const generate_10b_investigation_html = (full_name, short_name, exchange,
         <p>Attorney Advertising-- NEW YORK--(PR NEWSWIRE)--Bronstein, Gewirtz & Grossman, LLC is investigating potential claims on behalf of purchasers of ${full_name} (“${short_name}” or “the Company”) (${exchange}: ${ticker}). Investors who purchased ${short_name} securities are encouraged to obtain additional information and assist the investigation by visiting the firm’s site: <a href="https://bgandg.com/${ticker}" title="bgandg.com/${ticker}">bgandg.com/${ticker}</a>.</p>
         
         <h3>Investigation Details</h3>
-        <p>${formatted_investigation_paragraph}</p>
+        ${formatted_investigation_paragraph}
         
         <h3>What's Next?</h3>
         <p>If you are aware of any facts relating to this investigation or purchased ${short_name} securities, you can assist this investigation by visiting the firm’s site: <a href="https://bgandg.com/${ticker}" title="bgandg.com/${ticker}">bgandg.com/${ticker}</a>. You can also contact Peretz Bronstein or his client relations manager, Nathan Miller, of Bronstein, Gewirtz & Grossman, LLC: <a href="tel:332-239-2660">332-239-2660</a>.</p>
@@ -636,7 +636,7 @@ export const generate_mergers_investigation_html = (full_name, short_name, excha
 
        <h3>Investigation Details</h3>
         <p>The investigation concerns whether ${short_name}'s board of directors breached its fiduciary duties and failed to provide relevant information to its shareholders before the merger.</p>
-        <p>${formatted_investigation_paragraph}</p>
+        ${formatted_investigation_paragraph}
 
         <h3>What's Next?</h3>
         <p>If you are aware of any facts relating to this investigation or purchased ${short_name} shares, you can assist this investigation by visiting the firm’s site: <a href="https://bgandg.com/${ticker}" title="bgandg.com/${ticker}">bgandg.com/${ticker}</a>. You can also contact Peretz Bronstein or his client relations manager, Nathan Miller, of Bronstein, Gewirtz & Grossman, LLC: <a href="tel:332-239-2660">332-239-2660</a>.</p>
