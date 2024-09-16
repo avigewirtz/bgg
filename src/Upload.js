@@ -4,7 +4,7 @@ export const updatePage = async (
     wordpressPageId, ticker, fullName, caseType, leadPlaintiffDeadline, 
     classPeriodStartDate, classPeriodEndDate, caseDetails, ipoDate, updatedContent
 ) => {
-    // setIsLoading(true);
+  
     const apiEndpoint = `https://bgandg.com/wp-json/wp/v2/pages/${wordpressPageId}`;
     const encodedFullName = encodeURIComponent(fullName + ' (' + ticker + ')');
     
@@ -14,8 +14,7 @@ export const updatePage = async (
     
     const wpUsername = process.env.REACT_APP_WP_wpUsername;
     const wpPassword = process.env.REACT_APP_WP_APP_wpPassword;
-    // const wpUsername = 'Shlomo'; 
-    // const wpPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
+
 
     const headers = {
         'Content-Type': 'application/json',

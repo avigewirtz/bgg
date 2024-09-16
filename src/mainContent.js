@@ -122,8 +122,7 @@ const MainContent = () => {
 
     const wpUsername = process.env.REACT_APP_WP_wpUsername;
     const wpPassword = process.env.REACT_APP_WP_APP_wpPassword;
-    // const wpUsername = 'Shlomo'; 
-    // const wpPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
+
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation', 'Mergers investigation'];
     
     const handleSearch = (value) => {
