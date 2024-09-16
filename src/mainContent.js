@@ -120,8 +120,8 @@ const MainContent = () => {
         }
     }, [pressReleaseData, form]);
 
-    const wpUsername = process.env.REACT_APP_WP_wpUsername;
-    const wpPassword = process.env.REACT_APP_WP_APP_wpPassword;
+    const wpUsername = process.env.REACT_APP_WP_USERNAME;
+    const wpPassword = process.env.REACT_APP_WP_APP_PASSWORD;
 
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation', 'Mergers investigation'];
     
