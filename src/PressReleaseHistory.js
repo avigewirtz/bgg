@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, message, Button, Popconfirm, Dropdown, Menu } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import './PressReleaseHistory.css';
 
 function PressReleaseHistory() {
     const [pressReleases, setPressReleases] = useState([]);
