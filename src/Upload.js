@@ -12,12 +12,14 @@ export const updatePage = async (
     const htmlBlock = `<style>#footer .contact-form {display: none !important;}</style><a id="sign-up"></a><script type="text/javascript" src="${jotFormScriptUrl}"></script>`;  
     const fullContent = updatedContent + htmlBlock;
     
-    const username = 'Shlomo'; 
-    const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
+    const wpUsername = process.env.REACT_APP_WP_wpUsername;
+    const wpPassword = process.env.REACT_APP_WP_APP_wpPassword;
+    // const wpUsername = 'Shlomo'; 
+    // const wpPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
 
     const headers = {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${window.btoa(username + ':' + appPassword)}`,
+        Authorization: `Basic ${window.btoa(wpUsername + ':' + wpPassword)}`,
     };
 
     const folderId = 11; 

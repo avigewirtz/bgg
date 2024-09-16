@@ -120,8 +120,10 @@ const MainContent = () => {
         }
     }, [pressReleaseData, form]);
 
-    const username = 'Shlomo'; 
-    const appPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
+    const wpUsername = process.env.REACT_APP_WP_wpUsername;
+    const wpPassword = process.env.REACT_APP_WP_APP_wpPassword;
+    // const wpUsername = 'Shlomo'; 
+    // const wpPassword = 'AL5YMXHMhlFIv5K237R4R9RZ';
     const cases = ['Class period', 'IPO', 'Class period and IPO', '10b investigation', 'Derivative investigation', 'SPAC investigation', 'Mergers investigation'];
     
     const handleSearch = (value) => {
@@ -290,13 +292,13 @@ const MainContent = () => {
 
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Basic ${window.btoa(username + ':' + appPassword)}`,
+            Authorization: `Basic ${window.btoa(wpUsername + ':' + wpPassword)}`,
         };
 
         let featuredImageId = null;
         if (featuredImage) {
             try {
-                featuredImageId = await uploadImage(featuredImage, username, appPassword, 'https://bgandg.com');
+                featuredImageId = await uploadImage(featuredImage, wpUsername, wpPassword, 'https://bgandg.com');
             } catch (error) {
                 console.error('Error uploading featured image:', error);
                 setUploadStatus('Error uploading featured image.');
@@ -390,13 +392,13 @@ const MainContent = () => {
 
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Basic ${window.btoa(username + ':' + appPassword)}`,
+            Authorization: `Basic ${window.btoa(wpUsername + ':' + wpPassword)}`,
         };
 
         let featuredImageId = null;
         if (featuredImage) {
             try {
-                featuredImageId = await uploadImage(featuredImage, username, appPassword, 'https://bgandg.com');
+                featuredImageId = await uploadImage(featuredImage, wpUsername, wpPassword, 'https://bgandg.com');
             } catch (error) {
                 console.error('Error uploading featured image:', error);
                 setUploadStatus('Error uploading featured image.');
@@ -503,7 +505,7 @@ const MainContent = () => {
   
         const uploadHeaders = {
             'Content-Type': 'multipart/form-data',
-            Authorization: `Basic ${window.btoa(username + ':' + appPassword)}`,
+            Authorization: `Basic ${window.btoa(wpUsername + ':' + wpPassword)}`,
         };
   
         try {
