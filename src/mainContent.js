@@ -476,6 +476,8 @@ const MainContent = () => {
         }
     };
 
+    
+
     const updatePressReleaseInDatabase = async (data) => {
         try {
             const response = await axios.put('/.netlify/functions/updatePressRelease', data);
