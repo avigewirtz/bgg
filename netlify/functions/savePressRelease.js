@@ -1,10 +1,8 @@
-// netlify/functions/savePressRelease.js
-
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 exports.handler = async function(event) {
-    // Only allow POST requests
+
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method Not Allowed' };
     }
@@ -12,7 +10,7 @@ exports.handler = async function(event) {
     try {
         const data = JSON.parse(event.body);
 
-        // Check if a press release with the same ticker already exists
+    
         const existingPressRelease = await prisma.pressRelease.findUnique({
             where: {
                 ticker: data.ticker
@@ -20,14 +18,14 @@ exports.handler = async function(event) {
         });
 
         if (existingPressRelease) {
-            // Handle the conflict
+      
             return {
-                statusCode: 409, // HTTP status for conflict
+                statusCode: 409, 
                 body: JSON.stringify({ message: 'A press release with this ticker already exists' }),
             };
         }
 
-        // Create a new press release
+
         const pressRelease = await prisma.pressRelease.create({ 
             data: {
                 ticker: data.ticker,
@@ -52,7 +50,7 @@ exports.handler = async function(event) {
                 content: data.content,
                 contentWord: data.contentWord,
                 wordpressPageId: data.wordpressPageId,
-                // Add other fields as necessary
+           
             }
         });
 

@@ -8,10 +8,10 @@ exports.handler = async function(event) {
 
     try {
         let pressReleases = await prisma.pressRelease.findMany({
-            // Fetch all fields
+            
         });
 
-        // Filter out null fields from each press release
+     
         pressReleases = pressReleases.map(pressRelease => {
             const filteredPressRelease = {};
             for (const key in pressRelease) {

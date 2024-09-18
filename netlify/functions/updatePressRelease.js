@@ -9,7 +9,6 @@ exports.handler = async function(event) {
     const updatedData = JSON.parse(event.body);
     const ticker = updatedData.ticker;
 
-    // Iterate over each key in updatedData and set empty strings to null
     Object.keys(updatedData).forEach(key => {
         if (updatedData[key] === '') {
             updatedData[key] = null;

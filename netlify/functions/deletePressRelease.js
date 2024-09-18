@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 exports.handler = async (event) => {
   try {
-    // Only allow POST requests
+ 
     if (event.httpMethod !== 'POST') {
       return { statusCode: 405, body: 'Method Not Allowed' };
     }
@@ -17,7 +17,7 @@ exports.handler = async (event) => {
       return { statusCode: 400, body: 'Ticker is required' };
     }
 
-    // Deleting the press release
+
     await prisma.pressRelease.delete({
       where: { ticker },
     });

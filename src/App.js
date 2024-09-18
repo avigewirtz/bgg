@@ -4,7 +4,7 @@ import Header from './Header';
 import MainContent from './mainContent'; // Import the MainContent component
 import PressReleaseHistory from './PressReleaseHistory';
 
-// import './App.css';
+import './App.css';
 
 const App = () => {
     return (
